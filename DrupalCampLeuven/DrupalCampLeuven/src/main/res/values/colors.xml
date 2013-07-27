@@ -3,4 +3,5 @@
     <color name="white">#ffffff</color>
     <color name="grey">#f0f0f1</color>
     <color name="dark_grey">#4b4745</color>
+    <color name="separator">#959595</color>
 </resources>

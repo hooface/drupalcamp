@@ -1,10 +1,18 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@color/white"
-    tools:context=".ProgramList">
+    tools:context=".ProgramList"
+    android:orientation="vertical">
 
     <include layout="@layout/header" />
 
-</RelativeLayout>
+    <TextView
+        android:text="hello"
+        android:textColor="#000"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"/>
+
+
+</LinearLayout>
