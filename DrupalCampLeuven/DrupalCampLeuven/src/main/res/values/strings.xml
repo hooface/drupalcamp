@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- General -->
+    <string name="app_name">DrupalCamp Leuven</string>
+
+    <!-- Header -->
+    <string name="header_title">DRUPALCAMP</string>
+    <string name="header_go_to_favorites">Ga naar favorieten</string>
+
+</resources>

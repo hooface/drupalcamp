@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="60dp"
+    android:background="@color/white">
+
+    <TextView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/dark_grey"
+        android:textSize="@dimen/header_title"
+        android:text="@string/header_title"
+        android:id="@+id/header_title"
+        android:layout_centerInParent="true"/>
+
+    <ImageButton
+        android:id="@+id/header_go_to_favorites"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:layout_alignParentRight="true"
+        android:contentDescription="@string/header_go_to_favorites"
+        android:src="@drawable/header_favorites_button_states"
+            />
+
+</RelativeLayout>
