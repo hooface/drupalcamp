@@ -1,20 +1,34 @@
-<LinearLayout
+<RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="wrap_content"
         android:background="@color/white"
         tools:context=".ProgramList"
         android:orientation="vertical">
 
-    <include layout="@layout/header" />
+    <ScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/scrollview">
 
-    <TextView
-            android:text="hello"
-            android:textColor="#000"
+        <LinearLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+            <include layout="@layout/header" />
+            <include layout="@layout/separator" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <include layout="@layout/menu"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true" />
 
-    <include layout="@layout/menu" />
-
-</LinearLayout>
+</RelativeLayout>
