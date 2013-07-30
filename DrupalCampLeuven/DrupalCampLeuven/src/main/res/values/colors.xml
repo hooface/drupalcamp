@@ -4,4 +4,8 @@
     <color name="grey">#f0f0f1</color>
     <color name="dark_grey">#4b4745</color>
     <color name="separator">#959595</color>
+    <color name="agenda_blue">#3a92c2</color>
+    <color name="speakers_green">#00878a</color>
+    <color name="location_red">#b93938</color>
+    <color name="info_yellow">#ffc600</color>
 </resources>

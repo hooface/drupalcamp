@@ -8,4 +8,10 @@
     <string name="header_title">DRUPALCAMP</string>
     <string name="header_go_to_favorites">Ga naar favorieten</string>
 
+    <!-- Menu -->
+    <string name="menu_agenda">Agenda</string>
+    <string name="menu_speakers">Sprekers</string>
+    <string name="menu_location">Lokatie</string>
+    <string name="menu_info">Informatie</string>
+
 </resources>

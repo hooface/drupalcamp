@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:weightSum="1.0"
+        android:layout_height="@dimen/menu_height">
+
+    <ImageView
+            android:background="@color/agenda_blue"
+            android:contentDescription="@string/menu_agenda"
+            android:layout_weight="0.25"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/menu_height"
+            android:src="@drawable/menu_agenda"
+            android:scaleType="center"/>
+
+    <ImageView
+            android:background="@color/speakers_green"
+            android:contentDescription="@string/menu_speakers"
+            android:layout_weight="0.25"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/menu_height"
+            android:src="@drawable/menu_speakers"
+            android:scaleType="center"/>
+
+    <ImageView
+            android:background="@color/location_red"
+            android:contentDescription="@string/menu_location"
+            android:layout_weight="0.25"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/menu_height"
+            android:src="@drawable/menu_location"
+            android:scaleType="center" />
+
+    <ImageView
+            android:background="@color/info_yellow"
+            android:contentDescription="@string/menu_info"
+            android:layout_weight="0.25"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/menu_height"
+            android:src="@drawable/menu_info"
+            android:scaleType="center" />
+
+</LinearLayout>
