@@ -1,6 +1,12 @@
 package be.drupalcamp.leuven;
 
+import android.content.Context;
+import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
 
 public class Location extends BaseActivity {
 
@@ -14,6 +20,28 @@ public class Location extends BaseActivity {
 
         // Set fonts.
         setFontToOpenSansLight(R.id.header_title);
+        setFontToOpenSansRegular(R.id.location_info);
+        setFontToOpenSansRegular(R.id.location_map_link);
 
+        // Add listener on map link.
+        TextView mapLink = (TextView) findViewById(R.id.location_map_link);
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        if ((cm.getActiveNetworkInfo() != null) && cm.getActiveNetworkInfo().isAvailable() && cm.getActiveNetworkInfo().isConnected()) {// Add listener on map button.
+            mapLink.setOnClickListener(actionMap);
+        }
+        else {
+            mapLink.setVisibility(TextView.GONE);
+        }
     }
+
+    /**
+     * Map listener.
+     */
+    private final View.OnClickListener actionMap = new View.OnClickListener() {
+        public void onClick(View v) {
+            String mapUrl = "geo:" + R.string.location_geo + "?z=10";
+            Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(mapUrl));
+            startActivity(intent);
+        }
+    };
 }

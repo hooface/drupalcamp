@@ -9,7 +9,9 @@
 
     <ScrollView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_marginBottom="@dimen/menu_height"
+            android:background="@color/grey"
             android:id="@+id/scrollview">
 
         <LinearLayout
@@ -33,6 +35,7 @@
                         android:layout_height="@dimen/day_height">
 
                     <TextView
+                            android:textColor="@color/dark_grey"
                             android:id="@+id/day_1_text"
                             android:text="@string/day_1_text"
                             android:textSize="@dimen/day_text_size"
@@ -49,7 +52,7 @@
                             android:contentDescription="@string/day_1"
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
-                            android:layout_marginRight="10dp"/>
+                            android:layout_marginRight="@dimen/global_right_padding"/>
 
                 </RelativeLayout>
 
@@ -66,16 +69,16 @@
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
                             android:contentDescription="@string/day_2"
-                            android:layout_marginLeft="10dp" />
+                            android:layout_marginLeft="@dimen/global_left_padding" />
 
                     <TextView
+                            android:textColor="@color/dark_grey"
                             android:id="@+id/day_2_text"
                             android:text="@string/day_2_text"
                             android:textSize="@dimen/day_text_size"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true"/>
-
 
                 </RelativeLayout>
 

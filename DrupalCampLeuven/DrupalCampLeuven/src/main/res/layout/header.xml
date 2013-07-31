@@ -24,8 +24,8 @@
 
         <ImageButton
                 android:id="@+id/header_go_to_favorites"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="@dimen/go_to_favorites"
+                android:layout_height="@dimen/go_to_favorites"
                 android:background="@null"
                 android:layout_alignParentRight="true"
                 android:contentDescription="@string/header_go_to_favorites"
@@ -40,9 +40,9 @@
             android:background="@color/grey"
             android:src="@drawable/logo_text"
             android:layout_gravity="center_horizontal"
-            android:paddingTop="10dp"
-            android:layout_marginTop="1dp"
-            android:paddingBottom="10dp"
+            android:paddingTop="@dimen/logo_padding"
+            android:layout_marginTop="@dimen/header_separator"
+            android:paddingBottom="@dimen/logo_padding"
             android:scaleType="fitCenter"/>
 
 </LinearLayout>

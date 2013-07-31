@@ -1,7 +1,29 @@
 <resources>
+
+    <!-- Global -->
+    <dimen name="global_left_padding">10dp</dimen>
+    <dimen name="global_right_padding">10dp</dimen>
+    <dimen name="global_text_size">16sp</dimen>
+
+    <!-- header.xml -->
     <dimen name="header_text_size">24sp</dimen>
     <dimen name="header_height">50dp</dimen>
+    <dimen name="go_to_favorites">50dp</dimen>
+    <dimen name="logo_padding">10dp</dimen>
+    <dimen name="header_separator">1dp</dimen>
+
+    <!-- separator.xml -->
+    <dimen name="small_separator">0.2dp</dimen>
+
+    <!-- menu.xml -->
     <dimen name="menu_height">50dp</dimen>
+
+    <!-- program_list.xml -->
     <dimen name="day_height">35dp</dimen>
     <dimen name="day_text_size">18sp</dimen>
+
+    <!-- location.xml -->
+    <dimen name="location_padding_top">20dp</dimen>
+    <dimen name="location_padding_bottom">10dp</dimen>
+
 </resources>
