@@ -8,5 +8,6 @@ Features
 
 1. Program
 2. Speakers
-3. Agenda
-4. Contact
+3. Location
+4. Information
+5. Favorites
