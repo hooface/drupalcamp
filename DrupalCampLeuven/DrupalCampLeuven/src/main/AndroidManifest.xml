@@ -20,6 +20,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".SpeakerList" />
+        <activity android:name=".Location" />
+        <activity android:name=".Information" />
     </application>
 
 </manifest>

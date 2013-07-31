@@ -6,15 +6,17 @@
         android:layout_height="@dimen/menu_height">
 
     <ImageView
-            android:background="@color/agenda_blue"
-            android:contentDescription="@string/menu_agenda"
+            android:id="@+id/menu_program"
+            android:background="@color/program_blue"
+            android:contentDescription="@string/menu_program"
             android:layout_weight="0.25"
             android:layout_width="0dp"
             android:layout_height="@dimen/menu_height"
-            android:src="@drawable/menu_agenda"
+            android:src="@drawable/menu_program"
             android:scaleType="center"/>
 
     <ImageView
+            android:id="@+id/menu_speakers"
             android:background="@color/speakers_green"
             android:contentDescription="@string/menu_speakers"
             android:layout_weight="0.25"
@@ -24,6 +26,7 @@
             android:scaleType="center"/>
 
     <ImageView
+            android:id="@+id/menu_location"
             android:background="@color/location_red"
             android:contentDescription="@string/menu_location"
             android:layout_weight="0.25"
@@ -33,6 +36,7 @@
             android:scaleType="center" />
 
     <ImageView
+            android:id="@+id/menu_information"
             android:background="@color/info_yellow"
             android:contentDescription="@string/menu_info"
             android:layout_weight="0.25"

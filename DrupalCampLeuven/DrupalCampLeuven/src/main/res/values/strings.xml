@@ -5,14 +5,19 @@
     <string name="app_name">DrupalCamp Leuven</string>
 
     <!-- Header -->
-    <string name="header_title">DRUPALCAMP</string>
     <string name="header_go_to_favorites">Ga naar favorieten</string>
     <string name="header_logo">DrupalCamp Leuven</string>
 
     <!-- Menu -->
-    <string name="menu_agenda">Agenda</string>
+    <string name="menu_program">Programma</string>
     <string name="menu_speakers">Sprekers</string>
     <string name="menu_location">Lokatie</string>
     <string name="menu_info">Informatie</string>
+
+    <!-- Program -->
+    <string name="day_1">Dag 1</string>
+    <string name="day_2">Dag 2</string>
+    <string name="day_1_text">14 SEPTEMBER 2013</string>
+    <string name="day_2_text">15 SEPTEMBER 2013</string>
 
 </resources>
