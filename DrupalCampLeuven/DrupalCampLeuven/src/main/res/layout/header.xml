@@ -18,7 +18,7 @@
                 android:layout_height="@dimen/refresh"
                 android:background="@null"
                 android:contentDescription="@string/header_refresh"
-                android:src="@android:drawable/ic_menu_rotate" />
+                android:src="@drawable/refresh" />
 
         <TextView
                 xmlns:android="http://schemas.android.com/apk/res/android"
