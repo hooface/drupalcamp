@@ -25,4 +25,7 @@
     <string name="location_info">Katholieke Hogeschool Leuven\nDepartment "Gezondheidszorg en Technology"\nHerestraat 49\n3000 Leuven\n</string>
     <string name="location_geo">50.880943,4.674464</string>
 
+    <!-- Information -->
+    <string name="information_text"><![CDATA[Open source mobiele applicatie voor DrupalCamp, voor het eerst gebruikt voor DrupalCamp Leuven 2013.<br /><br /><b>Credits</b><br /><br /><a href="https://twitter.com/TimLeytens">@TimLeytens</a> - iOS & Drupal developer<br /><a href="https://twitter.com/swentel">@swentel</a> - Android & Drupal developer<br /><a href="https://twitter.com/leenvs">@LeenVS</a> - Graphic designer<br /><br /><b>Broncode</b><br /><br />iOS: <a href="http://github.com/TimLeytens/drupalcamp">GitHub</a><br />Android: <a href="https://github.com/swentel/drupalcamp">GitHub</a>]]></string>
+
 </resources>
