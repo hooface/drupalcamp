@@ -5,13 +5,13 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 public class BaseActivity extends Activity {
 
-    // The eventUrl.
-    public final String EventUrl = "";
+    public boolean hideRefreshButton = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +30,12 @@ public class BaseActivity extends Activity {
         ImageView go_to_information = (ImageView) findViewById(R.id.menu_information);
         go_to_information.setId(4);
         go_to_information.setOnClickListener(menuBar);
+
+        // Remove refresh button, unless the variable is overridden.
+        if (hideRefreshButton) {
+            ImageButton refresh = (ImageButton) findViewById(R.id.refresh);
+            refresh.setVisibility(ImageButton.GONE);
+        }
     }
 
     /**

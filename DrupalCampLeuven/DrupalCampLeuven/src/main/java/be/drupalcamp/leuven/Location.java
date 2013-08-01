@@ -26,7 +26,7 @@ public class Location extends BaseActivity {
         // Add listener on map link.
         TextView mapLink = (TextView) findViewById(R.id.location_map_link);
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        if ((cm.getActiveNetworkInfo() != null) && cm.getActiveNetworkInfo().isAvailable() && cm.getActiveNetworkInfo().isConnected()) {// Add listener on map button.
+        if ((cm.getActiveNetworkInfo() != null) && cm.getActiveNetworkInfo().isAvailable() && cm.getActiveNetworkInfo().isConnected()) {
             mapLink.setOnClickListener(actionMap);
         }
         else {

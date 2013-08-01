@@ -86,6 +86,17 @@
 
             <include layout="@layout/separator" />
 
+            <TextView
+                    android:textColor="@color/dark_grey"
+                    android:id="@+id/no_sessions"
+                    android:text="@string/no_sessions"
+                    android:textSize="@dimen/global_text_size"
+                    android:paddingLeft="@dimen/global_left_padding"
+                    android:paddingTop="@dimen/no_sessions_padding_top"
+                    android:paddingRight="@dimen/global_right_padding"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
         </LinearLayout>
 
     </ScrollView>

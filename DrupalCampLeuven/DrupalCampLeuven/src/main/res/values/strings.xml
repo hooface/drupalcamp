@@ -7,6 +7,7 @@
     <!-- Header -->
     <string name="header_go_to_favorites">Ga naar favorieten</string>
     <string name="header_logo">DrupalCamp Leuven</string>
+    <string name="header_refresh">Update programma</string>
 
     <!-- Menu -->
     <string name="menu_program">Programma</string>
@@ -19,6 +20,12 @@
     <string name="day_2">Dag 2</string>
     <string name="day_1_text">14 SEPTEMBER 2013</string>
     <string name="day_2_text">15 SEPTEMBER 2013</string>
+    <string name="no_sessions">Geen sessies gevonden. Klik hier om het programma op te halen.</string>
+    <string name="updating">Programma ophalen</string>
+    <string name="updating_message">We halen het programma met de sessies en sprekers nu op, even geduld.</string>
+    <string name="update_offline">Je bent niet verbonden met het internet.</string>
+    <string name="updating_done">Het programma is aangepast.</string>
+    <string name="service_offline">De service om het programma op te halen is niet beschikbaar, probeer het later opnieuw.</string>
 
     <!-- Location -->
     <string name="location_map_link">Bekijk op interactieve map</string>
