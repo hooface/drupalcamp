@@ -62,7 +62,7 @@ public class ProgramList extends BaseActivity {
 
         // Get flipper, refresh and no events.
         ImageButton refresh = (ImageButton) findViewById(R.id.refresh);
-        TextView noEvents = (TextView) findViewById(R.id.no_events);
+        TextView noSessions = (TextView) findViewById(R.id.no_sessions);
         final ViewFlipper switcher = (ViewFlipper) findViewById(R.id.dayFlipper);
 
         // Always set refresh listener on the button.
@@ -74,7 +74,7 @@ public class ProgramList extends BaseActivity {
 
         if (total > 0) {
             // Hide empty no sessions message.
-            noEvents.setVisibility(TextView.GONE);
+            noSessions.setVisibility(TextView.GONE);
 
             // Set listeners on day arrows.
             ImageButton day1 = (ImageButton) findViewById(R.id.day_1);
@@ -98,7 +98,7 @@ public class ProgramList extends BaseActivity {
             // Hide flipper.
             switcher.setVisibility(ViewFlipper.GONE);
             // Set listener on text view button to refresh the program.
-            noEvents.setOnClickListener(refreshProgram);
+            noSessions.setOnClickListener(refreshProgram);
         }
     }
 
