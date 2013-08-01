@@ -39,8 +39,9 @@ public class Location extends BaseActivity {
      */
     private final View.OnClickListener actionMap = new View.OnClickListener() {
         public void onClick(View v) {
-            String mapUrl = "geo:" + R.string.location_geo + "?z=10";
-            Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(mapUrl));
+            String mapUrl = "http://maps.google.com/maps?q=" + getString(R.string.location_geo_lat) + "," + getString(R.string.location_geo_long);
+            Uri uri = Uri.parse(mapUrl);
+            Intent intent = new Intent(android.content.Intent.ACTION_VIEW, uri);
             startActivity(intent);
         }
     };
