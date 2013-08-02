@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
@@ -44,7 +43,6 @@ public class ProgramList extends BaseActivity {
     // Other variables.
     ProgressDialog dialog;
     public static int siteStatus = 200;
-    public static InputStream dataFile = null;
     public List<Session> sessions;
 
     @Override
