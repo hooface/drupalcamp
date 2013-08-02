@@ -29,62 +29,82 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/dayFlipper">
 
-                <RelativeLayout
-                        android:background="@color/grey"
+                <LinearLayout
+                        android:orientation="vertical"
+                        android:id="@+id/day_flip_1"
+                        xmlns:android="http://schemas.android.com/apk/res/android"
                         android:layout_width="fill_parent"
-                        android:layout_height="@dimen/day_height">
+                        android:layout_height="wrap_content">
 
-                    <TextView
-                            android:textColor="@color/dark_grey"
-                            android:id="@+id/day_1_text"
-                            android:text="@string/day_1_text"
-                            android:textSize="@dimen/day_text_size"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerInParent="true"/>
+                    <RelativeLayout
+                            android:background="@color/grey"
+                            android:layout_width="fill_parent"
+                            android:layout_height="@dimen/day_height">
 
-                    <ImageButton
-                            android:id="@+id/day_1"
-                            android:background="@null"
-                            android:src="@drawable/arrow_right"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:contentDescription="@string/day_1"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
-                            android:layout_marginRight="@dimen/global_right_padding"/>
+                        <TextView
+                                android:textColor="@color/dark_grey"
+                                android:id="@+id/day_1_text"
+                                android:text="@string/day_1_text"
+                                android:textSize="@dimen/day_text_size"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"/>
 
-                </RelativeLayout>
+                        <ImageButton
+                                android:id="@+id/day_1"
+                                android:background="@null"
+                                android:src="@drawable/arrow_right"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:contentDescription="@string/day_1"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true"
+                                android:layout_marginRight="@dimen/global_right_padding"/>
 
-                <RelativeLayout
-                        android:background="@color/grey"
+                    </RelativeLayout>
+
+                    <include layout="@layout/separator" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                        android:orientation="vertical"
+                        android:id="@+id/day_flip_2"
+                        xmlns:android="http://schemas.android.com/apk/res/android"
                         android:layout_width="fill_parent"
-                        android:layout_height="@dimen/day_height">
+                        android:layout_height="wrap_content">
 
-                    <ImageButton
-                            android:id="@+id/day_2"
-                            android:background="@null"
-                            android:src="@drawable/arrow_left"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:contentDescription="@string/day_2"
-                            android:layout_marginLeft="@dimen/global_left_padding" />
+                    <RelativeLayout
+                            android:background="@color/grey"
+                            android:layout_width="fill_parent"
+                            android:layout_height="@dimen/day_height">
 
-                    <TextView
-                            android:textColor="@color/dark_grey"
-                            android:id="@+id/day_2_text"
-                            android:text="@string/day_2_text"
-                            android:textSize="@dimen/day_text_size"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerInParent="true"/>
+                        <ImageButton
+                                android:id="@+id/day_2"
+                                android:background="@null"
+                                android:src="@drawable/arrow_left"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:contentDescription="@string/day_2"
+                                android:layout_marginLeft="@dimen/global_left_padding" />
 
-                </RelativeLayout>
+                        <TextView
+                                android:textColor="@color/dark_grey"
+                                android:id="@+id/day_2_text"
+                                android:text="@string/day_2_text"
+                                android:textSize="@dimen/day_text_size"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"/>
+
+                    </RelativeLayout>
+
+                    <include layout="@layout/separator" />
+
+                </LinearLayout>
 
             </ViewFlipper>
-
-            <include layout="@layout/separator" />
 
             <TextView
                     android:textColor="@color/dark_grey"

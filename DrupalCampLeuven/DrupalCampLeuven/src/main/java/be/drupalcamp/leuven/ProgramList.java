@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
@@ -27,6 +28,7 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.List;
 
 public class ProgramList extends BaseActivity {
 
@@ -43,6 +45,7 @@ public class ProgramList extends BaseActivity {
     ProgressDialog dialog;
     public static int siteStatus = 200;
     public static InputStream dataFile = null;
+    public List<Session> sessions;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -77,12 +80,33 @@ public class ProgramList extends BaseActivity {
             // Hide empty no sessions message.
             noSessions.setVisibility(TextView.GONE);
 
+            // TODO We should make this dynamic and allow days to be configured from configuration.
+            LinearLayout myLayout = (LinearLayout) findViewById(R.id.day_flip_1);
+
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT);
+            layoutParams.setMargins(10, 0, 10, 0);
+
+            String selectQuery = "SELECT * FROM " + DatabaseHandler.TABLE_SESSIONS;
+            selectQuery += " te LEFT JOIN " + DatabaseHandler.TABLE_FAVORITES + " tf ON te." + DatabaseHandler.KEY_ID + " = tf." + DatabaseHandler.FAVORITES_KEY_ID + " ";
+            selectQuery += " ORDER BY " + DatabaseHandler.KEY_START_DATE + " ASC, " + DatabaseHandler.KEY_TITLE + " ASC";
+            sessions = db.getSessions(selectQuery);
+
+            for (int i = 0; i < sessions.size(); i++) {
+                TextView sessionText = new TextView(this);
+                sessionText.setTextColor(getResources().getColor(R.color.dark_grey));
+                sessionText.setText(sessions.get(i).getTitle());
+                sessionText.setLayoutParams(layoutParams);
+                myLayout.addView(sessionText);
+            }
+
             // Set listeners on day arrows.
             ImageButton day1 = (ImageButton) findViewById(R.id.day_1);
             day1.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     new AnimationUtils();
-                    switcher.setAnimation(AnimationUtils.makeInAnimation(ProgramList.this, true));
+                    switcher.setAnimation(AnimationUtils.makeInAnimation(ProgramList.this, false));
                     switcher.showNext();
                 }
             });
@@ -140,19 +164,15 @@ public class ProgramList extends BaseActivity {
                 catch (IOException ignored) {}
 
                 if (siteStatus == 200) {
+                    // TODO cleanup this whole routine.
 
                     JSONArray sessions = null;
-                    dataFile = openFileInput(fileName);
-                    InputStreamReader inputreader = new InputStreamReader(dataFile, "UTF-8");
-                    BufferedReader reader = new BufferedReader(inputreader);
-                    String json = reader.readLine();
+                    String json = new BufferedReader(new InputStreamReader(openFileInput(fileName), "UTF-8")).readLine();
 
                     try {
                         sessions = new JSONArray(json);
                     }
-                    catch (Exception e) {
-                        Log.d("PARSING FAIL", "" + e.getMessage());
-                    }
+                    catch (Exception ignored) {}
 
                     if (sessions == null) {
                         return "parsingfailed";
@@ -184,7 +204,6 @@ public class ProgramList extends BaseActivity {
                             count++;
                             int update = (count*100/numberOfSessions);
                             publishProgress(update);
-
                         }
 
                     }
@@ -277,7 +296,7 @@ public class ProgramList extends BaseActivity {
     }
 
     /**
-     * Close the dialog and remove the file.
+     * Close the dialog, remove the file and refresh the activity.
      */
     public void closeDialog(Dialog dialog) {
 
