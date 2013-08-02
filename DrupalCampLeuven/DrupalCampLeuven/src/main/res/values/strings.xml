@@ -26,6 +26,7 @@
     <string name="update_offline">Je bent niet verbonden met het internet.</string>
     <string name="updating_done">Het programma is aangepast.</string>
     <string name="service_offline">De service om het programma op te halen is niet beschikbaar, probeer het later opnieuw.</string>
+    <string name="parsing_failed">Er ging iets fout met het bewaren van het programma, probeer het later opnieuw.</string>
 
     <!-- Location -->
     <string name="location_map_link">Bekijk op interactieve map</string>

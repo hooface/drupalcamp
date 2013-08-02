@@ -4,11 +4,10 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.database.SQLException;
-import android.database.sqlite.SQLiteDatabase;
 import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
@@ -17,6 +16,8 @@ import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import org.apache.http.client.ClientProtocolException;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.FileOutputStream;
@@ -30,13 +31,13 @@ import java.net.URL;
 public class ProgramList extends BaseActivity {
 
     // The eventUrl.
-    public String eventUrl = "";
+    public String eventUrl = "http://dcleuven-api.timleytens.be/api/timeslots/list.json";
 
     // The filename to save to.
     public static String fileName = "list.json";
 
     // Number of sessions - we should actually do a count on the array of sessions.
-    public int numberOfSessions = 2;
+    public int numberOfSessions = 0;
 
     // Other variables.
     ProgressDialog dialog;
@@ -140,52 +141,52 @@ public class ProgramList extends BaseActivity {
 
                 if (siteStatus == 200) {
 
+                    JSONArray sessions = null;
                     dataFile = openFileInput(fileName);
                     InputStreamReader inputreader = new InputStreamReader(dataFile, "UTF-8");
-                    BufferedReader buffreader = new BufferedReader(inputreader);
+                    BufferedReader reader = new BufferedReader(inputreader);
+                    String json = reader.readLine();
+
+                    try {
+                        sessions = new JSONArray(json);
+                    }
+                    catch (Exception e) {
+                        Log.d("PARSING FAIL", "" + e.getMessage());
+                    }
+
+                    if (sessions == null) {
+                        return "parsingfailed";
+                    }
+
+                    numberOfSessions = sessions.length();
 
                     try {
 
                         int count = 0;
-                        String line;
-
                         DatabaseHandler handler = new DatabaseHandler(getApplicationContext());
                         handler.truncateTable();
-                        SQLiteDatabase db = handler.getWritableDatabase();
 
-                        @SuppressWarnings("static-access")
-                        String query = "INSERT INTO " + handler.TABLE_SESSIONS + "(" +
-                                "" + handler.KEY_TITLE + "," +
-                                "" + handler.KEY_DESCRIPTION +
-                                ") VALUES ";
+                        for (int i = 0; i < sessions.length(); i++){
 
-                        do {
-                            line = buffreader.readLine();
+                            JSONObject jsonSession = sessions.getJSONObject(i);
 
-                            // Split on ::SPLIT::
-                            line = line.replace("|NEWLINE|", "\n");
-                            String [] values = line.split(":SPLIT:");
-
-                            try {
-                                db.beginTransaction();
-                                for ( int i = 0; i <= values.length - 1; i++) {
-                                    String insertQuery = query + values[i] + ";";
-                                    db.execSQL(insertQuery);
-                                }
-                                db.setTransactionSuccessful();
-                            }
-                            catch (SQLException e) {} finally {
-                                db.endTransaction();
-                            }
+                            Session session = new Session();
+                            session.setId(jsonSession.getInt("id"));
+                            session.setTitle(jsonSession.getString("title"));
+                            session.setDescription(jsonSession.getString("description"));
+                            session.setSpecial(jsonSession.getInt("special"));
+                            session.setStartDate(jsonSession.getInt("from"));
+                            session.setEndDate(jsonSession.getInt("to"));
+                            session.setLevel(jsonSession.getInt("level"));
+                            handler.insertSession(session);
 
                             // Notify dialog.
                             count++;
                             int update = (count*100/numberOfSessions);
                             publishProgress(update);
 
-                        } while (line != null);
+                        }
 
-                    } catch (IOException ignored) {
                     }
                     catch (Exception ignored) {}
                 }
@@ -208,6 +209,9 @@ public class ProgramList extends BaseActivity {
         protected void onPostExecute(String sResponse) {
             if (sResponse.equals("servicedown")) {
                 serviceDown(dialog);
+            }
+            else if (sResponse.equals("parsingfailed")) {
+                parsingFailed(dialog);
             }
             else {
                 closeDialog(dialog);
@@ -259,6 +263,17 @@ public class ProgramList extends BaseActivity {
         }
 
         Toast.makeText(ProgramList.this, getString(R.string.service_offline), Toast.LENGTH_LONG).show();
+    }
+
+    /**
+     * Close the dialog and inform that the parsing failed.
+     */
+    public void parsingFailed(Dialog dialog) {
+        if (dialog.isShowing()) {
+            dialog.dismiss();
+        }
+
+        Toast.makeText(ProgramList.this, getString(R.string.parsing_failed), Toast.LENGTH_LONG).show();
     }
 
     /**

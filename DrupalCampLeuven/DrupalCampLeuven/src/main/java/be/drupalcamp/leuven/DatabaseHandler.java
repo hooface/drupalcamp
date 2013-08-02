@@ -131,6 +131,24 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return sessionList;
     }
 
+    // Insert session.
+    public void insertSession(Session session) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(KEY_ID, session.getId());
+        values.put(KEY_TITLE, session.getTitle());
+        values.put(KEY_DESCRIPTION, session.getDescription());
+        values.put(KEY_SPECIAL, session.getSpecial());
+        values.put(KEY_START_DATE, session.getStartDate());
+        values.put(KEY_END_DATE, session.getEndDate());
+        values.put(KEY_LEVEL, session.getLevel());
+
+        // Inserting Row
+        db.insert(TABLE_SESSIONS, null, values);
+        db.close();
+    }
+
     // Get number of sessions.
     public int getSessionCount() {
         SQLiteDatabase db = this.getReadableDatabase();
