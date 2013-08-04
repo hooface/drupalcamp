@@ -4,11 +4,11 @@ public class Session {
 
     int id;
     String title;
-    String description;
+    String description = "";
     int special;
     int startDate;
     int endDate;
-    int level;
+    int level = 0;
     // @todo speakers - tracks
 
     // Empty constructor.

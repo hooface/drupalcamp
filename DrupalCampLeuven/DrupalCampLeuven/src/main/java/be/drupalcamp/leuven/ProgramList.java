@@ -172,35 +172,41 @@ public class ProgramList extends BaseActivity {
                     }
                     catch (Exception ignored) {}
 
+                    // Return early if necessary.
                     if (sessions == null) {
                         return "parsingfailed";
                     }
 
+                    // Get number of sessions.
                     numberOfSessions = sessions.length();
 
                     try {
 
-                        int count = 0;
+                        int count = 1;
                         DatabaseHandler handler = new DatabaseHandler(getApplicationContext());
                         handler.truncateTable();
 
-                        for (int i = 0; i < sessions.length(); i++){
+                        for (int i = 0; i < numberOfSessions; i++){
 
                             JSONObject jsonSession = sessions.getJSONObject(i);
 
                             Session session = new Session();
                             session.setId(jsonSession.getInt("id"));
                             session.setTitle(jsonSession.getString("title"));
-                            session.setDescription(jsonSession.getString("description"));
+                            if (!jsonSession.isNull("description")) {
+                                session.setDescription(jsonSession.getString("description"));
+                            }
                             session.setSpecial(jsonSession.getInt("special"));
                             session.setStartDate(jsonSession.getInt("from"));
                             session.setEndDate(jsonSession.getInt("to"));
-                            session.setLevel(jsonSession.getInt("level"));
+                            if (!jsonSession.isNull("level")) {
+                                session.setLevel(jsonSession.getInt("level"));
+                            }
                             handler.insertSession(session);
 
                             // Notify dialog.
-                            count++;
                             int update = (count*100/numberOfSessions);
+                            count++;
                             publishProgress(update);
                         }
 
