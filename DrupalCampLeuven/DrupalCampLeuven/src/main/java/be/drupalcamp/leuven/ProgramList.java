@@ -93,7 +93,7 @@ public class ProgramList extends BaseActivity {
 
             for (int i = 0; i < sessions.size(); i++) {
                 TextView sessionText = new TextView(this);
-                sessionText.setTextColor(getResources().getColor(R.color.dark_grey));
+                sessionText.setTextColor(getResources().getColor(R.color.text_dark));
                 sessionText.setText(sessions.get(i).getTitle());
                 sessionText.setLayoutParams(layoutParams);
                 myLayout.addView(sessionText);
