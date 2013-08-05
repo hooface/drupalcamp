@@ -42,7 +42,7 @@
                             android:layout_height="@dimen/day_height">
 
                         <TextView
-                                android:textColor="@color/dark_grey"
+                                android:textColor="@color/text_dark"
                                 android:id="@+id/day_1_text"
                                 android:text="@string/day_1_text"
                                 android:textSize="@dimen/day_text_size"
@@ -90,7 +90,7 @@
                                 android:layout_marginLeft="@dimen/global_left_padding" />
 
                         <TextView
-                                android:textColor="@color/dark_grey"
+                                android:textColor="@color/text_dark"
                                 android:id="@+id/day_2_text"
                                 android:text="@string/day_2_text"
                                 android:textSize="@dimen/day_text_size"
@@ -107,7 +107,7 @@
             </ViewFlipper>
 
             <TextView
-                    android:textColor="@color/dark_grey"
+                    android:textColor="@color/text_dark"
                     android:id="@+id/no_sessions"
                     android:text="@string/no_sessions"
                     android:textSize="@dimen/global_text_size"

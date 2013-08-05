@@ -26,7 +26,7 @@
 
             <TextView
                     android:id="@+id/location_info"
-                    android:textColor="@color/dark_grey"
+                    android:textColor="@color/text_dark"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/global_text_size"
@@ -38,7 +38,7 @@
 
             <TextView
                     android:id="@+id/location_map_link"
-                    android:textColor="@color/dark_grey"
+                    android:textColor="@color/text_dark"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/global_text_size"

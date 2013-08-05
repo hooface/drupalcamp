@@ -11,7 +11,7 @@
     <View
             android:layout_width="fill_parent"
             android:layout_height="@dimen/small_separator"
-            android:background="@color/dark_grey"
+            android:background="@color/separator"
             android:visibility="visible"/>
 
 </LinearLayout>

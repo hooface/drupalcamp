@@ -2,8 +2,9 @@
 <resources>
     <color name="white">#ffffff</color>
     <color name="grey">#f0f0f1</color>
-    <color name="dark_grey">#4b4745</color>
-    <color name="separator">#e7e7e9</color>
+    <color name="text_dark">#4b4745</color>
+    <color name="dark_grey">#959595</color>
+    <color name="separator">#dcdcdc</color>
     <color name="program_blue">#3992c1</color>
     <color name="speakers_green">#00878a</color>
     <color name="location_red">#b93938</color>
