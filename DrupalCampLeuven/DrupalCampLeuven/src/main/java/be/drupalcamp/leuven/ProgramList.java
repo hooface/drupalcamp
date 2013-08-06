@@ -81,22 +81,16 @@ public class ProgramList extends BaseActivity {
             // TODO We should make this dynamic and allow days to be configured from configuration.
             LinearLayout myLayout = (LinearLayout) findViewById(R.id.day_flip_1);
 
-            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.WRAP_CONTENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT);
-            layoutParams.setMargins(10, 0, 10, 0);
-
             String selectQuery = "SELECT * FROM " + DatabaseHandler.TABLE_SESSIONS;
             selectQuery += " te LEFT JOIN " + DatabaseHandler.TABLE_FAVORITES + " tf ON te." + DatabaseHandler.KEY_ID + " = tf." + DatabaseHandler.FAVORITES_KEY_ID + " ";
             selectQuery += " ORDER BY " + DatabaseHandler.KEY_START_DATE + " ASC, " + DatabaseHandler.KEY_TITLE + " ASC";
             sessions = db.getSessions(selectQuery);
 
-            for (int i = 0; i < sessions.size(); i++) {
-                TextView sessionText = new TextView(this);
-                sessionText.setTextColor(getResources().getColor(R.color.text_dark));
-                sessionText.setText(sessions.get(i).getTitle());
-                sessionText.setLayoutParams(layoutParams);
-                myLayout.addView(sessionText);
+            SessionsListAdapter adapter = new SessionsListAdapter(this, sessions);
+
+            for (int i = 0; i < adapter.getCount(); i++) {
+                View item = adapter.getView(i, null, null);
+                myLayout.addView(item);
             }
 
             // Set listeners on day arrows.
