@@ -1,12 +1,13 @@
 <resources>
 
     <!-- Global -->
+    <dimen name="global_padding">10dp</dimen>
+    <dimen name="global_small_padding">5dp</dimen>
     <dimen name="global_left_padding">10dp</dimen>
     <dimen name="global_right_padding">10dp</dimen>
     <dimen name="global_top_padding">10dp</dimen>
     <dimen name="global_bottom_padding">10dp</dimen>
     <dimen name="global_text_size">16sp</dimen>
-    <dimen name="global_small_padding">5dp</dimen>
 
     <!-- header.xml -->
     <dimen name="header_text_size">24sp</dimen>

@@ -11,15 +11,20 @@ import android.widget.TextView;
 import java.util.List;
 
 /**
- * Event list adapter.
+ * Session list adapter.
  */
 public class SessionsListAdapter extends BaseAdapter implements OnClickListener {
     private final Context context;
     private final List<Session> sessions;
+    private LayoutInflater mInflater;
+
+    private static final int NORMAL = 0;
+    private static final int SPECIAL = 1;
 
     public SessionsListAdapter(Context context, List<Session> sessions) {
         this.context = context;
         this.sessions = sessions;
+        this.mInflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     public int getCount() {
@@ -38,21 +43,53 @@ public class SessionsListAdapter extends BaseAdapter implements OnClickListener 
 
     }
 
+    @Override
+    public int getViewTypeCount() {
+        return 2;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return sessions.get(position).getSpecial() == 0 ? NORMAL : SPECIAL;
+    }
+
+    public static class ViewHolder {
+        public TextView title;
+        public TextView speaker;
+    }
+
     public View getView(final int position, View convertView, ViewGroup parent) {
+        ViewHolder holder;
+        int type = getItemViewType(position);
+        Session session = sessions.get(position);
 
         if (convertView == null) {
-            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.session_list_item, null);
+            holder = new ViewHolder();
+            switch (type) {
+                case NORMAL:
+                    convertView = mInflater.inflate(R.layout.session_normal_item, null);
+                    holder.title = (TextView) convertView.findViewById(R.id.session_title);
+                    holder.speaker = (TextView) convertView.findViewById(R.id.session_speaker);
+                    break;
+                case SPECIAL:
+                    convertView = mInflater.inflate(R.layout.session_special_item, null);
+                    holder.title = (TextView) convertView.findViewById(R.id.session_title);
+                    break;
+            }
+            convertView.setTag(holder);
+        }
+        else {
+            holder = (ViewHolder) convertView.getTag();
         }
 
-        final Session session = sessions.get(position);
         if (session != null) {
 
             // Title.
-            final TextView tt = (TextView) convertView.findViewById(R.id.session_title);
-            String title = session.getTitle();
-            tt.setText(title);
+            holder.title.setText(session.getTitle());
 
+            // Normal sessions get speakers, hour and favorite button.
+            if (session.getSpecial() == 0) {
+            }
         }
 
         return convertView;

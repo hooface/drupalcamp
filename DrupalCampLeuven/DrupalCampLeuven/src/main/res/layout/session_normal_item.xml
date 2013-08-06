@@ -2,8 +2,6 @@
 <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="vertical"
-        android:layout_marginLeft="@dimen/global_left_padding"
-        android:layout_marginRight="@dimen/global_left_padding"
         android:background="@color/white"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
@@ -27,28 +25,45 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:textSize="@dimen/global_text_size"
-            android:text="speaker"
             android:textColor="@color/text_dark"
             android:layout_marginLeft="@dimen/global_left_padding"
-            android:layout_marginRight="@dimen/global_small_padding"
+            android:layout_marginRight="@dimen/global_right_padding"
             android:layout_marginBottom="@dimen/global_bottom_padding">
     </TextView>
 
-    <include layout="@layout/separator" />
+    <include layout="@layout/separator_white" />
 
-    <TextView
-            android:id="@+id/session_time"
+    <RelativeLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/global_text_size"
-            android:text="title"
-            android:textColor="@color/text_dark"
-            android:layout_marginLeft="@dimen/global_left_padding"
-            android:layout_marginTop="@dimen/global_small_padding"
-            android:layout_marginRight="@dimen/global_small_padding"
-            android:layout_marginBottom="@dimen/global_small_padding">
+            >
 
-    </TextView>
+        <TextView
+                android:id="@+id/session_time"
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/global_text_size"
+                android:text="11u30 - 12u30"
+                android:textColor="@color/text_dark"
+                android:layout_marginLeft="@dimen/global_left_padding"
+                android:layout_marginTop="@dimen/global_small_padding"
+                android:layout_marginRight="@dimen/global_right_padding"
+                android:layout_marginBottom="@dimen/global_bottom_padding"
+                android:layout_centerVertical="true">
+
+        </TextView>
+
+        <ImageButton
+                android:id="@+id/header_go_to_favorites"
+                android:layout_width="@dimen/go_to_favorites"
+                android:layout_height="@dimen/go_to_favorites"
+                android:background="@null"
+                android:layout_alignParentRight="true"
+                android:contentDescription="@string/header_go_to_favorites"
+                android:src="@drawable/favorites_session" />
+
+    </RelativeLayout>
 
 </LinearLayout>

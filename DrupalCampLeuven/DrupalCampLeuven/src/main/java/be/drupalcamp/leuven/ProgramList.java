@@ -81,6 +81,12 @@ public class ProgramList extends BaseActivity {
             // TODO We should make this dynamic and allow days to be configured from configuration.
             LinearLayout myLayout = (LinearLayout) findViewById(R.id.day_flip_1);
 
+            int dp = (int) getResources().getDimension(R.dimen.global_padding);
+            int dp_small = (int) getResources().getDimension(R.dimen.global_small_padding);
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            layoutParams.setMargins(dp, dp, dp, dp_small);
+
             String selectQuery = "SELECT * FROM " + DatabaseHandler.TABLE_SESSIONS;
             selectQuery += " te LEFT JOIN " + DatabaseHandler.TABLE_FAVORITES + " tf ON te." + DatabaseHandler.KEY_ID + " = tf." + DatabaseHandler.FAVORITES_KEY_ID + " ";
             selectQuery += " ORDER BY " + DatabaseHandler.KEY_START_DATE + " ASC, " + DatabaseHandler.KEY_TITLE + " ASC";
@@ -90,6 +96,7 @@ public class ProgramList extends BaseActivity {
 
             for (int i = 0; i < adapter.getCount(); i++) {
                 View item = adapter.getView(i, null, null);
+                item.setLayoutParams(layoutParams);
                 myLayout.addView(item);
             }
 
