@@ -3,7 +3,7 @@ Drupalcamp
 
 Android application for information about a Drupalcamp, initially built for DrupalCamp Leuven 2013 in Belgium.
 
-iOS version: https://github.com/TimLeytens/DrupalCamp-Leuven
+iOS version: https://github.com/TimLeytens/drupalcamp
 
 Features
 --------
