@@ -56,6 +56,7 @@ public class SessionsListAdapter extends BaseAdapter implements OnClickListener 
     public static class ViewHolder {
         public TextView title;
         public TextView speaker;
+        public TextView time;
     }
 
     public View getView(final int position, View convertView, ViewGroup parent) {
@@ -70,6 +71,7 @@ public class SessionsListAdapter extends BaseAdapter implements OnClickListener 
                     convertView = mInflater.inflate(R.layout.session_normal_item, null);
                     holder.title = (TextView) convertView.findViewById(R.id.session_title);
                     holder.speaker = (TextView) convertView.findViewById(R.id.session_speaker);
+                    holder.time = (TextView) convertView.findViewById(R.id.session_time);
                     break;
                 case SPECIAL:
                     convertView = mInflater.inflate(R.layout.session_special_item, null);
@@ -89,6 +91,18 @@ public class SessionsListAdapter extends BaseAdapter implements OnClickListener 
 
             // Normal sessions get speakers, hour and favorite button.
             if (session.getSpecial() == 0) {
+                String timeText = "";
+
+                // Time.
+                /*int from = session.getStartDate();
+                Time time = new Time();
+                time.set(from);
+                timeText = time.format("%h");
+                timeText += "u";
+                int to = session.getStartDate();
+                time.set(to);
+                timeText += time.format("%m");*/
+                holder.time.setText(timeText);
             }
         }
 

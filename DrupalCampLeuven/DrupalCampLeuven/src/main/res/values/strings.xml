@@ -16,6 +16,10 @@
     <string name="menu_info">Informatie</string>
 
     <!-- Program -->
+    <!-- add the end timestamp per day -->
+    <string name="day_1_timestamp">1379116800</string>
+    <string name="day_2_timestamp">1379203200</string>
+
     <string name="day_1">Dag 1</string>
     <string name="day_2">Dag 2</string>
     <string name="day_1_text">14 SEPTEMBER 2013</string>

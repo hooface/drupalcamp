@@ -37,6 +37,7 @@
                         android:layout_height="wrap_content">
 
                     <RelativeLayout
+                            android:id="@+id/day_1_bar"
                             android:background="@color/grey"
                             android:layout_width="fill_parent"
                             android:layout_height="@dimen/day_height">
@@ -75,6 +76,7 @@
                         android:layout_height="wrap_content">
 
                     <RelativeLayout
+                            android:id="@+id/day_2_bar"
                             android:background="@color/grey"
                             android:layout_width="fill_parent"
                             android:layout_height="@dimen/day_height">

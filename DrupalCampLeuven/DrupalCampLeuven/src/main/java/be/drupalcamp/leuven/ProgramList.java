@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
@@ -78,30 +79,30 @@ public class ProgramList extends BaseActivity {
             // Hide empty no sessions message.
             noSessions.setVisibility(TextView.GONE);
 
-            // TODO We should make this dynamic and allow days to be configured from configuration.
-            LinearLayout myLayout = (LinearLayout) findViewById(R.id.day_flip_1);
-
+            // Define layout params.
             int dp = (int) getResources().getDimension(R.dimen.global_padding);
             int dp_small = (int) getResources().getDimension(R.dimen.global_small_padding);
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             layoutParams.setMargins(dp, dp, dp, dp_small);
 
-            String selectQuery = "SELECT * FROM " + DatabaseHandler.TABLE_SESSIONS;
-            selectQuery += " te LEFT JOIN " + DatabaseHandler.TABLE_FAVORITES + " tf ON te." + DatabaseHandler.KEY_ID + " = tf." + DatabaseHandler.FAVORITES_KEY_ID + " ";
-            selectQuery += " ORDER BY " + DatabaseHandler.KEY_START_DATE + " ASC, " + DatabaseHandler.KEY_TITLE + " ASC";
-            sessions = db.getSessions(selectQuery);
+            // @todo make this more configurable so you can have multiple days without hardcoding.
 
-            SessionsListAdapter adapter = new SessionsListAdapter(this, sessions);
+            int day1_date = Integer.parseInt(getString(R.string.day_1_timestamp));
+            int day2_date = Integer.parseInt(getString(R.string.day_2_timestamp));
 
-            for (int i = 0; i < adapter.getCount(); i++) {
-                View item = adapter.getView(i, null, null);
-                item.setLayoutParams(layoutParams);
-                myLayout.addView(item);
-            }
+            // Add sessions for day 1.
+            int day1EndDate = (day1_date + 86400);
+            LinearLayout day1_layout = (LinearLayout) findViewById(R.id.day_flip_1);
+            addSessionsPerDay(day1_layout, layoutParams, db, day1_date, day1EndDate);
 
-            // Set listeners on day arrows.
-            ImageButton day1 = (ImageButton) findViewById(R.id.day_1);
+            // Add sessions for day 2.
+            int day2EndDate = (day2_date + 86400);
+            LinearLayout day2_layout = (LinearLayout) findViewById(R.id.day_flip_2);
+            addSessionsPerDay(day2_layout, layoutParams, db, day2_date, day2EndDate);
+
+            // Set listeners on day bars.
+            RelativeLayout day1 = (RelativeLayout) findViewById(R.id.day_1_bar);
             day1.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     new AnimationUtils();
@@ -109,7 +110,7 @@ public class ProgramList extends BaseActivity {
                     switcher.showNext();
                 }
             });
-            ImageButton day2 = (ImageButton) findViewById(R.id.day_2);
+            RelativeLayout day2 = (RelativeLayout) findViewById(R.id.day_2_bar);
             day2.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     new AnimationUtils();
@@ -147,6 +148,25 @@ public class ProgramList extends BaseActivity {
             }
         }
     };
+
+    /**
+     * Add sessions per day.
+     */
+    public void addSessionsPerDay(LinearLayout layout, LinearLayout.LayoutParams layoutParams, DatabaseHandler db, Integer startDate, Integer endDate) {
+        String selectQuery = "SELECT * FROM " + DatabaseHandler.TABLE_SESSIONS;
+        selectQuery += " te LEFT JOIN " + DatabaseHandler.TABLE_FAVORITES + " tf ON te." + DatabaseHandler.KEY_ID + " = tf." + DatabaseHandler.FAVORITES_KEY_ID + " ";
+        selectQuery += " WHERE " + DatabaseHandler.KEY_START_DATE + " > " + startDate + " AND " + DatabaseHandler.KEY_END_DATE + " < " + endDate;
+        selectQuery += " ORDER BY " + DatabaseHandler.KEY_START_DATE + " ASC, " + DatabaseHandler.KEY_TITLE + " ASC";
+        sessions = db.getSessions(selectQuery);
+
+        SessionsListAdapter adapter = new SessionsListAdapter(this, sessions);
+
+        for (int i = 0; i < adapter.getCount(); i++) {
+            View item = adapter.getView(i, null, null);
+            item.setLayoutParams(layoutParams);
+            layout.addView(item);
+        }
+    }
 
     /**
      * Update task.

@@ -56,9 +56,9 @@
         </TextView>
 
         <ImageButton
-                android:id="@+id/header_go_to_favorites"
-                android:layout_width="@dimen/go_to_favorites"
-                android:layout_height="@dimen/go_to_favorites"
+                android:id="@+id/session_favorite_state"
+                android:layout_width="@dimen/favorites_star"
+                android:layout_height="@dimen/favorites_star"
                 android:background="@null"
                 android:layout_alignParentRight="true"
                 android:contentDescription="@string/header_go_to_favorites"
