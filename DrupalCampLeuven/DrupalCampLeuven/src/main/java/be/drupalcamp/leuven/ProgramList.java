@@ -87,19 +87,16 @@ public class ProgramList extends BaseActivity {
             layoutParams.setMargins(dp, dp, dp, dp_small);
 
             // @todo make this more configurable so you can have multiple days without hardcoding.
+            // For instance, put this in array integer list. That will require us to create dynamic
+            // flippers, listeners on the fly, but that will be good in the end.
+            int day1_integer = Integer.parseInt(getString(R.string.day_1_integer));
+            int day2_integer = Integer.parseInt(getString(R.string.day_2_integer));
 
-            int day1_date = Integer.parseInt(getString(R.string.day_1_timestamp));
-            int day2_date = Integer.parseInt(getString(R.string.day_2_timestamp));
-
-            // Add sessions for day 1.
-            int day1EndDate = (day1_date + 86400);
             LinearLayout day1_layout = (LinearLayout) findViewById(R.id.day_flip_1);
-            addSessionsPerDay(day1_layout, layoutParams, db, day1_date, day1EndDate);
+            addSessionsPerDay(day1_layout, layoutParams, db, day1_integer);
 
-            // Add sessions for day 2.
-            int day2EndDate = (day2_date + 86400);
             LinearLayout day2_layout = (LinearLayout) findViewById(R.id.day_flip_2);
-            addSessionsPerDay(day2_layout, layoutParams, db, day2_date, day2EndDate);
+            addSessionsPerDay(day2_layout, layoutParams, db, day2_integer);
 
             // Set listeners on day bars.
             RelativeLayout day1 = (RelativeLayout) findViewById(R.id.day_1_bar);
@@ -152,11 +149,11 @@ public class ProgramList extends BaseActivity {
     /**
      * Add sessions per day.
      */
-    public void addSessionsPerDay(LinearLayout layout, LinearLayout.LayoutParams layoutParams, DatabaseHandler db, Integer startDate, Integer endDate) {
+    public void addSessionsPerDay(LinearLayout layout, LinearLayout.LayoutParams layoutParams, DatabaseHandler db, Integer day) {
         String selectQuery = "SELECT * FROM " + DatabaseHandler.TABLE_SESSIONS;
-        selectQuery += " te LEFT JOIN " + DatabaseHandler.TABLE_FAVORITES + " tf ON te." + DatabaseHandler.KEY_ID + " = tf." + DatabaseHandler.FAVORITES_KEY_ID + " ";
-        selectQuery += " WHERE " + DatabaseHandler.KEY_START_DATE + " > " + startDate + " AND " + DatabaseHandler.KEY_END_DATE + " < " + endDate;
-        selectQuery += " ORDER BY " + DatabaseHandler.KEY_START_DATE + " ASC, " + DatabaseHandler.KEY_TITLE + " ASC";
+        selectQuery += " te LEFT JOIN " + DatabaseHandler.TABLE_FAVORITES + " tf ON te." + DatabaseHandler.SESSIONS_KEY_ID + " = tf." + DatabaseHandler.FAVORITES_KEY_ID + " ";
+        selectQuery += " WHERE " + DatabaseHandler.SESSIONS_KEY_DAY + " = " + day;
+        selectQuery += " ORDER BY " + DatabaseHandler.SESSIONS_KEY_START_DATE + " ASC, " + DatabaseHandler.SESSIONS_KEY_TITLE + " ASC";
         sessions = db.getSessions(selectQuery);
 
         SessionsListAdapter adapter = new SessionsListAdapter(this, sessions);
@@ -183,7 +180,7 @@ public class ProgramList extends BaseActivity {
                 catch (IOException ignored) {}
 
                 if (siteStatus == 200) {
-                    // TODO cleanup this whole routine.
+                    // TODO cleanup this whole routine and move to separate file.
 
                     JSONArray sessions = null;
                     String json = new BufferedReader(new InputStreamReader(openFileInput(fileName), "UTF-8")).readLine();
@@ -223,6 +220,7 @@ public class ProgramList extends BaseActivity {
                             if (!jsonSession.isNull("level")) {
                                 session.setLevel(jsonSession.getInt("level"));
                             }
+                            session.setDay(jsonSession.getInt("day"));
                             handler.insertSession(session);
 
                             // Notify dialog.

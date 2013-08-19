@@ -8,6 +8,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -94,14 +97,15 @@ public class SessionsListAdapter extends BaseAdapter implements OnClickListener 
                 String timeText = "";
 
                 // Time.
-                /*int from = session.getStartDate();
-                Time time = new Time();
-                time.set(from);
-                timeText = time.format("%h");
-                timeText += "u";
-                int to = session.getStartDate();
-                time.set(to);
-                timeText += time.format("%m");*/
+                int from = session.getStartDate();
+                int to = session.getEndDate();
+
+                DateFormat sdf = new SimpleDateFormat("h m");
+                Date startHour = (new Date(from));
+                Date endHour = (new Date(to));
+
+                timeText = sdf.format(startHour) + " - " + sdf.format(endHour);
+
                 holder.time.setText(timeText);
             }
         }

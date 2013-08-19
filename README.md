@@ -37,9 +37,11 @@ JSON format
         "first_name": "Tim",
         "last_name": "Leytens",
         "organization": "Freelance",
-        "twitter": "@TimLeytens"
+        "twitter": "@TimLeytens",
+        "avatar": "",
       }
-    ]
+    ],
+    "day": "14"
   },
   {
     "id": "3",
@@ -55,6 +57,7 @@ JSON format
     "speakers": [
       
     ]
+    "day": "14"
   }
 ]
 ```

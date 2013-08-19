@@ -17,17 +17,19 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     // Database name.
     private static final String DATABASE_NAME = "DrupalCamp";
 
-    // Events table name.
+    // Sessions table name.
     public static final String TABLE_SESSIONS = "sessions";
 
-    // Events table column names.
-    public static final String KEY_ID = "id";
-    public static final String KEY_TITLE = "name";
-    public static final String KEY_DESCRIPTION = "description";
-    public static final String KEY_SPECIAL = "special";
-    public static final String KEY_START_DATE = "start_date";
-    public static final String KEY_END_DATE = "end_date";
-    public static final String KEY_LEVEL = "level";
+    // Sessions table column names.
+    public static final String SESSIONS_KEY_ID = "id";
+    public static final String SESSIONS_KEY_TITLE = "name";
+    public static final String SESSIONS_KEY_DESCRIPTION = "description";
+    public static final String SESSIONS_KEY_SPECIAL = "special";
+    public static final String SESSIONS_KEY_START_DATE = "start_date";
+    public static final String SESSIONS_KEY_END_DATE = "end_date";
+    public static final String SESSIONS_KEY_LEVEL = "level";
+    public static final String SESSIONS_KEY_DAY = "day";
+
 
     // Favorites table name.
     public static final String TABLE_FAVORITES = "favorites";
@@ -44,13 +46,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
 
         String CREATE_EVENTS_TABLE = "CREATE TABLE " + TABLE_SESSIONS + "(" +
-                "" + KEY_ID + " INTEGER PRIMARY KEY," +
-                "" + KEY_TITLE + " TEXT," +
-                "" + KEY_DESCRIPTION + " TEXT," +
-                "" + KEY_SPECIAL + " INTEGER," +
-                "" + KEY_START_DATE + " INTEGER," +
-                "" + KEY_END_DATE + " INTEGER," +
-                "" + KEY_LEVEL + " INTEGER" +
+                "" + SESSIONS_KEY_ID + " INTEGER PRIMARY KEY," +
+                "" + SESSIONS_KEY_TITLE + " TEXT," +
+                "" + SESSIONS_KEY_DESCRIPTION + " TEXT," +
+                "" + SESSIONS_KEY_SPECIAL + " INTEGER," +
+                "" + SESSIONS_KEY_START_DATE + " INTEGER," +
+                "" + SESSIONS_KEY_END_DATE + " INTEGER," +
+                "" + SESSIONS_KEY_LEVEL + " INTEGER" +
+                "" + SESSIONS_KEY_DAY + " INTEGER" +
                 ")";
         db.execSQL(CREATE_EVENTS_TABLE);
 
@@ -117,7 +120,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                     cursor.getInt(3),
                     cursor.getInt(4),
                     cursor.getInt(5),
-                    cursor.getInt(6)
+                    cursor.getInt(6),
+                    cursor.getInt(7)
                 );
 
                 // Add session to list.
@@ -136,13 +140,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(KEY_ID, session.getId());
-        values.put(KEY_TITLE, session.getTitle());
-        values.put(KEY_DESCRIPTION, session.getDescription());
-        values.put(KEY_SPECIAL, session.getSpecial());
-        values.put(KEY_START_DATE, session.getStartDate());
-        values.put(KEY_END_DATE, session.getEndDate());
-        values.put(KEY_LEVEL, session.getLevel());
+        values.put(SESSIONS_KEY_ID, session.getId());
+        values.put(SESSIONS_KEY_TITLE, session.getTitle());
+        values.put(SESSIONS_KEY_DESCRIPTION, session.getDescription());
+        values.put(SESSIONS_KEY_SPECIAL, session.getSpecial());
+        values.put(SESSIONS_KEY_START_DATE, session.getStartDate());
+        values.put(SESSIONS_KEY_END_DATE, session.getEndDate());
+        values.put(SESSIONS_KEY_LEVEL, session.getLevel());
 
         // Inserting Row
         db.insert(TABLE_SESSIONS, null, values);
@@ -164,8 +168,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         assert db != null;
         String selectQuery = "SELECT * FROM " + TABLE_SESSIONS;
-        selectQuery += " te LEFT JOIN " + DatabaseHandler.TABLE_FAVORITES + " tf ON te." + DatabaseHandler.KEY_ID + " = tf." + DatabaseHandler.FAVORITES_KEY_ID + " ";
-        selectQuery += " WHERE " + KEY_ID + " = " + id;
+        selectQuery += " te LEFT JOIN " + DatabaseHandler.TABLE_FAVORITES + " tf ON te." + DatabaseHandler.SESSIONS_KEY_ID + " = tf." + DatabaseHandler.FAVORITES_KEY_ID + " ";
+        selectQuery += " WHERE " + SESSIONS_KEY_ID + " = " + id;
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         if (cursor != null) {
@@ -180,7 +184,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 cursor.getInt(3),
                 cursor.getInt(4),
                 cursor.getInt(5),
-                cursor.getInt(6)
+                cursor.getInt(6),
+                cursor.getInt(7)
         );
     }
 }

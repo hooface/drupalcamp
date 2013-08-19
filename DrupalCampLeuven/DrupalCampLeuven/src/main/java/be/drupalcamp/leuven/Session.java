@@ -9,7 +9,8 @@ public class Session {
     int startDate;
     int endDate;
     int level = 0;
-    // @todo speakers - tracks
+    int day = 0;
+    // @todo tracks
 
     // Empty constructor.
     public Session() {
@@ -17,7 +18,7 @@ public class Session {
     }
 
     // Full constructor.
-    public Session(int id, String title, String description, int special, int startDate, int endDate, int level) {
+    public Session(int id, String title, String description, int special, int startDate, int endDate, int level, int day) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -25,6 +26,7 @@ public class Session {
         this.startDate = startDate;
         this.endDate = endDate;
         this.level = level;
+        this.day = day;
     }
 
     public int getId() {
@@ -83,4 +85,11 @@ public class Session {
         this.level = level;
     }
 
+    public int getDay() {
+        return day;
+    }
+
+    public void setDay(int day) {
+        this.day = day;
+    }
 }
