@@ -206,8 +206,10 @@ public class ProgramList extends BaseActivity {
 
                         for (int i = 0; i < numberOfSessions; i++){
 
+                            // Get session from json.
                             JSONObject jsonSession = sessions.getJSONObject(i);
 
+                            // Create new session object.
                             Session session = new Session();
                             session.setId(jsonSession.getInt("id"));
                             session.setTitle(jsonSession.getString("title"));
@@ -221,7 +223,40 @@ public class ProgramList extends BaseActivity {
                                 session.setLevel(jsonSession.getInt("level"));
                             }
                             session.setDay(jsonSession.getInt("day"));
+
+                            // Save session
                             handler.insertSession(session);
+
+                            // Speakers.
+                            if (!jsonSession.isNull("speakers")) {
+                                JSONArray speakers = jsonSession.getJSONArray("speakers");
+                                if (speakers.length() > 0) {
+                                    for (int j = 0; j < speakers.length(); j++) {
+                                        // Get speaker from from json.
+                                        JSONObject jsonSpeaker = speakers.getJSONObject(j);
+
+                                        // Create new speaker object.
+                                        Speaker speaker = new Speaker();
+                                        speaker.setId(jsonSpeaker.getInt("id"));
+                                        speaker.setSessionId(session.getId());
+                                        speaker.setUsername(jsonSpeaker.getString("username"));
+                                        speaker.setFirstName(jsonSpeaker.getString("first_name"));
+                                        speaker.setLastName(jsonSpeaker.getString("last_name"));
+                                        if (!jsonSpeaker.isNull("organization")) {
+                                            speaker.setOrganisation(jsonSpeaker.getString("organization"));
+                                        }
+                                        if (!jsonSpeaker.isNull("twitter")) {
+                                            speaker.setTwitter(jsonSpeaker.getString("twitter"));
+                                        }
+                                        if (!jsonSpeaker.isNull("avatar")) {
+                                            speaker.setAvatar(jsonSpeaker.getString("avatar"));
+                                        }
+
+                                        // Save speaker.
+                                        handler.insertSpeaker(speaker);
+                                    }
+                                }
+                            }
 
                             // Notify dialog.
                             int update = (count*100/numberOfSessions);

@@ -30,6 +30,18 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public static final String SESSIONS_KEY_LEVEL = "level";
     public static final String SESSIONS_KEY_DAY = "day";
 
+    // Speaker table name.
+    public static final String TABLE_SPEAKERS = "speakers";
+
+    // Speakers table column names.
+    public static final String SPEAKERS_KEY_ID = "id";
+    public static final String SPEAKERS_KEY_SESSION_ID = "session_id";
+    public static final String SPEAKERS_KEY_USERNAME = "username";
+    public static final String SPEAKERS_KEY_FIRSTNAME = "firstname";
+    public static final String SPEAKERS_KEY_LASTNAME = "lastname";
+    public static final String SPEAKERS_KEY_ORG = "organisation";
+    public static final String SPEAKERS_KEY_TWITTER = "twitter";
+    public static final String SPEAKERS_KEY_AVATAR = "avatar";
 
     // Favorites table name.
     public static final String TABLE_FAVORITES = "favorites";
@@ -45,7 +57,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        String CREATE_EVENTS_TABLE = "CREATE TABLE " + TABLE_SESSIONS + "(" +
+        String CREATE_SESSIONS_TABLE = "CREATE TABLE " + TABLE_SESSIONS + "(" +
                 "" + SESSIONS_KEY_ID + " INTEGER PRIMARY KEY," +
                 "" + SESSIONS_KEY_TITLE + " TEXT," +
                 "" + SESSIONS_KEY_DESCRIPTION + " TEXT," +
@@ -55,7 +67,19 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 "" + SESSIONS_KEY_LEVEL + " INTEGER" +
                 "" + SESSIONS_KEY_DAY + " INTEGER" +
                 ")";
-        db.execSQL(CREATE_EVENTS_TABLE);
+        db.execSQL(CREATE_SESSIONS_TABLE);
+
+        String CREATE_SPEAKERS_TABLE = "CREATE TABLE " + TABLE_SPEAKERS + "(" +
+                "" + SPEAKERS_KEY_ID + " INTEGER PRIMARY KEY," +
+                "" + SPEAKERS_KEY_SESSION_ID + " INTEGER," +
+                "" + SPEAKERS_KEY_USERNAME + " TEXT," +
+                "" + SPEAKERS_KEY_FIRSTNAME + " TEXT," +
+                "" + SPEAKERS_KEY_LASTNAME + " TEXT," +
+                "" + SPEAKERS_KEY_ORG + " TEXT," +
+                "" + SPEAKERS_KEY_TWITTER + " TEXT" +
+                "" + SPEAKERS_KEY_AVATAR + " TEXT" +
+                ")";
+        db.execSQL(CREATE_SPEAKERS_TABLE);
 
         String CREATE_FAVORITES_TABLE = "CREATE TABLE " + TABLE_FAVORITES + "(" +
                 "" + FAVORITES_KEY_ID + " INTEGER" +
@@ -148,8 +172,25 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(SESSIONS_KEY_END_DATE, session.getEndDate());
         values.put(SESSIONS_KEY_LEVEL, session.getLevel());
 
-        // Inserting Row
         db.insert(TABLE_SESSIONS, null, values);
+        db.close();
+    }
+
+    // Insert speaker.
+    public void insertSpeaker(Speaker speaker) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(SPEAKERS_KEY_ID, speaker.getId());
+        values.put(SPEAKERS_KEY_SESSION_ID, speaker.getSessionId());
+        values.put(SPEAKERS_KEY_USERNAME, speaker.getUsername());
+        values.put(SPEAKERS_KEY_FIRSTNAME, speaker.getFirstName());
+        values.put(SPEAKERS_KEY_LASTNAME, speaker.getLastName());
+        values.put(SPEAKERS_KEY_ORG, speaker.getOrganisation());
+        values.put(SPEAKERS_KEY_TWITTER, speaker.getTwitter());
+        values.put(SPEAKERS_KEY_AVATAR, speaker.getAvatar());
+
+        db.insert(TABLE_SPEAKERS, null, values);
         db.close();
     }
 

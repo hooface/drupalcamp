@@ -3,18 +3,20 @@ package be.drupalcamp.leuven;
 public class Speaker {
 
     int id;
-    String username = "";
-    String firstName = "";
-    String lastName = "";
-    String organisation = "";
-    String twitter = "";
-    String avatar = "";
+    int sessionId;
+    String username;
+    String firstName;
+    String lastName;
+    String organisation;
+    String twitter;
+    String avatar;
 
     public Speaker() {
     }
 
-    public Speaker(int id, String username, String firstName, String lastName, String organisation, String twitter, String avatar) {
+    public Speaker(int id, int sessionId, String username, String firstName, String lastName, String organisation, String twitter, String avatar) {
         this.id = id;
+        this.sessionId = sessionId;
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -29,6 +31,14 @@ public class Speaker {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getSessionId() {
+        return sessionId;
+    }
+
+    public void setSessionId(int sessionId) {
+        this.sessionId = sessionId;
     }
 
     public String getUsername() {
