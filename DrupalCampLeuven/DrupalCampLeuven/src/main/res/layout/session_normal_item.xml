@@ -45,7 +45,6 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/global_text_size"
-                android:text="11u30 - 12u30"
                 android:textColor="@color/text_dark"
                 android:layout_marginLeft="@dimen/global_left_padding"
                 android:layout_marginTop="@dimen/global_small_padding"

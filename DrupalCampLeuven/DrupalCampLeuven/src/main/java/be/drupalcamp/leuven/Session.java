@@ -6,7 +6,7 @@ public class Session {
 
     int id;
     String title;
-    String description = "";
+    String description;
     int special;
     int startDate;
     int endDate;
@@ -21,7 +21,7 @@ public class Session {
 
     }
 
-    // Full constructor.
+    // Full constructor, including speaker list.
     public Session(int id, String title, String description, int special, int startDate, int endDate, int level, int day, List<Speaker> speakerList) {
         this.id = id;
         this.title = title;
