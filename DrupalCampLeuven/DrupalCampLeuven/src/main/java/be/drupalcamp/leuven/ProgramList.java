@@ -46,6 +46,8 @@ public class ProgramList extends BaseActivity {
     public static int siteStatus = 200;
     public List<Session> sessions;
 
+    public ViewFlipper switcher;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
@@ -66,7 +68,7 @@ public class ProgramList extends BaseActivity {
         // Get flipper, refresh and no events.
         ImageButton refresh = (ImageButton) findViewById(R.id.refresh);
         TextView noSessions = (TextView) findViewById(R.id.no_sessions);
-        final ViewFlipper switcher = (ViewFlipper) findViewById(R.id.dayFlipper);
+        switcher = (ViewFlipper) findViewById(R.id.dayFlipper);
 
         // Always set refresh listener on the button.
         refresh.setOnClickListener(refreshProgram);
@@ -98,23 +100,15 @@ public class ProgramList extends BaseActivity {
             LinearLayout day2_layout = (LinearLayout) findViewById(R.id.day_flip_2);
             getSessionsPerDay(day2_layout, layoutParams, db, day2_integer);
 
-            // Set listeners on day bars.
-            RelativeLayout day1 = (RelativeLayout) findViewById(R.id.day_1_bar);
-            day1.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    new AnimationUtils();
-                    switcher.setAnimation(AnimationUtils.makeInAnimation(ProgramList.this, false));
-                    switcher.showNext();
-                }
-            });
-            RelativeLayout day2 = (RelativeLayout) findViewById(R.id.day_2_bar);
-            day2.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    new AnimationUtils();
-                    switcher.setAnimation(AnimationUtils.makeInAnimation(ProgramList.this, true));
-                    switcher.showPrevious();
-                }
-            });
+            // Set listeners on day bars and arrows.
+            RelativeLayout day1_bar = (RelativeLayout) findViewById(R.id.day_1_bar);
+            ImageButton day1_arrow = (ImageButton) findViewById(R.id.day_1_arrow);
+            day1_bar.setOnClickListener(showNext);
+            day1_arrow.setOnClickListener(showNext);
+            RelativeLayout day2_bar = (RelativeLayout) findViewById(R.id.day_2_bar);
+            ImageButton day2_arrow = (ImageButton) findViewById(R.id.day_2_arrow);
+            day2_bar.setOnClickListener(showPrevious);
+            day2_arrow.setOnClickListener(showPrevious);
         }
         else {
             // Hide flipper.
@@ -123,6 +117,28 @@ public class ProgramList extends BaseActivity {
             noSessions.setOnClickListener(refreshProgram);
         }
     }
+
+    /**
+     * Show next day.
+     */
+    private final View.OnClickListener showNext = new View.OnClickListener() {
+        public void onClick(View v) {
+            new AnimationUtils();
+            switcher.setAnimation(AnimationUtils.makeInAnimation(ProgramList.this, false));
+            switcher.showNext();
+        }
+    };
+
+    /**
+     * Show previous day.
+     */
+    private final View.OnClickListener showPrevious = new View.OnClickListener() {
+        public void onClick(View v) {
+            new AnimationUtils();
+            switcher.setAnimation(AnimationUtils.makeInAnimation(ProgramList.this, true));
+            switcher.showPrevious();
+        }
+    };
 
     /**
      * Refresh program.

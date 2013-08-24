@@ -101,4 +101,5 @@ public class BaseActivity extends Activity {
         Typeface tf = Typeface.createFromAsset(getAssets(), "OpenSans-Regular.ttf");
         tv.setTypeface(tf);
     }
+
 }
