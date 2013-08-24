@@ -14,6 +14,12 @@ Features
 4. Information
 5. Favorites
 
+Screenshot
+----------
+
+![ScreenShot](http://realize.be/drupalcamp-mobile.png)
+
+
 JSON format
 -----------
 ```
