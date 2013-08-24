@@ -64,7 +64,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 "" + SESSIONS_KEY_SPECIAL + " INTEGER," +
                 "" + SESSIONS_KEY_START_DATE + " INTEGER," +
                 "" + SESSIONS_KEY_END_DATE + " INTEGER," +
-                "" + SESSIONS_KEY_LEVEL + " INTEGER" +
+                "" + SESSIONS_KEY_LEVEL + " INTEGER," +
                 "" + SESSIONS_KEY_DAY + " INTEGER" +
                 ")";
         db.execSQL(CREATE_SESSIONS_TABLE);
@@ -76,7 +76,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 "" + SPEAKERS_KEY_FIRSTNAME + " TEXT," +
                 "" + SPEAKERS_KEY_LASTNAME + " TEXT," +
                 "" + SPEAKERS_KEY_ORG + " TEXT," +
-                "" + SPEAKERS_KEY_TWITTER + " TEXT" +
+                "" + SPEAKERS_KEY_TWITTER + " TEXT," +
                 "" + SPEAKERS_KEY_AVATAR + " TEXT" +
                 ")";
         db.execSQL(CREATE_SPEAKERS_TABLE);
@@ -118,45 +118,104 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.close();
     }
 
+    // Get number of sessions.
+    public int getSessionCount() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor dataCount = db.rawQuery("select * from " + TABLE_SESSIONS, null);
+        int count = dataCount.getCount();
+        db.close();
+        return count;
+    }
+
     /**
-     * Get events
+     * Get sessions.
      *
-     * @param selectQuery
-     *   The query.
+     * @param day
+     *   The day to get sessions for.
      *
      * @return <List>Session
-     *   A list of events.
+     *   A list of sessions.
      */
-    public List<Session> getSessions(String selectQuery) {
+    public List<Session> getSessions(Integer day) {
         List<Session> sessionList = new ArrayList<Session>();
 
-        SQLiteDatabase db = this.getWritableDatabase();
-        assert db != null;
-        Cursor cursor = db.rawQuery(selectQuery, null);
+        String sessionsQuery = "SELECT * FROM " + DatabaseHandler.TABLE_SESSIONS;
+        sessionsQuery += " ts LEFT JOIN " + DatabaseHandler.TABLE_FAVORITES + " tf ON ts." + DatabaseHandler.SESSIONS_KEY_ID + " = tf." + DatabaseHandler.FAVORITES_KEY_ID;
+        sessionsQuery += " WHERE " + DatabaseHandler.SESSIONS_KEY_DAY + " = " + day;
+        sessionsQuery += " ORDER BY " + DatabaseHandler.SESSIONS_KEY_START_DATE + " ASC, " + DatabaseHandler.SESSIONS_KEY_TITLE + " ASC";
 
-        // Loop through all rows and add to list.
-        if (cursor.moveToFirst()) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor sessionCursor = db.rawQuery(sessionsQuery, null);
+
+        // Loop through all session results.
+        if (sessionCursor.moveToFirst()) {
             do {
+
+                // Get speakers.
+                List<Speaker> speakerList = this.getSpeakers(sessionCursor.getInt(0));
+
                 Session session = new Session(
-                    cursor.getInt(0),
-                    cursor.getString(1),
-                    cursor.getString(2),
-                    cursor.getInt(3),
-                    cursor.getInt(4),
-                    cursor.getInt(5),
-                    cursor.getInt(6),
-                    cursor.getInt(7)
+                    sessionCursor.getInt(0),
+                    sessionCursor.getString(1),
+                    sessionCursor.getString(2),
+                    sessionCursor.getInt(3),
+                    sessionCursor.getInt(4),
+                    sessionCursor.getInt(5),
+                    sessionCursor.getInt(6),
+                    sessionCursor.getInt(7),
+                    speakerList
                 );
 
                 // Add session to list.
                 sessionList.add(session);
+
             }
-            while (cursor.moveToNext());
+            while (sessionCursor.moveToNext());
         }
 
         db.close();
 
         return sessionList;
+    }
+
+    /**
+     * Get speakers.
+     *
+     * @param sessionId
+     *   The id of the session to get speakers for.
+     *
+     * @return <List>Speaker
+     *   A list of speakers.
+     */
+    public List<Speaker> getSpeakers(Integer sessionId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        List<Speaker> speakerList = new ArrayList<Speaker>();
+        String speakersQuery = "SELECT * FROM " + DatabaseHandler.TABLE_SPEAKERS + " WHERE " + DatabaseHandler.SPEAKERS_KEY_SESSION_ID + " = " + sessionId;
+        Cursor speakerCursor = db.rawQuery(speakersQuery, null);
+
+        // Loop through all speaker results.
+        if (speakerCursor.moveToFirst()) {
+            do {
+
+                Speaker speaker = new Speaker(
+                    speakerCursor.getInt(0),
+                    speakerCursor.getInt(1),
+                    speakerCursor.getString(2),
+                    speakerCursor.getString(3),
+                    speakerCursor.getString(4),
+                    speakerCursor.getString(5),
+                    speakerCursor.getString(6),
+                    speakerCursor.getString(7)
+                );
+
+                // Add session to list.
+                speakerList.add(speaker);
+            }
+            while (speakerCursor.moveToNext());
+        }
+        db.close();
+
+        return speakerList;
     }
 
     // Insert session.
@@ -171,6 +230,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(SESSIONS_KEY_START_DATE, session.getStartDate());
         values.put(SESSIONS_KEY_END_DATE, session.getEndDate());
         values.put(SESSIONS_KEY_LEVEL, session.getLevel());
+        values.put(SESSIONS_KEY_DAY, session.getDay());
 
         db.insert(TABLE_SESSIONS, null, values);
         db.close();
@@ -194,15 +254,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.close();
     }
 
-    // Get number of sessions.
-    public int getSessionCount() {
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor dataCount = db.rawQuery("select * from " + TABLE_SESSIONS, null);
-        int count = dataCount.getCount();
-        db.close();
-        return count;
-    }
-
     // Get single session.
     public Session getSession(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -217,6 +268,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             cursor.moveToFirst();
         }
 
+        // Get speakers.
+        List<Speaker> speakerList = this.getSpeakers(cursor.getInt(0));
+
         assert cursor != null;
         return new Session(
                 cursor.getInt(0),
@@ -226,7 +280,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 cursor.getInt(4),
                 cursor.getInt(5),
                 cursor.getInt(6),
-                cursor.getInt(7)
+                cursor.getInt(7),
+                speakerList
         );
     }
 }

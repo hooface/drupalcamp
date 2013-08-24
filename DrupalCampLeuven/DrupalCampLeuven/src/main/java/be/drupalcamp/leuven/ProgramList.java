@@ -93,10 +93,10 @@ public class ProgramList extends BaseActivity {
             int day2_integer = Integer.parseInt(getString(R.string.day_2_integer));
 
             LinearLayout day1_layout = (LinearLayout) findViewById(R.id.day_flip_1);
-            addSessionsPerDay(day1_layout, layoutParams, db, day1_integer);
+            getSessionsPerDay(day1_layout, layoutParams, db, day1_integer);
 
             LinearLayout day2_layout = (LinearLayout) findViewById(R.id.day_flip_2);
-            addSessionsPerDay(day2_layout, layoutParams, db, day2_integer);
+            getSessionsPerDay(day2_layout, layoutParams, db, day2_integer);
 
             // Set listeners on day bars.
             RelativeLayout day1 = (RelativeLayout) findViewById(R.id.day_1_bar);
@@ -147,14 +147,10 @@ public class ProgramList extends BaseActivity {
     };
 
     /**
-     * Add sessions per day.
+     * Get sessions per day.
      */
-    public void addSessionsPerDay(LinearLayout layout, LinearLayout.LayoutParams layoutParams, DatabaseHandler db, Integer day) {
-        String selectQuery = "SELECT * FROM " + DatabaseHandler.TABLE_SESSIONS;
-        selectQuery += " te LEFT JOIN " + DatabaseHandler.TABLE_FAVORITES + " tf ON te." + DatabaseHandler.SESSIONS_KEY_ID + " = tf." + DatabaseHandler.FAVORITES_KEY_ID + " ";
-        selectQuery += " WHERE " + DatabaseHandler.SESSIONS_KEY_DAY + " = " + day;
-        selectQuery += " ORDER BY " + DatabaseHandler.SESSIONS_KEY_START_DATE + " ASC, " + DatabaseHandler.SESSIONS_KEY_TITLE + " ASC";
-        sessions = db.getSessions(selectQuery);
+    public void getSessionsPerDay(LinearLayout layout, LinearLayout.LayoutParams layoutParams, DatabaseHandler db, Integer day) {
+        sessions = db.getSessions(day);
 
         SessionsListAdapter adapter = new SessionsListAdapter(this, sessions);
 

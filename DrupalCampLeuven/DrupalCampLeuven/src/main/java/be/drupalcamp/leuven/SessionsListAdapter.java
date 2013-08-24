@@ -73,7 +73,7 @@ public class SessionsListAdapter extends BaseAdapter implements OnClickListener 
                 case NORMAL:
                     convertView = mInflater.inflate(R.layout.session_normal_item, null);
                     holder.title = (TextView) convertView.findViewById(R.id.session_title);
-                    holder.speaker = (TextView) convertView.findViewById(R.id.session_speaker);
+                    holder.speaker = (TextView) convertView.findViewById(R.id.session_speakers);
                     holder.time = (TextView) convertView.findViewById(R.id.session_time);
                     break;
                 case SPECIAL:
@@ -94,19 +94,24 @@ public class SessionsListAdapter extends BaseAdapter implements OnClickListener 
 
             // Normal sessions get speakers, hour and favorite button.
             if (session.getSpecial() == 0) {
-                String timeText = "";
 
-                // Time.
+                String speakers = "";
+                List<Speaker> speakerList = session.getSpeakers();
+                for (int i = 0; i < speakerList.size(); i++) {
+                    Speaker speaker = speakerList.get(i);
+                    // @todo count and implode with ','.
+                    speakers += speaker.getFirstName() + " " + speaker.getLastName() + " ";
+                }
+                holder.speaker.setText(speakers);
+
+
+                // Session time.
                 int from = session.getStartDate();
                 int to = session.getEndDate();
-
-                DateFormat sdf = new SimpleDateFormat("h m");
-                Date startHour = (new Date(from));
-                Date endHour = (new Date(to));
-
-                timeText = sdf.format(startHour) + " - " + sdf.format(endHour);
-
-                holder.time.setText(timeText);
+                DateFormat sdf = new SimpleDateFormat("kk:mm");
+                Date startHour = new Date((long)from * 1000);
+                Date endHour = new Date((long)to * 1000);
+                holder.time.setText(sdf.format(startHour) + " - " + sdf.format(endHour));
             }
         }
 

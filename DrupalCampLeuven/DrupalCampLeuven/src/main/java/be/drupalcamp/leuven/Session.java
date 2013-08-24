@@ -1,5 +1,7 @@
 package be.drupalcamp.leuven;
 
+import java.util.List;
+
 public class Session {
 
     int id;
@@ -10,6 +12,8 @@ public class Session {
     int endDate;
     int level = 0;
     int day = 0;
+    List<Speaker> speakerList;
+
     // @todo tracks
 
     // Empty constructor.
@@ -18,7 +22,7 @@ public class Session {
     }
 
     // Full constructor.
-    public Session(int id, String title, String description, int special, int startDate, int endDate, int level, int day) {
+    public Session(int id, String title, String description, int special, int startDate, int endDate, int level, int day, List<Speaker> speakerList) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -27,10 +31,11 @@ public class Session {
         this.endDate = endDate;
         this.level = level;
         this.day = day;
+        this.speakerList = speakerList;
     }
 
     public int getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(int id) {
@@ -38,7 +43,7 @@ public class Session {
     }
 
     public String getTitle() {
-        return title;
+        return this.title;
     }
 
     public void setTitle(String title) {
@@ -46,7 +51,7 @@ public class Session {
     }
 
     public String getDescription() {
-        return description;
+        return this.description;
     }
 
     public void setDescription(String description) {
@@ -54,7 +59,7 @@ public class Session {
     }
 
     public int getSpecial() {
-        return special;
+        return this.special;
     }
 
     public void setSpecial(int special) {
@@ -62,7 +67,7 @@ public class Session {
     }
 
     public int getStartDate() {
-        return startDate;
+        return this.startDate;
     }
 
     public void setStartDate(int startDate) {
@@ -70,7 +75,7 @@ public class Session {
     }
 
     public int getEndDate() {
-        return endDate;
+        return this.endDate;
     }
 
     public void setEndDate(int endDate) {
@@ -78,7 +83,7 @@ public class Session {
     }
 
     public int getLevel() {
-        return level;
+        return this.level;
     }
 
     public void setLevel(int level) {
@@ -86,10 +91,15 @@ public class Session {
     }
 
     public int getDay() {
-        return day;
+        return this.day;
     }
 
     public void setDay(int day) {
         this.day = day;
     }
+
+    public List<Speaker> getSpeakers() {
+        return this.speakerList;
+    }
+
 }

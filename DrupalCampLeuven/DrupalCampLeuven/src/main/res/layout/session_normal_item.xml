@@ -20,7 +20,7 @@
     </TextView>
 
     <TextView
-            android:id="@+id/session_speaker"
+            android:id="@+id/session_speakers"
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
