@@ -104,7 +104,6 @@ public class SessionsListAdapter extends BaseAdapter implements OnClickListener 
                 }
                 holder.speaker.setText(speakers);
 
-
                 // Session time.
                 int from = session.getStartDate();
                 int to = session.getEndDate();
