@@ -6,12 +6,13 @@ public class Session {
 
     int id;
     String title;
-    String description;
-    int special;
+    String description = "";
+    int special = 0;
     int startDate;
     int endDate;
     int level = 0;
     int day = 0;
+    int favorite = 0;
     List<Speaker> speakerList;
 
     // @todo tracks
@@ -22,7 +23,7 @@ public class Session {
     }
 
     // Full constructor, including speaker list.
-    public Session(int id, String title, String description, int special, int startDate, int endDate, int level, int day, List<Speaker> speakerList) {
+    public Session(int id, String title, String description, int special, int startDate, int endDate, int level, int day, int favorite, List<Speaker> speakerList) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -31,6 +32,7 @@ public class Session {
         this.endDate = endDate;
         this.level = level;
         this.day = day;
+        this.favorite = favorite;
         this.speakerList = speakerList;
     }
 
@@ -96,6 +98,14 @@ public class Session {
 
     public void setDay(int day) {
         this.day = day;
+    }
+
+    public int getFavorite() {
+        return this.favorite;
+    }
+
+    public void setFavorite(int favorite) {
+        this.favorite = favorite;
     }
 
     public List<Speaker> getSpeakers() {

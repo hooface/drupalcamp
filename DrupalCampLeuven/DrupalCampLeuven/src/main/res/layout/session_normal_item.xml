@@ -55,13 +55,12 @@
         </TextView>
 
         <ImageButton
-                android:id="@+id/session_favorite_state"
+                android:id="@+id/session_favorite"
                 android:layout_width="@dimen/favorites_star"
                 android:layout_height="@dimen/favorites_star"
                 android:background="@null"
                 android:layout_alignParentRight="true"
-                android:contentDescription="@string/header_go_to_favorites"
-                android:src="@drawable/favorites_session" />
+                android:contentDescription="@string/header_go_to_favorites"/>
 
     </RelativeLayout>
 

@@ -1,11 +1,14 @@
 package be.drupalcamp.leuven;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.text.DateFormat;
@@ -57,9 +60,11 @@ public class SessionsListAdapter extends BaseAdapter implements OnClickListener 
     }
 
     public static class ViewHolder {
+        public int sessionId;
         public TextView title;
         public TextView speaker;
         public TextView time;
+        public ImageButton favorite;
     }
 
     public View getView(final int position, View convertView, ViewGroup parent) {
@@ -69,12 +74,16 @@ public class SessionsListAdapter extends BaseAdapter implements OnClickListener 
 
         if (convertView == null) {
             holder = new ViewHolder();
+
+            holder.sessionId = session.getId();
+
             switch (type) {
                 case NORMAL:
                     convertView = mInflater.inflate(R.layout.session_normal_item, null);
                     holder.title = (TextView) convertView.findViewById(R.id.session_title);
                     holder.speaker = (TextView) convertView.findViewById(R.id.session_speakers);
                     holder.time = (TextView) convertView.findViewById(R.id.session_time);
+                    holder.favorite = (ImageButton) convertView.findViewById(R.id.session_favorite);
                     break;
                 case SPECIAL:
                     convertView = mInflater.inflate(R.layout.session_special_item, null);
@@ -111,9 +120,50 @@ public class SessionsListAdapter extends BaseAdapter implements OnClickListener 
                 Date startHour = new Date((long)from * 1000);
                 Date endHour = new Date((long)to * 1000);
                 holder.time.setText(sdf.format(startHour) + " - " + sdf.format(endHour));
+
+                // Favorite image.
+                if (session.getFavorite() == 0) {
+                    holder.favorite.setImageResource(R.drawable.non_favorited_session);
+                }
+                else {
+                    holder.favorite.setImageResource(R.drawable.favorited_session);
+                }
+
+                // Set touch listener.
+                convertView.setOnTouchListener(sessionTouch);
             }
         }
 
         return convertView;
     }
+
+    View.OnTouchListener sessionTouch = new View.OnTouchListener() {
+        @Override
+        public boolean onTouch(View v, MotionEvent motionEvent) {
+            ViewHolder holder = (ViewHolder)v.getTag();
+            switch(motionEvent.getAction()) {
+                /*case MotionEvent.ACTION_DOWN:
+                    holder.hour.setTextColor(Color.parseColor("#ffffff"));
+                    holder.title.setTextColor(Color.parseColor("#ffffff"));
+                    holder.row.setBackgroundColor(Color.parseColor("#ef4f3f"));
+                    break;
+                case MotionEvent.ACTION_CANCEL:
+                    holder.hour.setTextColor(Color.parseColor("#ef4f3f"));
+                    holder.title.setTextColor(Color.parseColor("#323232"));
+                    holder.row.setBackgroundColor(Color.parseColor("#ffffff"));
+                    break;*/
+                case MotionEvent.ACTION_UP:
+                    /*holder.hour.setTextColor(Color.parseColor("#ef4f3f"));
+                    holder.title.setTextColor(Color.parseColor("#323232"));
+                    holder.row.setBackgroundColor(Color.parseColor("#ffffff"));*/
+                    int sessionId = holder.sessionId;
+                    Intent intent = new Intent(context, SessionDetail.class);
+                    intent.putExtra("sessionId", sessionId);
+                    context.startActivity(intent);
+                    break;
+            }
+            return true;
+        }
+    };
+
 }

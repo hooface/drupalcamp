@@ -102,4 +102,14 @@ public class BaseActivity extends Activity {
         tv.setTypeface(tf);
     }
 
-}
+    /**
+     * Set Font to OpenSans-Bold.
+     *
+     * @param textViewId
+     *   The textView id.
+     */
+    public void setFontToOpenSansBold(Integer textViewId) {
+        TextView tv = (TextView) findViewById(textViewId);
+        Typeface tf = Typeface.createFromAsset(getAssets(), "OpenSans-Bold.ttf");
+        tv.setTypeface(tf);
+    }}

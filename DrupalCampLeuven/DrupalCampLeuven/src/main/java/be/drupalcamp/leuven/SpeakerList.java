@@ -15,5 +15,7 @@ public class SpeakerList extends BaseActivity {
         // Set fonts.
         setFontToOpenSansLight(R.id.header_title);
 
+
+
     }
 }

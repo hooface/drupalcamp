@@ -163,6 +163,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                     sessionCursor.getInt(5),
                     sessionCursor.getInt(6),
                     sessionCursor.getInt(7),
+                    sessionCursor.getInt(8),
                     speakerList
                 );
 
@@ -281,6 +282,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 cursor.getInt(5),
                 cursor.getInt(6),
                 cursor.getInt(7),
+                cursor.getInt(8),
                 speakerList
         );
     }
