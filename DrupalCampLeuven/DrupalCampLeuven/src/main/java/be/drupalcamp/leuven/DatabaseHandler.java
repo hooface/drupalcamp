@@ -124,6 +124,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public void truncateTable() {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_SESSIONS, null, null);
+        db.delete(TABLE_SPEAKERS, null, null);
         db.close();
     }
 

@@ -261,7 +261,11 @@ public class SessionList extends BaseActivity {
                                             speaker.setTwitter(jsonSpeaker.getString("twitter"));
                                         }
                                         if (!jsonSpeaker.isNull("avatar")) {
-                                            speaker.setAvatar(jsonSpeaker.getString("avatar"));
+                                            String avatarUrl = jsonSpeaker.getString("avatar");
+                                            String[] explode = avatarUrl.split("/");
+                                            String imageFileName = explode[(explode.length - 1)];
+                                            downloadAvatar(avatarUrl, imageFileName);
+                                            speaker.setAvatar(imageFileName);
                                         }
 
                                         // Save speaker.
@@ -307,6 +311,33 @@ public class SessionList extends BaseActivity {
             }
         }
     }
+
+    /**
+     * Download the avatar.
+     */
+    public void downloadAvatar(String avatarUrl, String imageFileName) {
+        int avatarStatus = -1;
+        try {
+            URL downloadFileUrl = new URL(avatarUrl);
+            HttpURLConnection httpConnection = (HttpURLConnection) downloadFileUrl.openConnection();
+            avatarStatus = httpConnection.getResponseCode();
+
+            if (avatarStatus == 200) {
+                InputStream inputStream = httpConnection.getInputStream();
+                byte[] buffer = new byte[1024];
+                int bufferLength;
+
+                FileOutputStream fos = openFileOutput(imageFileName, Context.MODE_PRIVATE);
+                while ((bufferLength = inputStream.read(buffer)) > 0 ) {
+                    fos.write(buffer, 0, bufferLength);
+                }
+                fos.flush();
+                fos.close();
+            }
+        }
+        catch (IOException ignored) {}
+    }
+
 
     /**
      * Download the program from the internet and save it locally.
