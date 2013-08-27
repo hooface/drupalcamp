@@ -231,6 +231,43 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     /**
+     * Get speakers.
+     *
+     * @return <List>Speaker
+     *   A list of speakers.
+     */
+    public List<Speaker> getSpeakers() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        List<Speaker> speakerList = new ArrayList<Speaker>();
+        String speakersQuery = "SELECT * FROM " + DatabaseHandler.TABLE_SPEAKERS + " ORDER BY " + DatabaseHandler.SPEAKERS_KEY_FIRSTNAME + " ASC";
+        Cursor speakerCursor = db.rawQuery(speakersQuery, null);
+
+        // Loop through all speaker results.
+        if (speakerCursor.moveToFirst()) {
+            do {
+
+                Speaker speaker = new Speaker(
+                        speakerCursor.getInt(0),
+                        speakerCursor.getInt(1),
+                        speakerCursor.getString(2),
+                        speakerCursor.getString(3),
+                        speakerCursor.getString(4),
+                        speakerCursor.getString(5),
+                        speakerCursor.getString(6),
+                        speakerCursor.getString(7)
+                );
+
+                // Add session to list.
+                speakerList.add(speaker);
+            }
+            while (speakerCursor.moveToNext());
+        }
+        db.close();
+
+        return speakerList;
+    }
+
+    /**
      * Insert a session into the database.
      *
      * @param session
@@ -252,8 +289,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.insert(TABLE_SESSIONS, null, values);
         db.close();
     }
-
-    // Insert speaker.
 
     /**
      * Insert a speaker into the database.
@@ -277,8 +312,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.insert(TABLE_SPEAKERS, null, values);
         db.close();
     }
-
-    // Get single session.
 
     /**
      * Get a single session.

@@ -75,7 +75,6 @@ public class SessionListAdapter extends BaseAdapter implements OnClickListener {
 
         if (convertView == null) {
             holder = new ViewHolder();
-
             holder.sessionId = session.getId();
 
             switch (type) {

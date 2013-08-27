@@ -41,11 +41,15 @@
             <TextView
                     android:id="@+id/session_description"
                     android:textColor="@color/text_dark"
+                    android:background="@color/white"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/global_text_size"
+                    android:layout_marginLeft="@dimen/global_padding"
+                    android:layout_marginRight="@dimen/global_padding"
                     android:paddingLeft="@dimen/global_left_padding"
-                    android:paddingTop="@dimen/location_padding_top"
+                    android:paddingTop="@dimen/global_top_padding"
+                    android:paddingBottom="@dimen/global_bottom_padding"
                     android:paddingRight="@dimen/global_right_padding">
             </TextView>
 
