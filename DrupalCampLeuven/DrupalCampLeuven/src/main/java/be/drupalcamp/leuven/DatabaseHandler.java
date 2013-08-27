@@ -298,20 +298,25 @@ public class DatabaseHandler extends SQLiteOpenHelper {
      *   A full speaker object.
      */
     public void insertSpeaker(Speaker speaker) {
-        SQLiteDatabase db = this.getWritableDatabase();
 
-        ContentValues values = new ContentValues();
-        values.put(SPEAKERS_KEY_ID, speaker.getId());
-        values.put(SPEAKERS_KEY_SESSION_ID, speaker.getSessionId());
-        values.put(SPEAKERS_KEY_USERNAME, speaker.getUsername());
-        values.put(SPEAKERS_KEY_FIRSTNAME, speaker.getFirstName());
-        values.put(SPEAKERS_KEY_LASTNAME, speaker.getLastName());
-        values.put(SPEAKERS_KEY_ORG, speaker.getOrganisation());
-        values.put(SPEAKERS_KEY_TWITTER, speaker.getTwitter());
-        values.put(SPEAKERS_KEY_AVATAR, speaker.getAvatar());
+        Speaker existingSpeaker = this.getSpeaker(speaker.getId());
+        // @todo test this.
+        if (existingSpeaker == null) {
+            SQLiteDatabase db = this.getWritableDatabase();
 
-        db.insert(TABLE_SPEAKERS, null, values);
-        db.close();
+            ContentValues values = new ContentValues();
+            values.put(SPEAKERS_KEY_ID, speaker.getId());
+            values.put(SPEAKERS_KEY_SESSION_ID, speaker.getSessionId());
+            values.put(SPEAKERS_KEY_USERNAME, speaker.getUsername());
+            values.put(SPEAKERS_KEY_FIRSTNAME, speaker.getFirstName());
+            values.put(SPEAKERS_KEY_LASTNAME, speaker.getLastName());
+            values.put(SPEAKERS_KEY_ORG, speaker.getOrganisation());
+            values.put(SPEAKERS_KEY_TWITTER, speaker.getTwitter());
+            values.put(SPEAKERS_KEY_AVATAR, speaker.getAvatar());
+
+            db.insert(TABLE_SPEAKERS, null, values);
+            db.close();
+        }
     }
 
     /**
@@ -360,7 +365,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
      * @param speakerId
      *   The id of the speaker.
      *
-     * @return Speaker speaker
+     * @return Speaker speaker | null if the speaker does not exists.
      *   A full speaker object.
      */
     public Speaker getSpeaker(int speakerId) {
@@ -370,12 +375,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         String selectQuery = "SELECT * FROM " + TABLE_SPEAKERS + " WHERE " + SPEAKERS_KEY_ID + " = " + speakerId;
         Cursor cursor = db.rawQuery(selectQuery, null);
 
-        if (cursor != null) {
-            cursor.moveToFirst();
+        if (cursor == null) {
+            return null;
         }
 
-        assert cursor != null;
-        Speaker speaker = new Speaker(
+        cursor.moveToFirst();
+        return new Speaker(
                 cursor.getInt(0),
                 cursor.getInt(1),
                 cursor.getString(2),
@@ -385,7 +390,5 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 cursor.getString(6),
                 cursor.getString(7)
         );
-
-        return speaker;
     }
 }
