@@ -45,7 +45,7 @@ public class BaseActivity extends Activity {
         public void onClick(View v) {
             switch (v.getId()) {
                 case 1:
-                    Intent program = new Intent(getBaseContext(), ProgramList.class);
+                    Intent program = new Intent(getBaseContext(), SessionList.class);
                     startActivity(program);
                     break;
                 case 2:

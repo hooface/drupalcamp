@@ -92,33 +92,44 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         // No upgrades.
     }
 
-    // Set favorite status for an event.
-    public void saveFavorite(int favorite, int eventId) {
+    /**
+     * Truncate the table, this only happens for update.
+     *
+     * @param favorite
+     *   The favorite status (either 0 or 1).
+     * @param sessionId
+     *   The id of the session.
+     */
+    public void saveFavorite(int favorite, int sessionId) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         // Always delete first.
         assert db != null;
         db.delete(TABLE_FAVORITES, FAVORITES_KEY_ID + " = ?",
-                new String[] { "" + eventId });
+                new String[] { "" + sessionId });
 
         // Insert if favorite is 1.
         if (favorite == 1) {
             ContentValues values = new ContentValues();
-            values.put(FAVORITES_KEY_ID, eventId);
+            values.put(FAVORITES_KEY_ID, sessionId);
             db.insert(TABLE_FAVORITES, null, values);
         }
 
         db.close();
     }
 
-    // Truncate the table, this only happens for update.
+    /**
+     * Truncate the table, this only happens for update.
+     */
     public void truncateTable() {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_SESSIONS, null, null);
         db.close();
     }
 
-    // Get number of sessions.
+    /**
+     * Get number of sessions.
+     */
     public int getSessionCount() {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor dataCount = db.rawQuery("select * from " + TABLE_SESSIONS, null);
@@ -152,7 +163,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             do {
 
                 // Get speakers.
-                List<Speaker> speakerList = this.getSpeakers(sessionCursor.getInt(0));
+                List<Speaker> speakerList = this.getSessionSpeakers(sessionCursor.getInt(0));
 
                 Session session = new Session(
                     sessionCursor.getInt(0),
@@ -180,7 +191,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     /**
-     * Get speakers.
+     * Get speakers from a session.
      *
      * @param sessionId
      *   The id of the session to get speakers for.
@@ -188,7 +199,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
      * @return <List>Speaker
      *   A list of speakers.
      */
-    public List<Speaker> getSpeakers(Integer sessionId) {
+    public List<Speaker> getSessionSpeakers(Integer sessionId) {
         SQLiteDatabase db = this.getWritableDatabase();
         List<Speaker> speakerList = new ArrayList<Speaker>();
         String speakersQuery = "SELECT * FROM " + DatabaseHandler.TABLE_SPEAKERS + " WHERE " + DatabaseHandler.SPEAKERS_KEY_SESSION_ID + " = " + sessionId;
@@ -219,7 +230,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return speakerList;
     }
 
-    // Insert session.
+    /**
+     * Insert a session into the database.
+     *
+     * @param session
+     *   A full session object.
+     */
     public void insertSession(Session session) {
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -238,6 +254,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     // Insert speaker.
+
+    /**
+     * Insert a speaker into the database.
+     *
+     * @param speaker
+     *   A full speaker object.
+     */
     public void insertSpeaker(Speaker speaker) {
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -256,13 +279,23 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     // Get single session.
-    public Session getSession(int id) {
+
+    /**
+     * Get a single session.
+     *
+     * @param sessionId
+     *   The id of the session.
+     *
+     * @return Session session
+     *   A full session object.
+     */
+    public Session getSession(int sessionId) {
         SQLiteDatabase db = this.getReadableDatabase();
 
         assert db != null;
         String selectQuery = "SELECT * FROM " + TABLE_SESSIONS;
         selectQuery += " te LEFT JOIN " + DatabaseHandler.TABLE_FAVORITES + " tf ON te." + DatabaseHandler.SESSIONS_KEY_ID + " = tf." + DatabaseHandler.FAVORITES_KEY_ID + " ";
-        selectQuery += " WHERE " + SESSIONS_KEY_ID + " = " + id;
+        selectQuery += " WHERE " + SESSIONS_KEY_ID + " = " + sessionId;
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         if (cursor != null) {
@@ -270,7 +303,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         }
 
         // Get speakers.
-        List<Speaker> speakerList = this.getSpeakers(cursor.getInt(0));
+        List<Speaker> speakerList = this.getSessionSpeakers(cursor.getInt(0));
 
         assert cursor != null;
         return new Session(
@@ -285,5 +318,40 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 cursor.getInt(8),
                 speakerList
         );
+    }
+
+    /**
+     * Get a single speaker.
+     *
+     * @param speakerId
+     *   The id of the speaker.
+     *
+     * @return Speaker speaker
+     *   A full speaker object.
+     */
+    public Speaker getSpeaker(int speakerId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        assert db != null;
+        String selectQuery = "SELECT * FROM " + TABLE_SPEAKERS + " WHERE " + SPEAKERS_KEY_ID + " = " + speakerId;
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor != null) {
+            cursor.moveToFirst();
+        }
+
+        assert cursor != null;
+        Speaker speaker = new Speaker(
+                cursor.getInt(0),
+                cursor.getInt(1),
+                cursor.getString(2),
+                cursor.getString(3),
+                cursor.getString(4),
+                cursor.getString(5),
+                cursor.getString(6),
+                cursor.getString(7)
+        );
+
+        return speaker;
     }
 }

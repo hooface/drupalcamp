@@ -45,7 +45,7 @@ public class SessionDetail extends BaseActivity {
         }
 
         // Set fonts.
-        setFontToOpenSansRegular(R.id.session_title);
+        setFontToOpenSansLight(R.id.session_title);
     }
 
     /**

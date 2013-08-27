@@ -7,7 +7,7 @@
 
     <ImageView
             android:id="@+id/menu_program"
-            android:background="@color/program_blue"
+            android:background="@color/session_blue"
             android:contentDescription="@string/menu_program"
             android:layout_weight="0.25"
             android:layout_width="0dp"

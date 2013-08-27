@@ -9,6 +9,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.text.DateFormat;
@@ -19,7 +20,7 @@ import java.util.List;
 /**
  * Session list adapter.
  */
-public class SessionsListAdapter extends BaseAdapter implements OnClickListener {
+public class SessionListAdapter extends BaseAdapter implements OnClickListener {
     private final Context context;
     private final List<Session> sessions;
     private LayoutInflater mInflater;
@@ -27,7 +28,7 @@ public class SessionsListAdapter extends BaseAdapter implements OnClickListener 
     private static final int NORMAL = 0;
     private static final int SPECIAL = 1;
 
-    public SessionsListAdapter(Context context, List<Session> sessions) {
+    public SessionListAdapter(Context context, List<Session> sessions) {
         this.context = context;
         this.sessions = sessions;
         this.mInflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -46,7 +47,6 @@ public class SessionsListAdapter extends BaseAdapter implements OnClickListener 
     }
 
     public void onClick(View view) {
-
     }
 
     @Override
@@ -65,6 +65,7 @@ public class SessionsListAdapter extends BaseAdapter implements OnClickListener 
         public TextView speaker;
         public TextView time;
         public ImageButton favorite;
+        public LinearLayout session_item;
     }
 
     public View getView(final int position, View convertView, ViewGroup parent) {
@@ -84,6 +85,7 @@ public class SessionsListAdapter extends BaseAdapter implements OnClickListener 
                     holder.speaker = (TextView) convertView.findViewById(R.id.session_speakers);
                     holder.time = (TextView) convertView.findViewById(R.id.session_time);
                     holder.favorite = (ImageButton) convertView.findViewById(R.id.session_favorite);
+                    holder.session_item = (LinearLayout) convertView.findViewById(R.id.session_item);
                     break;
                 case SPECIAL:
                     convertView = mInflater.inflate(R.layout.session_special_item, null);
@@ -137,29 +139,33 @@ public class SessionsListAdapter extends BaseAdapter implements OnClickListener 
         return convertView;
     }
 
+    /**
+     * onTouchListener for session.
+     */
     View.OnTouchListener sessionTouch = new View.OnTouchListener() {
         @Override
         public boolean onTouch(View v, MotionEvent motionEvent) {
             ViewHolder holder = (ViewHolder)v.getTag();
-            switch(motionEvent.getAction()) {
-                /*case MotionEvent.ACTION_DOWN:
-                    holder.hour.setTextColor(Color.parseColor("#ffffff"));
-                    holder.title.setTextColor(Color.parseColor("#ffffff"));
-                    holder.row.setBackgroundColor(Color.parseColor("#ef4f3f"));
+            int action = motionEvent.getAction();
+            switch (action) {
+                case MotionEvent.ACTION_DOWN:
+                    holder.title.setTextColor(context.getResources().getColor(R.color.white));
+                    holder.speaker.setTextColor(context.getResources().getColor(R.color.white));
+                    holder.time.setTextColor(context.getResources().getColor(R.color.white));
+                    holder.session_item.setBackgroundColor(context.getResources().getColor(R.color.session_blue));
                     break;
                 case MotionEvent.ACTION_CANCEL:
-                    holder.hour.setTextColor(Color.parseColor("#ef4f3f"));
-                    holder.title.setTextColor(Color.parseColor("#323232"));
-                    holder.row.setBackgroundColor(Color.parseColor("#ffffff"));
-                    break;*/
                 case MotionEvent.ACTION_UP:
-                    /*holder.hour.setTextColor(Color.parseColor("#ef4f3f"));
-                    holder.title.setTextColor(Color.parseColor("#323232"));
-                    holder.row.setBackgroundColor(Color.parseColor("#ffffff"));*/
-                    int sessionId = holder.sessionId;
-                    Intent intent = new Intent(context, SessionDetail.class);
-                    intent.putExtra("sessionId", sessionId);
-                    context.startActivity(intent);
+                    holder.title.setTextColor(context.getResources().getColor(R.color.text_dark));
+                    holder.speaker.setTextColor(context.getResources().getColor(R.color.dark_grey));
+                    holder.time.setTextColor(context.getResources().getColor(R.color.text_dark));
+                    holder.session_item.setBackgroundColor(context.getResources().getColor(R.color.white));
+                    if (action == MotionEvent.ACTION_UP) {
+                        int sessionId = holder.sessionId;
+                        Intent intent = new Intent(context, SessionDetail.class);
+                        intent.putExtra("sessionId", sessionId);
+                        context.startActivity(intent);
+                    }
                     break;
             }
             return true;

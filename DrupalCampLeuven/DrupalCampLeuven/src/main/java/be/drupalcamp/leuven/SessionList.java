@@ -30,7 +30,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
 
-public class ProgramList extends BaseActivity {
+public class SessionList extends BaseActivity {
 
     // The eventUrl.
     public String eventUrl = "http://dcleuven-api.timleytens.be/api/timeslots/list.json";
@@ -54,7 +54,7 @@ public class ProgramList extends BaseActivity {
         // Do not hide refresh button.
         hideRefreshButton = false;
 
-        setContentView(R.layout.program_list);
+        setContentView(R.layout.session_list);
         super.onCreate(savedInstanceState);
 
         // Set header title.
@@ -124,7 +124,7 @@ public class ProgramList extends BaseActivity {
     private final View.OnClickListener showNext = new View.OnClickListener() {
         public void onClick(View v) {
             new AnimationUtils();
-            switcher.setAnimation(AnimationUtils.makeInAnimation(ProgramList.this, false));
+            switcher.setAnimation(AnimationUtils.makeInAnimation(SessionList.this, false));
             switcher.showNext();
         }
     };
@@ -135,7 +135,7 @@ public class ProgramList extends BaseActivity {
     private final View.OnClickListener showPrevious = new View.OnClickListener() {
         public void onClick(View v) {
             new AnimationUtils();
-            switcher.setAnimation(AnimationUtils.makeInAnimation(ProgramList.this, true));
+            switcher.setAnimation(AnimationUtils.makeInAnimation(SessionList.this, true));
             switcher.showPrevious();
         }
     };
@@ -147,7 +147,7 @@ public class ProgramList extends BaseActivity {
         public void onClick(View v) {
             ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
             if ((cm.getActiveNetworkInfo() != null) && cm.getActiveNetworkInfo().isAvailable() && cm.getActiveNetworkInfo().isConnected()) {
-                dialog = new customProgressDialog(ProgramList.this);
+                dialog = new customProgressDialog(SessionList.this);
                 dialog.setTitle(R.string.updating);
                 dialog.setMessage(getString(R.string.updating_message));
                 dialog.setIndeterminate(false);
@@ -157,7 +157,7 @@ public class ProgramList extends BaseActivity {
                 new updateTask().execute();
             }
             else {
-                Toast.makeText(ProgramList.this, getString(R.string.update_offline), Toast.LENGTH_LONG).show();
+                Toast.makeText(SessionList.this, getString(R.string.update_offline), Toast.LENGTH_LONG).show();
             }
         }
     };
@@ -168,7 +168,7 @@ public class ProgramList extends BaseActivity {
     public void getSessionsPerDay(LinearLayout layout, LinearLayout.LayoutParams layoutParams, DatabaseHandler db, Integer day) {
         sessions = db.getSessions(day);
 
-        SessionsListAdapter adapter = new SessionsListAdapter(this, sessions);
+        SessionListAdapter adapter = new SessionListAdapter(this, sessions);
 
         for (int i = 0; i < adapter.getCount(); i++) {
             View item = adapter.getView(i, null, null);
@@ -351,7 +351,7 @@ public class ProgramList extends BaseActivity {
             dialog.dismiss();
         }
 
-        Toast.makeText(ProgramList.this, getString(R.string.service_offline), Toast.LENGTH_LONG).show();
+        Toast.makeText(SessionList.this, getString(R.string.service_offline), Toast.LENGTH_LONG).show();
     }
 
     /**
@@ -362,7 +362,7 @@ public class ProgramList extends BaseActivity {
             dialog.dismiss();
         }
 
-        Toast.makeText(ProgramList.this, getString(R.string.parsing_failed), Toast.LENGTH_LONG).show();
+        Toast.makeText(SessionList.this, getString(R.string.parsing_failed), Toast.LENGTH_LONG).show();
     }
 
     /**
@@ -376,9 +376,9 @@ public class ProgramList extends BaseActivity {
             dialog.dismiss();
         }
 
-        Toast.makeText(ProgramList.this, getString(R.string.updating_done), Toast.LENGTH_LONG).show();
+        Toast.makeText(SessionList.this, getString(R.string.updating_done), Toast.LENGTH_LONG).show();
 
-        Intent refresh = new Intent(getBaseContext(), ProgramList.class);
+        Intent refresh = new Intent(getBaseContext(), SessionList.class);
         startActivity(refresh);
     }
 }

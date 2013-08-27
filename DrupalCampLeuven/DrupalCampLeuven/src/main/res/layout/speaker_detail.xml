@@ -1,0 +1,61 @@
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        tools:context=".speakerDetail"
+        android:orientation="vertical">
+
+    <ScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_marginBottom="@dimen/menu_height"
+            android:background="@color/grey"
+            android:id="@+id/scrollview">
+
+        <LinearLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+            <include layout="@layout/header" />
+
+            <include layout="@layout/separator" />
+
+            <TextView
+                    android:id="@+id/speaker_name"
+                    android:textColor="@color/text_dark"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/day_text_size"
+                    android:paddingTop="@dimen/global_top_padding"
+                    android:paddingBottom="@dimen/global_left_padding"
+                    android:paddingLeft="@dimen/global_left_padding"
+                    android:paddingRight="@dimen/global_right_padding">
+            </TextView>
+
+            <include layout="@layout/separator" />
+
+            <TextView
+                    android:id="@+id/session_description"
+                    android:textColor="@color/text_dark"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/global_text_size"
+                    android:paddingLeft="@dimen/global_left_padding"
+                    android:paddingTop="@dimen/location_padding_top"
+                    android:paddingRight="@dimen/global_right_padding">
+            </TextView>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <include layout="@layout/menu"
+             android:layout_width="fill_parent"
+             android:layout_height="wrap_content"
+             android:layout_alignParentBottom="true" />
+
+</RelativeLayout>
