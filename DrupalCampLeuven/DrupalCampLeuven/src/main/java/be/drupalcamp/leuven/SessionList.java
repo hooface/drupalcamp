@@ -16,7 +16,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
-import org.apache.http.client.ClientProtocolException;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -25,27 +24,25 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
 
 public class SessionList extends BaseActivity {
 
-    // The eventUrl.
-    public String eventUrl = "http://dcleuven-api.timleytens.be/api/timeslots/list.json";
+    // The data.
+    public String dataUrl = "http://dcleuven-api.timleytens.be/api/timeslots/list.json";
 
-    // The filename to save to.
+    // The filename to save the list to.
     public static String fileName = "list.json";
 
-    // Number of sessions - we should actually do a count on the array of sessions.
+    // Number of sessions.
     public int numberOfSessions = 0;
 
     // Other variables.
     ProgressDialog dialog;
     public static int siteStatus = 200;
     public List<Session> sessions;
-
     public ViewFlipper switcher;
 
     @Override
@@ -192,8 +189,6 @@ public class SessionList extends BaseActivity {
                 catch (IOException ignored) {}
 
                 if (siteStatus == 200) {
-                    // TODO cleanup this whole routine and move to separate file.
-
                     JSONArray sessions = null;
                     String json = new BufferedReader(new InputStreamReader(openFileInput(fileName), "UTF-8")).readLine();
 
@@ -334,6 +329,8 @@ public class SessionList extends BaseActivity {
                 fos.flush();
                 fos.close();
             }
+
+            httpConnection.disconnect();
         }
         catch (IOException ignored) {}
     }
@@ -347,7 +344,7 @@ public class SessionList extends BaseActivity {
 
         try {
 
-            URL downloadFileUrl = new URL(eventUrl);
+            URL downloadFileUrl = new URL(dataUrl);
             HttpURLConnection httpConnection = (HttpURLConnection) downloadFileUrl.openConnection();
             siteStatus = httpConnection.getResponseCode();
             if (siteStatus == 200) {
@@ -367,8 +364,6 @@ public class SessionList extends BaseActivity {
 
             httpConnection.disconnect();
         }
-        catch (UnsupportedEncodingException ignored) {}
-        catch (ClientProtocolException ignored) {}
         catch (IOException ignored) {}
 
         return siteStatus;
