@@ -27,6 +27,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public static final String SESSIONS_KEY_SPECIAL = "special";
     public static final String SESSIONS_KEY_START_DATE = "start_date";
     public static final String SESSIONS_KEY_END_DATE = "end_date";
+    // @todo currently not yet used.
     public static final String SESSIONS_KEY_LEVEL = "level";
     public static final String SESSIONS_KEY_DAY = "day";
 
