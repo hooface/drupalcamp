@@ -14,12 +14,24 @@ public class Session {
     int day = 0;
     int favorite = 0;
     List<Speaker> speakerList;
-
     // @todo tracks
 
     // Empty constructor.
     public Session() {
 
+    }
+
+    // Full constructor, without speaker list.
+    public Session(int id, String title, String description, int special, int startDate, int endDate, int level, int day, int favorite) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.special = special;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.level = level;
+        this.day = day;
+        this.favorite = favorite;
     }
 
     // Full constructor, including speaker list.

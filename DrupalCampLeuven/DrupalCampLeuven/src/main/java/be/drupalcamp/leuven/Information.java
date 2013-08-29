@@ -24,6 +24,5 @@ public class Information extends BaseActivity {
 
         // Set fonts.
         setFontToOpenSansLight(R.id.header_title);
-        setFontToOpenSansRegular(R.id.information_text);
     }
 }

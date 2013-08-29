@@ -7,9 +7,9 @@ public class Speaker {
     String username;
     String firstName;
     String lastName;
-    String organisation;
-    String twitter;
-    String avatar;
+    String organisation = "";
+    String twitter = "";
+    String avatar = "";
 
     public Speaker() {
     }

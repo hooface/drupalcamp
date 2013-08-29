@@ -3,18 +3,18 @@
 
     <!-- General -->
     <string name="app_name">DrupalCamp Leuven</string>
-    <string name="favorite">Favoriet</string>
+    <string name="favorite">Favorite</string>
 
     <!-- Header -->
-    <string name="header_go_to_favorites">Ga naar favorieten</string>
+    <string name="header_go_to_favorites">Go to favorites</string>
     <string name="header_logo">DrupalCamp Leuven</string>
-    <string name="header_refresh">Update programma</string>
+    <string name="header_refresh">Update program</string>
 
     <!-- Menu -->
-    <string name="menu_program">Programma</string>
-    <string name="menu_speakers">Sprekers</string>
-    <string name="menu_location">Locatie</string>
-    <string name="menu_info">Informatie</string>
+    <string name="menu_program">Program</string>
+    <string name="menu_speakers">Speakers</string>
+    <string name="menu_location">Location</string>
+    <string name="menu_info">Information</string>
 
     <!-- Days - we should make this configurable by using arrays -->
     <string name="day_1_integer">14</string>
@@ -25,26 +25,28 @@
     <string name="day_2_text">15 SEPTEMBER 2013</string>
 
     <!-- Program -->
-    <string name="no_sessions">Geen sessies gevonden. Klik hier om het programma op te halen.</string>
-    <string name="updating">Programma ophalen</string>
-    <string name="updating_message">We halen het programma met de sessies en sprekers nu op, even geduld.</string>
-    <string name="update_offline">Je bent niet verbonden met het internet.</string>
-    <string name="updating_done">Het programma is aangepast.</string>
-    <string name="service_offline">De service om het programma op te halen is niet beschikbaar, probeer het later opnieuw.</string>
-    <string name="parsing_failed">Er ging iets fout met het bewaren van het programma, probeer het later opnieuw.</string>
-    <string name="favorite_add">Voeg toe aan je favorieten</string>
-    <string name="favorite_remove">Verwijder uit je favorieten</string>
+    <string name="no_sessions">No sessions found, click here to download</string>
+    <string name="updating">Download program</string>
+    <string name="updating_message">Downloading the program with sessions and speakers.</string>
+    <string name="update_offline">You are not connected to the internet.</string>
+    <string name="updating_done">The program has been updated.</string>
+    <string name="service_offline">The program service is not available, please try again later.</string>
+    <string name="parsing_failed">Something went wrong saving the program, please try again later.</string>
+    <string name="favorite_add">Add to favorites</string>
+    <string name="favorite_remove">Remove from favorites</string>
 
     <!-- Speakers -->
     <string name="speaker_avatar">Avatar</string>
+    <string name="speaker_organisation">Organisation</string>
+    <string name="speaker_twitter">Twitter</string>
 
     <!-- Location -->
-    <string name="location_map_link">Bekijk op interactieve map</string>
+    <string name="location_map_link">Interactive map</string>
     <string name="location_info">Katholieke Hogeschool Leuven\nDepartment "Gezondheidszorg en Technology"\nHerestraat 49\n3000 Leuven\n</string>
     <string name="location_geo_lat">50.880943</string>
     <string name="location_geo_long">4.674464</string>
 
     <!-- Information -->
-    <string name="information_text"><![CDATA[Open source mobiele applicatie voor DrupalCamp, voor het eerst gebruikt voor DrupalCamp Leuven 2013.<br /><br /><b>Proudly built by</b><br /><a href="https://twitter.com/TimLeytens">@TimLeytens</a> - iOS & Drupal developer<br /><a href="https://twitter.com/swentel">@swentel</a> - Android & Drupal developer<br /><a href="https://twitter.com/leenvs">@LeenVS</a> - Graphic designer<br /><br /><b>Broncode</b><br />iOS: <a href="http://github.com/TimLeytens/drupalcamp">GitHub</a><br />Android: <a href="https://github.com/swentel/drupalcamp">GitHub</a>]]></string>
+    <string name="information_text"><![CDATA[Open source mobile application for DrupalCamp, first used for DrupalCamp Leuven 2013 in Belgium.<br /><br /><b>Proudly built by</b><br /><a href="https://twitter.com/TimLeytens">@TimLeytens</a> - iOS & Drupal developer<br /><a href="https://twitter.com/swentel">@swentel</a> - Android & Drupal developer<br /><a href="https://twitter.com/leenvs">@LeenVS</a> - Graphic designer<br /><br /><b>Source code</b><br />iOS: <a href="http://github.com/TimLeytens/drupalcamp">GitHub</a><br />Android: <a href="https://github.com/swentel/drupalcamp">GitHub</a>]]></string>
 
 </resources>

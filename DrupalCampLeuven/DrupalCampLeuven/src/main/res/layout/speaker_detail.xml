@@ -38,20 +38,70 @@
 
             <include layout="@layout/separator" />
 
-            <TextView
-                    android:id="@+id/speaker_info"
-                    android:textColor="@color/text_dark"
+            <LinearLayout
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:orientation="horizontal"
                     android:background="@color/white"
                     android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/global_text_size"
                     android:layout_marginLeft="@dimen/global_padding"
                     android:layout_marginRight="@dimen/global_padding"
-                    android:paddingLeft="@dimen/global_left_padding"
-                    android:paddingTop="@dimen/global_top_padding"
-                    android:paddingBottom="@dimen/global_bottom_padding"
-                    android:paddingRight="@dimen/global_right_padding">
-            </TextView>
+                    android:layout_height="wrap_content">
+
+                <ImageView
+                        xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:contentDescription="@string/speaker_avatar"
+                        android:paddingTop="@dimen/global_top_padding"
+                        android:paddingBottom="@dimen/global_top_padding"
+                        android:layout_marginLeft="@dimen/global_padding"
+                        android:id="@+id/speaker_avatar" />
+
+                <LinearLayout
+                        xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:orientation="vertical"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content">
+
+                    <TextView
+                                android:id="@+id/speaker_organisation"
+                                android:textColor="@color/text_dark"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/global_text_size"
+                                android:layout_marginLeft="@dimen/global_padding"
+                                android:layout_marginRight="@dimen/global_padding"
+                                android:paddingLeft="@dimen/global_left_padding"
+                                android:layout_marginTop="@dimen/global_top_padding"
+                                android:paddingRight="@dimen/global_right_padding">
+                        </TextView>
+
+                        <TextView
+                                android:id="@+id/speaker_twitter"
+                                android:textColor="@color/text_dark"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/global_text_size"
+                                android:layout_marginLeft="@dimen/global_padding"
+                                android:layout_marginRight="@dimen/global_padding"
+                                android:paddingLeft="@dimen/global_left_padding"
+                                android:layout_marginTop="@dimen/speaker_top_padding"
+                                android:paddingBottom="@dimen/global_bottom_padding"
+                                android:paddingRight="@dimen/global_right_padding">
+                        </TextView>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            <include layout="@layout/separator" />
+
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:id="@+id/session_list"
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
 
         </LinearLayout>
 

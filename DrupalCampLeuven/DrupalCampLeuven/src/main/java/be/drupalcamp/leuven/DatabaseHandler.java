@@ -27,7 +27,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public static final String SESSIONS_KEY_SPECIAL = "special";
     public static final String SESSIONS_KEY_START_DATE = "start_date";
     public static final String SESSIONS_KEY_END_DATE = "end_date";
-    // @todo currently not yet used.
+    // @todo currently not yet used for output.
     public static final String SESSIONS_KEY_LEVEL = "level";
     public static final String SESSIONS_KEY_DAY = "day";
 
@@ -194,7 +194,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     /**
-     * Get speakers from a session.
+     * Get speakers per session.
      *
      * @param sessionId
      *   The id of the session to get speakers for.
@@ -231,6 +231,50 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.close();
 
         return speakerList;
+    }
+
+    /**
+     * Get sessions from a speaker.
+     *
+     * @param sessionId
+     *   The id of the speaker to get sessions for.
+     *   // @todo this is actually just wrong.
+     *
+     * @return <List>Session
+     *   A list of sessions.
+     */
+    public List<Session> getSpeakerSessions(Integer sessionId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        List<Session> sessionList = new ArrayList<Session>();
+
+        String sessionsQuery = "SELECT * FROM " + DatabaseHandler.TABLE_SESSIONS;
+        sessionsQuery += " ts LEFT JOIN " + DatabaseHandler.TABLE_FAVORITES + " tf ON ts." + DatabaseHandler.SESSIONS_KEY_ID + " = tf." + DatabaseHandler.FAVORITES_KEY_ID;
+        sessionsQuery += " WHERE " + DatabaseHandler.SESSIONS_KEY_ID + " = " + sessionId;
+        Cursor sessionCursor = db.rawQuery(sessionsQuery, null);
+
+        // Loop through all session results.
+        if (sessionCursor.moveToFirst()) {
+            do {
+
+                Session session = new Session(
+                        sessionCursor.getInt(0),
+                        sessionCursor.getString(1),
+                        sessionCursor.getString(2),
+                        sessionCursor.getInt(3),
+                        sessionCursor.getInt(4),
+                        sessionCursor.getInt(5),
+                        sessionCursor.getInt(6),
+                        sessionCursor.getInt(7),
+                        sessionCursor.getInt(8)
+                );
+
+                sessionList.add(session);
+            }
+            while (sessionCursor.moveToNext());
+        }
+        db.close();
+
+        return sessionList;
     }
 
     /**

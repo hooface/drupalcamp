@@ -20,8 +20,6 @@ public class Location extends BaseActivity {
 
         // Set fonts.
         setFontToOpenSansLight(R.id.header_title);
-        setFontToOpenSansRegular(R.id.location_info);
-        setFontToOpenSansRegular(R.id.location_map_link);
 
         // Add listener on map link.
         TextView mapLink = (TextView) findViewById(R.id.location_map_link);

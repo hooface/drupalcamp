@@ -89,27 +89,4 @@ public class BaseActivity extends Activity {
         Typeface tf = Typeface.createFromAsset(getAssets(), "OpenSans-Light.ttf");
         tv.setTypeface(tf);
     }
-
-    /**
-     * Set Font to OpenSans-Regular.
-     *
-     * @param textViewId
-     *   The textView id.
-     */
-    public void setFontToOpenSansRegular(Integer textViewId) {
-        TextView tv = (TextView) findViewById(textViewId);
-        Typeface tf = Typeface.createFromAsset(getAssets(), "OpenSans-Regular.ttf");
-        tv.setTypeface(tf);
-    }
-
-    /**
-     * Set Font to OpenSans-Bold.
-     *
-     * @param textViewId
-     *   The textView id.
-     */
-    public void setFontToOpenSansBold(Integer textViewId) {
-        TextView tv = (TextView) findViewById(textViewId);
-        Typeface tf = Typeface.createFromAsset(getAssets(), "OpenSans-Bold.ttf");
-        tv.setTypeface(tf);
-    }}
+}

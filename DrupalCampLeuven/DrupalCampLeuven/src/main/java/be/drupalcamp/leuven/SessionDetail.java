@@ -41,7 +41,7 @@ public class SessionDetail extends BaseActivity {
         Date startHour = new Date((long)from * 1000);
         Date endHour = new Date((long)to * 1000);
         TextView stime = (TextView) findViewById(R.id.session_time);
-        // @todo hardcoded date.
+        // @todo hardcoded date - see also sessionList.java.
         String Date = "";
         if (session.getDay() == 14) {
             Date = "14 september";
@@ -84,7 +84,6 @@ public class SessionDetail extends BaseActivity {
             item.setLayoutParams(layoutParams);
             speaker_list.addView(item);
         }
-
 
         // Set fonts.
         setFontToOpenSansLight(R.id.header_title);

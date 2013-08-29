@@ -1,8 +1,12 @@
 package be.drupalcamp.leuven;
 
 
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.io.FileInputStream;
 
 public class SpeakerDetail extends BaseActivity {
 
@@ -23,16 +27,55 @@ public class SpeakerDetail extends BaseActivity {
         // Set header title.
         setTextViewString(R.id.header_title, R.string.menu_speakers);
 
-        // Set speaker name.
+        ImageView iv = (ImageView) findViewById(R.id.speaker_avatar);
+        // Avatar.
+        try {
+            FileInputStream in = openFileInput(speaker.getAvatar());
+            iv.setImageBitmap(BitmapFactory.decodeStream(in));
+        }
+        catch (Exception ignored) {}
+
+        // Speaker name.
         TextView st = (TextView) findViewById(R.id.speaker_name);
         st.setText(speaker.getFirstName() + ' ' + speaker.getLastName());
-        //TextView sd = (TextView) findViewById(R.id.session_description);
-        //sd.setText(speaker.get);
+
+        // Speaker organisation.
+        TextView so = (TextView) findViewById(R.id.speaker_organisation);
+        if (speaker.getOrganisation().length() > 0) {
+            so.setText(getString(R.string.speaker_organisation) + ": " + speaker.getOrganisation());
+        }
+        else {
+            so.setVisibility(TextView.GONE);
+        }
+
+        // Speaker twitter.
+        TextView stw = (TextView) findViewById(R.id.speaker_twitter);
+        if (speaker.getTwitter().length() > 0) {
+            stw.setText(getString(R.string.speaker_twitter) + ": @" + speaker.getTwitter());
+        }
+        else {
+            stw.setVisibility(TextView.GONE);
+        }
+
+        // Sessions of this speaker.
+        /*List<Session> sessions = db.getSpeakerSessions(speaker.getSessionId());
+        SessionListAdapter adapter = new SessionListAdapter(this, sessions);
+        int dp = (int) getResources().getDimension(R.dimen.global_padding);
+        int dp_small = (int) getResources().getDimension(R.dimen.global_small_padding);
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        layoutParams.setMargins(dp, dp_small, dp, dp);
+
+        LinearLayout session_list = (LinearLayout) findViewById(R.id.session_list);
+
+        for (int i = 0; i < adapter.getCount(); i++) {
+            View item = adapter.getView(i, null, null);
+            item.setLayoutParams(layoutParams);
+            session_list.addView(item);
+        }*/
 
         // Set fonts.
         setFontToOpenSansLight(R.id.header_title);
-
-        // Set fonts.
         setFontToOpenSansLight(R.id.speaker_name);
     }
 
