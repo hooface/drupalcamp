@@ -4,7 +4,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class SessionDetail extends BaseActivity {
 
@@ -25,26 +30,64 @@ public class SessionDetail extends BaseActivity {
         // Set header title.
         setTextViewString(R.id.header_title, R.string.menu_program);
 
-        // Set session title.
+        // Title.
         TextView st = (TextView) findViewById(R.id.session_title);
         st.setText(session.getTitle());
+
+        // Time.
+        int from = session.getStartDate();
+        int to = session.getEndDate();
+        DateFormat sdf = new SimpleDateFormat("kk:mm");
+        Date startHour = new Date((long)from * 1000);
+        Date endHour = new Date((long)to * 1000);
+        TextView stime = (TextView) findViewById(R.id.session_time);
+        // @todo hardcoded date.
+        String Date = "";
+        if (session.getDay() == 14) {
+            Date = "14 september";
+        }
+        else {
+            Date = "15 september";
+        }
+        stime.setText(Date + ": " + sdf.format(startHour) + " - " + sdf.format(endHour));
+
+        // Description.
         TextView sd = (TextView) findViewById(R.id.session_description);
         sd.setText(session.getDescription());
 
-        // Set fonts.
-        setFontToOpenSansLight(R.id.header_title);
-
         // Set favorite button and attach listener.
+        TextView favoriteText = (TextView) findViewById(R.id.session_favorite_action);
         ImageButton favoriteButton = (ImageButton) findViewById(R.id.session_favorite);
         favoriteButton.setOnClickListener(actionFavorite);
+        favoriteText.setOnClickListener(actionFavorite);
         if (session.getFavorite() == 0) {
             favoriteButton.setImageResource(R.drawable.non_favorited_session);
+            favoriteText.setText(getString(R.string.favorite_add));
         }
         else {
             favoriteButton.setImageResource(R.drawable.favorited_session);
+            favoriteText.setText(getString(R.string.favorite_remove));
         }
 
+        // Speakers.
+        SpeakerListAdapter adapter = new SpeakerListAdapter(this, session.getSpeakers());
+        int dp = (int) getResources().getDimension(R.dimen.global_padding);
+        int dp_small = (int) getResources().getDimension(R.dimen.global_small_padding);
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        layoutParams.setMargins(dp, dp_small, dp, dp);
+
+        LinearLayout speaker_list = (LinearLayout) findViewById(R.id.speaker_list);
+
+        for (int i = 0; i < adapter.getCount(); i++) {
+            View item = adapter.getView(i, null, null);
+            item.setLayoutParams(layoutParams);
+            speaker_list.addView(item);
+        }
+
+
         // Set fonts.
+        setFontToOpenSansLight(R.id.header_title);
         setFontToOpenSansLight(R.id.session_title);
     }
 
@@ -56,15 +99,18 @@ public class SessionDetail extends BaseActivity {
             // Get favorite.
             int favorite = session.getFavorite();
 
-            // Switch image.
+            // Switch image and text.
+            TextView favoriteText = (TextView) findViewById(R.id.session_favorite_action);
             ImageView i = (ImageView) findViewById(R.id.session_favorite);
             int setFavorite;
             if (favorite == 0) {
                 setFavorite = 1;
                 i.setImageResource(R.drawable.favorited_session);
+                favoriteText.setText(getString(R.string.favorite_remove));
             } else {
                 setFavorite = 0;
                 i.setImageResource(R.drawable.non_favorited_session);
+                favoriteText.setText(getString(R.string.favorite_add));
             }
 
             // Update in database.

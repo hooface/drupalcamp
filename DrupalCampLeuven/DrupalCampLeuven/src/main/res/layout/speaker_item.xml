@@ -2,36 +2,51 @@
 <LinearLayout
         android:id="@+id/speaker_item"
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:background="@color/white"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
 
-    <TextView
-            android:id="@+id/speaker_name"
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="fill_parent"
+    <ImageView
             android:layout_height="wrap_content"
-            android:textSize="@dimen/global_text_size"
-            android:textColor="@color/text_dark"
-            android:layout_marginLeft="@dimen/global_left_padding"
-            android:layout_marginTop="@dimen/global_top_padding"
-            android:layout_marginRight="@dimen/global_small_padding"
-            android:layout_marginBottom="@dimen/global_small_padding"
-            android:textStyle="bold">
-    </TextView>
+            android:layout_width="wrap_content"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:contentDescription="@string/speaker_avatar"
+            android:id="@+id/speaker_avatar" />
 
-    <TextView
-            android:id="@+id/speaker_organisation"
+
+    <LinearLayout
+            android:id="@+id/speaker_info"
             xmlns:android="http://schemas.android.com/apk/res/android"
+            android:orientation="vertical"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/global_text_size"
-            android:textColor="@color/dark_grey"
-            android:layout_marginLeft="@dimen/global_left_padding"
-            android:layout_marginRight="@dimen/global_right_padding"
-            android:layout_marginBottom="@dimen/global_bottom_padding"
-            >
-    </TextView>
+            android:layout_height="wrap_content">
+
+        <TextView
+                android:id="@+id/speaker_name"
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/global_text_size"
+                android:textColor="@color/text_dark"
+                android:layout_marginLeft="@dimen/global_left_padding"
+                android:layout_marginTop="@dimen/speaker_top_padding"
+                android:layout_marginRight="@dimen/global_small_padding"
+                android:textStyle="bold">
+        </TextView>
+
+        <TextView
+                android:id="@+id/speaker_organisation"
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/global_text_size"
+                android:textColor="@color/dark_grey"
+                android:layout_marginLeft="@dimen/global_left_padding"
+                android:layout_marginRight="@dimen/global_right_padding"
+                >
+        </TextView>
+
+    </LinearLayout>
 
 </LinearLayout>

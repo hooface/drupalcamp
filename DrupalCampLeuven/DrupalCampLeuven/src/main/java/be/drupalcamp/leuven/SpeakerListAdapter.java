@@ -2,14 +2,17 @@ package be.drupalcamp.leuven;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.io.FileInputStream;
 import java.util.List;
 
 public class SpeakerListAdapter extends BaseAdapter implements View.OnClickListener {
@@ -43,6 +46,8 @@ public class SpeakerListAdapter extends BaseAdapter implements View.OnClickListe
     public static class ViewHolder {
         public int speakerId;
         public TextView speaker;
+        public TextView organisation;
+        public ImageView avatar;
         public LinearLayout speaker_item;
     }
 
@@ -54,7 +59,9 @@ public class SpeakerListAdapter extends BaseAdapter implements View.OnClickListe
             convertView = mInflater.inflate(R.layout.speaker_item, null);
             holder = new ViewHolder();
             holder.speakerId = speaker.getId();
+            holder.avatar = (ImageView) convertView.findViewById(R.id.speaker_avatar);
             holder.speaker = (TextView) convertView.findViewById(R.id.speaker_name);
+            holder.organisation = (TextView) convertView.findViewById(R.id.speaker_organisation);
             holder.speaker_item = (LinearLayout) convertView.findViewById(R.id.speaker_item);
             convertView.setTag(holder);
         }
@@ -64,8 +71,18 @@ public class SpeakerListAdapter extends BaseAdapter implements View.OnClickListe
 
         if (speaker != null) {
 
+            // Avatar.
+            try {
+                FileInputStream in =  context.getApplicationContext().openFileInput(speaker.getAvatar());
+                holder.avatar.setImageBitmap(BitmapFactory.decodeStream(in));
+            }
+            catch (Exception ignored) {}
+
             // Name.
             holder.speaker.setText(speaker.getFirstName() + " " + speaker.getLastName());
+
+            // Organisation.
+            holder.organisation.setText(speaker.getOrganisation());
 
             // Set touch listener.
             convertView.setOnTouchListener(speakerTouch);
@@ -85,11 +102,13 @@ public class SpeakerListAdapter extends BaseAdapter implements View.OnClickListe
             switch (action) {
                 case MotionEvent.ACTION_DOWN:
                     holder.speaker.setTextColor(context.getResources().getColor(R.color.white));
+                    holder.organisation.setTextColor(context.getResources().getColor(R.color.white));
                     holder.speaker_item.setBackgroundColor(context.getResources().getColor(R.color.session_blue));
                     break;
                 case MotionEvent.ACTION_CANCEL:
                 case MotionEvent.ACTION_UP:
                     holder.speaker.setTextColor(context.getResources().getColor(R.color.text_dark));
+                    holder.organisation.setTextColor(context.getResources().getColor(R.color.dark_grey));
                     holder.speaker_item.setBackgroundColor(context.getResources().getColor(R.color.white));
                     if (action == MotionEvent.ACTION_UP) {
                         int sessionId = holder.speakerId;

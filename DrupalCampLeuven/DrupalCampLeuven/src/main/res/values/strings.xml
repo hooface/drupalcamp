@@ -3,6 +3,7 @@
 
     <!-- General -->
     <string name="app_name">DrupalCamp Leuven</string>
+    <string name="favorite">Favoriet</string>
 
     <!-- Header -->
     <string name="header_go_to_favorites">Ga naar favorieten</string>
@@ -15,14 +16,15 @@
     <string name="menu_location">Locatie</string>
     <string name="menu_info">Informatie</string>
 
-    <!-- Program -->
+    <!-- Days - we should make this configurable by using arrays -->
     <string name="day_1_integer">14</string>
     <string name="day_2_integer">15</string>
-
     <string name="day_1">Dag 1</string>
     <string name="day_2">Dag 2</string>
     <string name="day_1_text">14 SEPTEMBER 2013</string>
     <string name="day_2_text">15 SEPTEMBER 2013</string>
+
+    <!-- Program -->
     <string name="no_sessions">Geen sessies gevonden. Klik hier om het programma op te halen.</string>
     <string name="updating">Programma ophalen</string>
     <string name="updating_message">We halen het programma met de sessies en sprekers nu op, even geduld.</string>
@@ -30,6 +32,11 @@
     <string name="updating_done">Het programma is aangepast.</string>
     <string name="service_offline">De service om het programma op te halen is niet beschikbaar, probeer het later opnieuw.</string>
     <string name="parsing_failed">Er ging iets fout met het bewaren van het programma, probeer het later opnieuw.</string>
+    <string name="favorite_add">Voeg toe aan je favorieten</string>
+    <string name="favorite_remove">Verwijder uit je favorieten</string>
+
+    <!-- Speakers -->
+    <string name="speaker_avatar">Avatar</string>
 
     <!-- Location -->
     <string name="location_map_link">Bekijk op interactieve map</string>

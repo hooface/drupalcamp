@@ -35,6 +35,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     // Speakers table column names.
     public static final String SPEAKERS_KEY_ID = "id";
+    // @todo speakers can have multiple sessions
     public static final String SPEAKERS_KEY_SESSION_ID = "session_id";
     public static final String SPEAKERS_KEY_USERNAME = "username";
     public static final String SPEAKERS_KEY_FIRSTNAME = "firstname";
@@ -93,7 +94,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     /**
-     * Truncate the table, this only happens for update.
+     * Save the favorite.
      *
      * @param favorite
      *   The favorite status (either 0 or 1).
@@ -119,7 +120,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     /**
-     * Truncate the table, this only happens for update.
+     * Truncate the session and speaker, this only happens for update.
      */
     public void truncateTable() {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -299,9 +300,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
      */
     public void insertSpeaker(Speaker speaker) {
 
-        Speaker existingSpeaker = this.getSpeaker(speaker.getId());
-        // @todo test this.
-        if (existingSpeaker == null) {
+        int count = this.getSpeakerCount(speaker.getId());
+        if (count == 0) {
             SQLiteDatabase db = this.getWritableDatabase();
 
             ContentValues values = new ContentValues();
@@ -375,10 +375,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         String selectQuery = "SELECT * FROM " + TABLE_SPEAKERS + " WHERE " + SPEAKERS_KEY_ID + " = " + speakerId;
         Cursor cursor = db.rawQuery(selectQuery, null);
 
-        if (cursor == null) {
-            return null;
-        }
-
         cursor.moveToFirst();
         return new Speaker(
                 cursor.getInt(0),
@@ -390,5 +386,21 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 cursor.getString(6),
                 cursor.getString(7)
         );
+    }
+
+    /**
+     * Get speaker count.
+     *
+     * @param speakerId
+     *   The id of the speaker.
+     *
+     * @return int 0
+     */
+    public int getSpeakerCount(int speakerId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String selectQuery = "SELECT * FROM " + TABLE_SPEAKERS + " WHERE " + SPEAKERS_KEY_ID + " = " + speakerId;
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        int count = cursor.getCount();
+        return count;
     }
 }

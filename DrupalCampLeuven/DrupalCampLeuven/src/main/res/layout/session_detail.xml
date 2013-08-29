@@ -39,6 +39,58 @@
             <include layout="@layout/separator" />
 
             <TextView
+                    android:id="@+id/session_time"
+                    android:textColor="@color/text_dark"
+                    android:layout_width="fill_parent"
+                    android:background="@color/white"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/global_text_size"
+                    android:layout_marginLeft="@dimen/global_padding"
+                    android:layout_marginRight="@dimen/global_padding"
+                    android:paddingTop="@dimen/global_top_padding"
+                    android:paddingBottom="@dimen/global_bottom_padding"
+                    android:paddingLeft="@dimen/global_left_padding"
+                    android:paddingRight="@dimen/global_right_padding">
+            </TextView>
+
+            <include layout="@layout/separator" />
+
+            <LinearLayout
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="@dimen/global_padding"
+                    android:layout_marginRight="@dimen/global_padding"
+                    android:background="@color/white"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content">
+
+                <TextView
+                        android:id="@+id/session_favorite_action"
+                        android:textColor="@color/text_dark"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/global_text_size"
+                        android:layout_marginRight="@dimen/global_padding"
+                        android:paddingLeft="@dimen/global_left_padding"
+                        android:paddingTop="@dimen/global_top_padding"
+                        android:paddingBottom="@dimen/global_bottom_padding"
+                        android:paddingRight="@dimen/global_right_padding"
+                        android:layout_gravity="center_vertical">
+                </TextView>
+
+                <ImageButton
+                        android:background="@null"
+                        android:contentDescription="@string/favorite"
+                        android:layout_width="@dimen/favorites_star"
+                        android:layout_height="@dimen/favorites_star"
+                        android:id="@+id/session_favorite">
+                </ImageButton>
+
+            </LinearLayout>
+
+            <include layout="@layout/separator" />
+
+            <TextView
                     android:id="@+id/session_description"
                     android:textColor="@color/text_dark"
                     android:background="@color/white"
@@ -53,12 +105,14 @@
                     android:paddingRight="@dimen/global_right_padding">
             </TextView>
 
-            <ImageButton
-                    android:background="@null"
-                    android:layout_width="@dimen/favorites_star"
-                    android:layout_height="@dimen/favorites_star"
-                    android:id="@+id/session_favorite">
-            </ImageButton>
+            <include layout="@layout/separator" />
+
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:id="@+id/speaker_list"
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
 
         </LinearLayout>
 

@@ -311,11 +311,10 @@ public class SessionList extends BaseActivity {
      * Download the avatar.
      */
     public void downloadAvatar(String avatarUrl, String imageFileName) {
-        int avatarStatus = -1;
         try {
             URL downloadFileUrl = new URL(avatarUrl);
             HttpURLConnection httpConnection = (HttpURLConnection) downloadFileUrl.openConnection();
-            avatarStatus = httpConnection.getResponseCode();
+            int avatarStatus = httpConnection.getResponseCode();
 
             if (avatarStatus == 200) {
                 InputStream inputStream = httpConnection.getInputStream();

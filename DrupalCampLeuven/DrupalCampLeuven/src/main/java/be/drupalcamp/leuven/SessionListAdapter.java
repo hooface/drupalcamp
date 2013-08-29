@@ -89,6 +89,7 @@ public class SessionListAdapter extends BaseAdapter implements OnClickListener {
                 case SPECIAL:
                     convertView = mInflater.inflate(R.layout.session_special_item, null);
                     holder.title = (TextView) convertView.findViewById(R.id.session_title);
+                    holder.time = (TextView) convertView.findViewById(R.id.session_time);
                     break;
             }
             convertView.setTag(holder);
@@ -133,6 +134,13 @@ public class SessionListAdapter extends BaseAdapter implements OnClickListener {
                 // Set touch listener.
                 convertView.setOnTouchListener(sessionTouch);
             }
+            else {
+                // Special session has start time.
+                int from = session.getStartDate();
+                DateFormat sdf = new SimpleDateFormat("kk:mm");
+                Date startHour = new Date((long)from * 1000);
+                holder.time.setText(sdf.format(startHour));
+            }
         }
 
         return convertView;
@@ -157,7 +165,7 @@ public class SessionListAdapter extends BaseAdapter implements OnClickListener {
                 case MotionEvent.ACTION_UP:
                     holder.title.setTextColor(context.getResources().getColor(R.color.text_dark));
                     holder.speaker.setTextColor(context.getResources().getColor(R.color.dark_grey));
-                    holder.time.setTextColor(context.getResources().getColor(R.color.text_dark));
+                    holder.time.setTextColor(context.getResources().getColor(R.color.dark_grey));
                     holder.session_item.setBackgroundColor(context.getResources().getColor(R.color.white));
                     if (action == MotionEvent.ACTION_UP) {
                         int sessionId = holder.sessionId;
