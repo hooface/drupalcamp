@@ -30,8 +30,15 @@ public class SpeakerDetail extends BaseActivity {
         ImageView iv = (ImageView) findViewById(R.id.speaker_avatar);
         // Avatar.
         try {
-            FileInputStream in = openFileInput(speaker.getAvatar());
-            iv.setImageBitmap(BitmapFactory.decodeStream(in));
+            if (speaker.getAvatar().length() > 0) {
+                FileInputStream in = openFileInput(speaker.getAvatar());
+                iv.setImageBitmap(BitmapFactory.decodeStream(in));
+            }
+            else {
+                //FileInputStream in =
+                //Drawable d = getResources().getDrawable(R.drawable.no_avatar);
+                iv.setImageResource(R.drawable.no_avatar);
+            }
         }
         catch (Exception ignored) {}
 

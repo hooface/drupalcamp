@@ -64,6 +64,14 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content">
 
+                <ImageButton
+                        android:background="@null"
+                        android:contentDescription="@string/favorite"
+                        android:layout_width="@dimen/favorites_star"
+                        android:layout_height="@dimen/favorites_star"
+                        android:id="@+id/session_favorite">
+                </ImageButton>
+
                 <TextView
                         android:id="@+id/session_favorite_action"
                         android:textColor="@color/text_dark"
@@ -77,14 +85,6 @@
                         android:paddingRight="@dimen/global_right_padding"
                         android:layout_gravity="center_vertical">
                 </TextView>
-
-                <ImageButton
-                        android:background="@null"
-                        android:contentDescription="@string/favorite"
-                        android:layout_width="@dimen/favorites_star"
-                        android:layout_height="@dimen/favorites_star"
-                        android:id="@+id/session_favorite">
-                </ImageButton>
 
             </LinearLayout>
 

@@ -44,10 +44,10 @@ public class SessionDetail extends BaseActivity {
         // @todo hardcoded date - see also sessionList.java.
         String Date = "";
         if (session.getDay() == 14) {
-            Date = "14 september";
+            Date = "September 14th";
         }
         else {
-            Date = "15 september";
+            Date = "September 15th";
         }
         stime.setText(Date + ": " + sdf.format(startHour) + " - " + sdf.format(endHour));
 

@@ -73,8 +73,13 @@ public class SpeakerListAdapter extends BaseAdapter implements View.OnClickListe
 
             // Avatar.
             try {
-                FileInputStream in =  context.getApplicationContext().openFileInput(speaker.getAvatar());
-                holder.avatar.setImageBitmap(BitmapFactory.decodeStream(in));
+                if (speaker.getAvatar().length() > 0) {
+                    FileInputStream in =  context.getApplicationContext().openFileInput(speaker.getAvatar());
+                    holder.avatar.setImageBitmap(BitmapFactory.decodeStream(in));
+                }
+                else {
+                    holder.avatar.setImageResource(R.drawable.no_avatar);
+                }
             }
             catch (Exception ignored) {}
 

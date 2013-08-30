@@ -91,6 +91,7 @@ public class SessionList extends BaseActivity {
             int day1_integer = Integer.parseInt(getString(R.string.day_1_integer));
             int day2_integer = Integer.parseInt(getString(R.string.day_2_integer));
 
+            // @todo consider adding an asynctask here with a 'Loading' here.
             LinearLayout day1_layout = (LinearLayout) findViewById(R.id.day_flip_1);
             getSessionsPerDay(day1_layout, layoutParams, db, day1_integer);
 
