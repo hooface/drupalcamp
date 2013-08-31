@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,14 +37,19 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     // Speakers table column names.
     public static final String SPEAKERS_KEY_ID = "id";
-    // @todo speakers can have multiple sessions
-    public static final String SPEAKERS_KEY_SESSION_ID = "session_id";
     public static final String SPEAKERS_KEY_USERNAME = "username";
     public static final String SPEAKERS_KEY_FIRSTNAME = "firstname";
     public static final String SPEAKERS_KEY_LASTNAME = "lastname";
     public static final String SPEAKERS_KEY_ORG = "organisation";
     public static final String SPEAKERS_KEY_TWITTER = "twitter";
     public static final String SPEAKERS_KEY_AVATAR = "avatar";
+
+    // Speakers x sessions table.
+    public static final String TABLE_SPEAKERS_SESSIONS = "speakers_sessions";
+
+    // Speakers x sessions table column names.
+    public static final String SPEAKERS_SESSIONS_KEY_SESSION_ID = "cross_session_id";
+    public static final String SPEAKERS_SESSIONS_KEY_SPEAKER_ID = "cross_speaker_id";
 
     // Favorites table name.
     public static final String TABLE_FAVORITES = "favorites";
@@ -73,7 +79,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         String CREATE_SPEAKERS_TABLE = "CREATE TABLE " + TABLE_SPEAKERS + "(" +
                 "" + SPEAKERS_KEY_ID + " INTEGER PRIMARY KEY," +
-                "" + SPEAKERS_KEY_SESSION_ID + " INTEGER," +
                 "" + SPEAKERS_KEY_USERNAME + " TEXT," +
                 "" + SPEAKERS_KEY_FIRSTNAME + " TEXT," +
                 "" + SPEAKERS_KEY_LASTNAME + " TEXT," +
@@ -82,6 +87,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 "" + SPEAKERS_KEY_AVATAR + " TEXT" +
                 ")";
         db.execSQL(CREATE_SPEAKERS_TABLE);
+
+        String CREATE_SPEAKERS_SESSIONS_TABLE = "CREATE TABLE " + TABLE_SPEAKERS_SESSIONS + "(" +
+                "" + SPEAKERS_SESSIONS_KEY_SESSION_ID + " INTEGER," +
+                "" + SPEAKERS_SESSIONS_KEY_SPEAKER_ID + " INTEGER" +
+                ")";
+        db.execSQL(CREATE_SPEAKERS_SESSIONS_TABLE);
 
         String CREATE_FAVORITES_TABLE = "CREATE TABLE " + TABLE_FAVORITES + "(" +
                 "" + FAVORITES_KEY_ID + " INTEGER" +
@@ -127,6 +138,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_SESSIONS, null, null);
         db.delete(TABLE_SPEAKERS, null, null);
+        db.delete(TABLE_SPEAKERS_SESSIONS, null, null);
         db.close();
     }
 
@@ -205,22 +217,26 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public List<Speaker> getSessionSpeakers(Integer sessionId) {
         SQLiteDatabase db = this.getWritableDatabase();
         List<Speaker> speakerList = new ArrayList<Speaker>();
-        String speakersQuery = "SELECT * FROM " + DatabaseHandler.TABLE_SPEAKERS + " WHERE " + DatabaseHandler.SPEAKERS_KEY_SESSION_ID + " = " + sessionId;
+        String speakersQuery = "SELECT * FROM " + DatabaseHandler.TABLE_SPEAKERS_SESSIONS + " INNER JOIN " + TABLE_SPEAKERS;
+        speakersQuery += " WHERE " + TABLE_SPEAKERS + "." + DatabaseHandler.SPEAKERS_KEY_ID  + " = " + TABLE_SPEAKERS_SESSIONS + "." + DatabaseHandler.SPEAKERS_SESSIONS_KEY_SPEAKER_ID;
+        speakersQuery += " AND " + DatabaseHandler.SPEAKERS_SESSIONS_KEY_SESSION_ID + " = " + sessionId;
+
         Cursor speakerCursor = db.rawQuery(speakersQuery, null);
 
         // Loop through all speaker results.
         if (speakerCursor.moveToFirst()) {
             do {
 
+                Log.d("speakersQuery", "" + speakerCursor.getString(3));
+
                 Speaker speaker = new Speaker(
-                    speakerCursor.getInt(0),
-                    speakerCursor.getInt(1),
-                    speakerCursor.getString(2),
+                    speakerCursor.getInt(2),
                     speakerCursor.getString(3),
                     speakerCursor.getString(4),
                     speakerCursor.getString(5),
                     speakerCursor.getString(6),
-                    speakerCursor.getString(7)
+                    speakerCursor.getString(7),
+                    speakerCursor.getString(8)
                 );
 
                 // Add session to list.
@@ -238,7 +254,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
      *
      * @param sessionId
      *   The id of the speaker to get sessions for.
-     *   // @todo this is actually just wrong.
      *
      * @return <List>Session
      *   A list of sessions.
@@ -295,13 +310,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
                 Speaker speaker = new Speaker(
                         speakerCursor.getInt(0),
-                        speakerCursor.getInt(1),
+                        speakerCursor.getString(1),
                         speakerCursor.getString(2),
                         speakerCursor.getString(3),
                         speakerCursor.getString(4),
                         speakerCursor.getString(5),
-                        speakerCursor.getString(6),
-                        speakerCursor.getString(7)
+                        speakerCursor.getString(6)
                 );
 
                 // Add session to list.
@@ -351,7 +365,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
             ContentValues values = new ContentValues();
             values.put(SPEAKERS_KEY_ID, speaker.getId());
-            values.put(SPEAKERS_KEY_SESSION_ID, speaker.getSessionId());
             values.put(SPEAKERS_KEY_USERNAME, speaker.getUsername());
             values.put(SPEAKERS_KEY_FIRSTNAME, speaker.getFirstName());
             values.put(SPEAKERS_KEY_LASTNAME, speaker.getLastName());
@@ -362,6 +375,24 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             db.insert(TABLE_SPEAKERS, null, values);
             db.close();
         }
+    }
+
+    /**
+     * Insert a speaker + session into the database.
+     *
+     * @param sessionId
+     *   The id of the sessions.
+     * @param speakerId
+     *   The id of the speaker.
+     */
+    public void insertSpeakerSession(Integer sessionId, Integer speakerId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(SPEAKERS_SESSIONS_KEY_SESSION_ID, sessionId);
+        values.put(SPEAKERS_SESSIONS_KEY_SPEAKER_ID, speakerId);
+        db.insert(TABLE_SPEAKERS_SESSIONS, null, values);
+        db.close();
     }
 
     /**
@@ -423,13 +454,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         cursor.moveToFirst();
         return new Speaker(
                 cursor.getInt(0),
-                cursor.getInt(1),
+                cursor.getString(1),
                 cursor.getString(2),
                 cursor.getString(3),
                 cursor.getString(4),
                 cursor.getString(5),
-                cursor.getString(6),
-                cursor.getString(7)
+                cursor.getString(6)
         );
     }
 

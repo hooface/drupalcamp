@@ -37,8 +37,6 @@
 
     <!-- Speakers -->
     <string name="speaker_avatar">Avatar</string>
-    <string name="speaker_organisation">Organisation</string>
-    <string name="speaker_twitter">Twitter</string>
 
     <!-- Location -->
     <string name="location_map_link">Interactive map</string>

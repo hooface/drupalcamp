@@ -17,7 +17,7 @@
         <LinearLayout
                 xmlns:android="http://schemas.android.com/apk/res/android"
                 android:orientation="vertical"
-                android:layout_width="fill_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
             <include layout="@layout/header" />
@@ -38,14 +38,20 @@
 
             <TextView
                     android:id="@+id/location_map_link"
-                    android:textColor="@color/text_dark"
+                    android:textColor="@color/white"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/global_text_size"
                     android:text="@string/location_map_link"
+                    android:background="@color/location_red"
                     android:paddingLeft="@dimen/global_left_padding"
-                    android:paddingBottom="@dimen/location_padding_bottom"
-                    android:paddingRight="@dimen/global_right_padding">
+                    android:paddingBottom="@dimen/global_small_padding"
+                    android:paddingRight="@dimen/global_right_padding"
+                    android:layout_marginBottom="@dimen/global_small_padding"
+                    android:layout_marginLeft="@dimen/global_left_padding"
+                    android:layout_marginRight="@dimen/global_right_padding"
+                    android:gravity="center_horizontal"
+                    android:paddingTop="@dimen/global_small_padding">
             </TextView>
 
             <ImageView

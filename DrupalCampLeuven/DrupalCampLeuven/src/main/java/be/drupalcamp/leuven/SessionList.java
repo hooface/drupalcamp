@@ -246,7 +246,6 @@ public class SessionList extends BaseActivity {
                                         // Create new speaker object.
                                         Speaker speaker = new Speaker();
                                         speaker.setId(jsonSpeaker.getInt("id"));
-                                        speaker.setSessionId(session.getId());
                                         speaker.setUsername(jsonSpeaker.getString("username"));
                                         speaker.setFirstName(jsonSpeaker.getString("first_name"));
                                         speaker.setLastName(jsonSpeaker.getString("last_name"));
@@ -266,6 +265,9 @@ public class SessionList extends BaseActivity {
 
                                         // Save speaker.
                                         handler.insertSpeaker(speaker);
+
+                                        // Save speaker for this session.
+                                        handler.insertSpeakerSession(session.getId(), speaker.getId());
                                     }
                                 }
                             }

@@ -72,6 +72,7 @@ public class SpeakerListAdapter extends BaseAdapter implements View.OnClickListe
         if (speaker != null) {
 
             // Avatar.
+            // @todo default image vs actual avatar looks wonky.
             try {
                 if (speaker.getAvatar().length() > 0) {
                     FileInputStream in =  context.getApplicationContext().openFileInput(speaker.getAvatar());

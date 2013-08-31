@@ -49,7 +49,7 @@ public class SpeakerDetail extends BaseActivity {
         // Speaker organisation.
         TextView so = (TextView) findViewById(R.id.speaker_organisation);
         if (speaker.getOrganisation().length() > 0) {
-            so.setText(getString(R.string.speaker_organisation) + ": " + speaker.getOrganisation());
+            so.setText(speaker.getOrganisation());
         }
         else {
             so.setVisibility(TextView.GONE);
@@ -58,7 +58,7 @@ public class SpeakerDetail extends BaseActivity {
         // Speaker twitter.
         TextView stw = (TextView) findViewById(R.id.speaker_twitter);
         if (speaker.getTwitter().length() > 0) {
-            stw.setText(getString(R.string.speaker_twitter) + ": @" + speaker.getTwitter());
+            stw.setText("@" + speaker.getTwitter());
         }
         else {
             stw.setVisibility(TextView.GONE);
