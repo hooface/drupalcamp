@@ -14,7 +14,6 @@ public class Session {
     int day = 0;
     int favorite = 0;
     List<Speaker> speakerList;
-    // @todo tracks
 
     // Empty constructor.
     public Session() {

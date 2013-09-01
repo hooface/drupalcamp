@@ -110,8 +110,10 @@ public class SessionListAdapter extends BaseAdapter implements OnClickListener {
                 List<Speaker> speakerList = session.getSpeakers();
                 for (int i = 0; i < speakerList.size(); i++) {
                     Speaker speaker = speakerList.get(i);
-                    // @todo count and implode in case there are multiple speakers.
-                    speakers += speaker.getFirstName() + " " + speaker.getLastName() + " ";
+                    if (i > 1) {
+                        speakers += "\n";
+                    }
+                    speakers += speaker.getFirstName() + " " + speaker.getLastName();
                 }
                 holder.speaker.setText(speakers);
 
