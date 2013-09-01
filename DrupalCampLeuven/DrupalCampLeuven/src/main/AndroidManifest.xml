@@ -26,6 +26,7 @@
         <activity android:name=".SpeakerDetail" />
         <activity android:name=".Location" />
         <activity android:name=".Information" />
+        <activity android:name=".Favorites" />
     </application>
 
 </manifest>

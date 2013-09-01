@@ -69,7 +69,7 @@ public class SpeakerDetail extends BaseActivity {
 
         // Sessions of this speaker.
         List<Session> sessions = db.getSpeakerSessions(speaker.getId());
-        SessionListSpeakerAdapter adapter = new SessionListSpeakerAdapter(this, sessions);
+        SessionListSmallAdapter adapter = new SessionListSmallAdapter(this, sessions);
         int dp = (int) getResources().getDimension(R.dimen.global_padding);
         int dp_small = (int) getResources().getDimension(R.dimen.global_small_padding);
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(

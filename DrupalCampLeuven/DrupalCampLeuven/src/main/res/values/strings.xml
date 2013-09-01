@@ -15,6 +15,7 @@
     <string name="menu_speakers">Speakers</string>
     <string name="menu_location">Location</string>
     <string name="menu_info">Information</string>
+    <string name="menu_favorites">Favorites</string>
 
     <!-- Days - we should make this configurable by using arrays -->
     <string name="day_1_integer">14</string>

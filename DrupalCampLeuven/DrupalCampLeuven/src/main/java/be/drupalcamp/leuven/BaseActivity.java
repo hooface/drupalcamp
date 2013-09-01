@@ -13,6 +13,7 @@ import android.widget.TextView;
 public class BaseActivity extends Activity {
 
     public boolean hideRefreshButton = true;
+    public boolean showFavoritesButton = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +37,16 @@ public class BaseActivity extends Activity {
         if (hideRefreshButton) {
             ImageButton refresh = (ImageButton) findViewById(R.id.refresh);
             refresh.setVisibility(ImageButton.GONE);
+        }
+
+        // Favorites listener or hider.
+        ImageButton go_to_favorites = (ImageButton) findViewById(R.id.header_go_to_favorites);
+        if (showFavoritesButton) {
+            go_to_favorites.setId(5);
+            go_to_favorites.setOnTouchListener(menuBar);
+        }
+        else {
+            go_to_favorites.setVisibility(ImageButton.GONE);
         }
     }
 
@@ -65,7 +76,10 @@ public class BaseActivity extends Activity {
                     Intent information = new Intent(getBaseContext(), Information.class);
                     startActivity(information);
                     break;
-
+                case 5:
+                    Intent favorites = new Intent(getBaseContext(), Favorites.class);
+                    startActivity(favorites);
+                    break;
             }
 
             return true;

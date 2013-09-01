@@ -325,6 +325,46 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     /**
+     * Get favorites.
+     *
+     * @return <List>Session
+     *   A list of sessions.
+     */
+    public List<Session> getFavorites() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        List<Session> sessionList = new ArrayList<Session>();
+
+        String sessionsQuery = "SELECT * FROM " + DatabaseHandler.TABLE_SESSIONS;
+        sessionsQuery += " ts INNER JOIN " + DatabaseHandler.TABLE_FAVORITES + " tf ON ts." + DatabaseHandler.SESSIONS_KEY_ID + " = tf." + DatabaseHandler.FAVORITES_KEY_ID;
+        sessionsQuery += " ORDER BY " + DatabaseHandler.SESSIONS_KEY_START_DATE + " ASC, " + DatabaseHandler.SESSIONS_KEY_TITLE + " ASC";
+        Cursor sessionCursor = db.rawQuery(sessionsQuery, null);
+
+        // Loop through all session results.
+        if (sessionCursor.moveToFirst()) {
+            do {
+
+                Session session = new Session(
+                        sessionCursor.getInt(0),
+                        sessionCursor.getString(1),
+                        sessionCursor.getString(2),
+                        sessionCursor.getInt(3),
+                        sessionCursor.getInt(4),
+                        sessionCursor.getInt(5),
+                        sessionCursor.getInt(6),
+                        sessionCursor.getInt(7),
+                        sessionCursor.getInt(8)
+                );
+
+                sessionList.add(session);
+            }
+            while (sessionCursor.moveToNext());
+        }
+        db.close();
+
+        return sessionList;
+    }
+
+    /**
      * Insert a session into the database.
      *
      * @param session

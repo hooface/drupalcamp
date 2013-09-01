@@ -48,7 +48,7 @@ public class SessionDetail extends BaseActivity {
         else {
             Date = "September 15th";
         }
-        stime.setText(Date + ": " + sdf.format(startHour) + " - " + sdf.format(endHour));
+        stime.setText(Date + " | " + sdf.format(startHour) + " - " + sdf.format(endHour));
 
         // Description.
         TextView sd = (TextView) findViewById(R.id.session_description);
