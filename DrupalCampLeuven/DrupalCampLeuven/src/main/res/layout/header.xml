@@ -18,7 +18,8 @@
                 android:layout_height="@dimen/refresh"
                 android:background="@null"
                 android:contentDescription="@string/header_refresh"
-                android:src="@drawable/refresh" />
+                android:src="@drawable/refresh_states"
+                />
 
         <TextView
                 xmlns:android="http://schemas.android.com/apk/res/android"

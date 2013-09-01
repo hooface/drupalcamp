@@ -3,10 +3,13 @@ package be.drupalcamp.leuven;
 
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.io.FileInputStream;
+import java.util.List;
 
 public class SpeakerDetail extends BaseActivity {
 
@@ -65,13 +68,13 @@ public class SpeakerDetail extends BaseActivity {
         }
 
         // Sessions of this speaker.
-        /*List<Session> sessions = db.getSpeakerSessions(speaker.getSessionId());
-        SessionListAdapter adapter = new SessionListAdapter(this, sessions);
+        List<Session> sessions = db.getSpeakerSessions(speaker.getId());
+        SessionListSpeakerAdapter adapter = new SessionListSpeakerAdapter(this, sessions);
         int dp = (int) getResources().getDimension(R.dimen.global_padding);
         int dp_small = (int) getResources().getDimension(R.dimen.global_small_padding);
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        layoutParams.setMargins(dp, dp_small, dp, dp);
+        layoutParams.setMargins(dp, dp_small, dp, dp_small);
 
         LinearLayout session_list = (LinearLayout) findViewById(R.id.session_list);
 
@@ -79,7 +82,7 @@ public class SpeakerDetail extends BaseActivity {
             View item = adapter.getView(i, null, null);
             item.setLayoutParams(layoutParams);
             session_list.addView(item);
-        }*/
+        }
 
         // Set fonts.
         setFontToOpenSansLight(R.id.header_title);

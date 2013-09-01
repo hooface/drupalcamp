@@ -99,6 +99,7 @@
             <LinearLayout
                     android:orientation="vertical"
                     android:id="@+id/session_list"
+                    android:paddingTop="@dimen/global_small_padding"
                     xmlns:android="http://schemas.android.com/apk/res/android"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content" />

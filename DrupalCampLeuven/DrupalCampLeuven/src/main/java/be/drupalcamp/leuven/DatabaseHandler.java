@@ -252,19 +252,19 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     /**
      * Get sessions from a speaker.
      *
-     * @param sessionId
+     * @param speakerId
      *   The id of the speaker to get sessions for.
      *
      * @return <List>Session
      *   A list of sessions.
      */
-    public List<Session> getSpeakerSessions(Integer sessionId) {
+    public List<Session> getSpeakerSessions(Integer speakerId) {
         SQLiteDatabase db = this.getWritableDatabase();
         List<Session> sessionList = new ArrayList<Session>();
 
-        String sessionsQuery = "SELECT * FROM " + DatabaseHandler.TABLE_SESSIONS;
-        sessionsQuery += " ts LEFT JOIN " + DatabaseHandler.TABLE_FAVORITES + " tf ON ts." + DatabaseHandler.SESSIONS_KEY_ID + " = tf." + DatabaseHandler.FAVORITES_KEY_ID;
-        sessionsQuery += " WHERE " + DatabaseHandler.SESSIONS_KEY_ID + " = " + sessionId;
+        String sessionsQuery = "SELECT * FROM " + DatabaseHandler.TABLE_SPEAKERS_SESSIONS + " INNER JOIN " + TABLE_SESSIONS;
+        sessionsQuery += " WHERE " + TABLE_SESSIONS + "." + DatabaseHandler.SESSIONS_KEY_ID  + " = " + TABLE_SPEAKERS_SESSIONS + "." + DatabaseHandler.SPEAKERS_SESSIONS_KEY_SESSION_ID;
+        sessionsQuery += " AND " + DatabaseHandler.SPEAKERS_SESSIONS_KEY_SPEAKER_ID + " = " + speakerId;
         Cursor sessionCursor = db.rawQuery(sessionsQuery, null);
 
         // Loop through all session results.
@@ -272,15 +272,15 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             do {
 
                 Session session = new Session(
-                        sessionCursor.getInt(0),
-                        sessionCursor.getString(1),
-                        sessionCursor.getString(2),
-                        sessionCursor.getInt(3),
-                        sessionCursor.getInt(4),
+                        sessionCursor.getInt(2),
+                        sessionCursor.getString(3),
+                        sessionCursor.getString(4),
                         sessionCursor.getInt(5),
                         sessionCursor.getInt(6),
                         sessionCursor.getInt(7),
-                        sessionCursor.getInt(8)
+                        sessionCursor.getInt(8),
+                        sessionCursor.getInt(9),
+                        0
                 );
 
                 sessionList.add(session);

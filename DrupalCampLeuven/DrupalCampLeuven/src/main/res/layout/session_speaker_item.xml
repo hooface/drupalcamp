@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        android:id="@+id/session_item"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:background="@color/white"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+    <TextView
+            android:id="@+id/session_title"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/global_text_size"
+            android:textColor="@color/text_dark"
+            android:layout_marginLeft="@dimen/global_left_padding"
+            android:layout_marginTop="@dimen/global_top_padding"
+            android:layout_marginRight="@dimen/global_small_padding"
+            android:layout_marginBottom="@dimen/global_top_padding"
+            android:textStyle="bold">
+    </TextView>
+
+</LinearLayout>
