@@ -41,7 +41,6 @@ public class SessionDetail extends BaseActivity {
         Date startHour = new Date((long)from * 1000);
         Date endHour = new Date((long)to * 1000);
         TextView stime = (TextView) findViewById(R.id.session_time);
-        // @todo hardcoded date - see also sessionList.java.
         String Date = "";
         if (session.getDay() == 14) {
             Date = "September 14th";

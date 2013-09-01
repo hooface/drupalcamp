@@ -5,7 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -218,15 +217,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         List<Speaker> speakerList = new ArrayList<Speaker>();
         String speakersQuery = "SELECT * FROM " + DatabaseHandler.TABLE_SPEAKERS_SESSIONS + " INNER JOIN " + TABLE_SPEAKERS;
         speakersQuery += " WHERE " + TABLE_SPEAKERS + "." + DatabaseHandler.SPEAKERS_KEY_ID  + " = " + TABLE_SPEAKERS_SESSIONS + "." + DatabaseHandler.SPEAKERS_SESSIONS_KEY_SPEAKER_ID;
-        speakersQuery += " AND " + DatabaseHandler.SPEAKERS_SESSIONS_KEY_SESSION_ID + " = " + sessionId;
+        speakersQuery += " AND " + DatabaseHandler.SPEAKERS_SESSIONS_KEY_SESSION_ID + " = " + sessionId + " ORDER BY " + DatabaseHandler.SPEAKERS_KEY_FIRSTNAME + " ASC";
 
         Cursor speakerCursor = db.rawQuery(speakersQuery, null);
 
         // Loop through all speaker results.
         if (speakerCursor.moveToFirst()) {
             do {
-
-                Log.d("speakersQuery", "" + speakerCursor.getString(3));
 
                 Speaker speaker = new Speaker(
                     speakerCursor.getInt(2),
@@ -263,7 +260,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         String sessionsQuery = "SELECT * FROM " + DatabaseHandler.TABLE_SPEAKERS_SESSIONS + " INNER JOIN " + TABLE_SESSIONS;
         sessionsQuery += " WHERE " + TABLE_SESSIONS + "." + DatabaseHandler.SESSIONS_KEY_ID  + " = " + TABLE_SPEAKERS_SESSIONS + "." + DatabaseHandler.SPEAKERS_SESSIONS_KEY_SESSION_ID;
-        sessionsQuery += " AND " + DatabaseHandler.SPEAKERS_SESSIONS_KEY_SPEAKER_ID + " = " + speakerId;
+        sessionsQuery += " AND " + DatabaseHandler.SPEAKERS_SESSIONS_KEY_SPEAKER_ID + " = " + speakerId + " ORDER BY " + DatabaseHandler.SESSIONS_KEY_START_DATE + " ASC";
         Cursor sessionCursor = db.rawQuery(sessionsQuery, null);
 
         // Loop through all session results.

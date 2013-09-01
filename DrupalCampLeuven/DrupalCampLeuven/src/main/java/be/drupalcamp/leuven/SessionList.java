@@ -85,7 +85,6 @@ public class SessionList extends BaseActivity {
                     LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             layoutParams.setMargins(dp, dp, dp, dp_small);
 
-            // @todo make this more configurable so you can have multiple days without hardcoding.
             // For instance, put this in array integer list. That will require us to create dynamic
             // flippers, listeners on the fly, but that will be good in the end.
             int day1_integer = Integer.parseInt(getString(R.string.day_1_integer));
