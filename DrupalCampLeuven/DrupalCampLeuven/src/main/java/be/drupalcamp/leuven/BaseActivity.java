@@ -57,28 +57,26 @@ public class BaseActivity extends Activity {
         public boolean onTouch(View v, MotionEvent motionEvent) {
             switch (v.getId()) {
                 case 1:
-                    setBackGroundColor(v, motionEvent, getResources().getColor(R.color.session_blue_hover), getResources().getColor(R.color.session_blue));
                     Intent program = new Intent(getBaseContext(), SessionList.class);
-                    startActivity(program);
+                    setBackGroundColor(v, motionEvent, getResources().getColor(R.color.session_blue_hover), getResources().getColor(R.color.session_blue), program);
                     break;
                 case 2:
-                    setBackGroundColor(v, motionEvent, getResources().getColor(R.color.speakers_green_hover), getResources().getColor(R.color.speakers_green));
                     Intent speakers = new Intent(getBaseContext(), SpeakerList.class);
-                    startActivity(speakers);
+                    setBackGroundColor(v, motionEvent, getResources().getColor(R.color.speakers_green_hover), getResources().getColor(R.color.speakers_green), speakers);
                     break;
                 case 3:
-                    setBackGroundColor(v, motionEvent, getResources().getColor(R.color.location_red_hover), getResources().getColor(R.color.location_red));
                     Intent location = new Intent(getBaseContext(), Location.class);
-                    startActivity(location);
+                    setBackGroundColor(v, motionEvent, getResources().getColor(R.color.location_red_hover), getResources().getColor(R.color.location_red), location);
                     break;
                 case 4:
-                    setBackGroundColor(v, motionEvent, getResources().getColor(R.color.info_yellow_hover), getResources().getColor(R.color.info_yellow));
                     Intent information = new Intent(getBaseContext(), Information.class);
-                    startActivity(information);
+                    setBackGroundColor(v, motionEvent, getResources().getColor(R.color.info_yellow_hover), getResources().getColor(R.color.info_yellow), information);
                     break;
                 case 5:
-                    Intent favorites = new Intent(getBaseContext(), Favorites.class);
-                    startActivity(favorites);
+                    if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+                        Intent favorites = new Intent(getBaseContext(), Favorites.class);
+                        startActivity(favorites);
+                    }
                     break;
             }
 
@@ -89,10 +87,11 @@ public class BaseActivity extends Activity {
     /**
      * Set backgroundColor based on action.
      */
-    public void setBackGroundColor(View v, MotionEvent e, Integer colorHover, Integer color) {
+    public void setBackGroundColor(View v, MotionEvent e, Integer colorHover, Integer color, Intent activity) {
         switch (e.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 v.setBackgroundColor(colorHover);
+                startActivity(activity);
                 break;
             case MotionEvent.ACTION_CANCEL:
             case MotionEvent.ACTION_UP:
