@@ -34,5 +34,7 @@
 
     <!-- speaker_item.xml -->
     <dimen name="speaker_top_padding">2dp</dimen>
+    <dimen name="speaker_avatar_width">100dp</dimen>
+    <dimen name="speaker_avatar_height">100dp</dimen>
 
 </resources>
