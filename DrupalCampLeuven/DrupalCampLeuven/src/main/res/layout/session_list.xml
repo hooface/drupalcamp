@@ -25,6 +25,7 @@
                 <LinearLayout
                         android:orientation="vertical"
                         android:id="@+id/day_flip_1"
+                        android:layout_marginBottom="@dimen/list_margin_bottom"
                         xmlns:android="http://schemas.android.com/apk/res/android"
                         android:background="@color/grey"
                         android:layout_width="fill_parent"
@@ -77,6 +78,7 @@
                 <LinearLayout
                         android:orientation="vertical"
                         android:id="@+id/day_flip_2"
+                        android:layout_marginBottom="@dimen/list_margin_bottom"
                         xmlns:android="http://schemas.android.com/apk/res/android"
                         android:background="@color/grey"
                         android:layout_width="fill_parent"

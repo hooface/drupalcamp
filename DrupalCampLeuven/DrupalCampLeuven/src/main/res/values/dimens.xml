@@ -10,6 +10,7 @@
     <dimen name="global_text_size">16sp</dimen>
     <dimen name="favorites_star">50dp</dimen>
     <dimen name="divider_height">10dp</dimen>
+    <dimen name="list_margin_bottom">55dp</dimen>
 
     <!-- header.xml -->
     <dimen name="header_text_size">24sp</dimen>
