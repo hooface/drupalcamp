@@ -7,12 +7,11 @@
         tools:context=".Speakers"
         android:orientation="vertical">
 
-    <ScrollView
+    <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:layout_marginBottom="@dimen/menu_height"
-            android:background="@color/grey"
-            android:id="@+id/scrollview">
+            android:background="@color/grey">
 
         <LinearLayout
                 xmlns:android="http://schemas.android.com/apk/res/android"
@@ -20,20 +19,25 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content">
 
-            <include layout="@layout/header" />
+            <include layout="@layout/header_small" />
 
             <include layout="@layout/separator" />
 
-            <LinearLayout
-                    android:orientation="vertical"
+            <ListView
                     android:id="@+id/speaker_list"
+                    android:paddingTop="@dimen/global_small_padding"
+                    android:paddingLeft="@dimen/global_left_padding"
+                    android:paddingRight="@dimen/global_right_padding"
                     xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:dividerHeight="@dimen/divider_height"
+                    android:fadingEdge="none"
+                    android:divider="@color/grey"
                     android:layout_width="fill_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="fill_parent" />
 
         </LinearLayout>
 
-    </ScrollView>
+    </LinearLayout>
 
     <include layout="@layout/menu"
              android:layout_width="fill_parent"

@@ -58,7 +58,6 @@ public class SpeakerListAdapter extends BaseAdapter implements View.OnClickListe
         if (convertView == null) {
             convertView = mInflater.inflate(R.layout.speaker_item, null);
             holder = new ViewHolder();
-            holder.speakerId = speaker.getId();
             holder.avatar = (ImageView) convertView.findViewById(R.id.speaker_avatar);
             holder.speaker = (TextView) convertView.findViewById(R.id.speaker_name);
             holder.organisation = (TextView) convertView.findViewById(R.id.speaker_organisation);
@@ -82,6 +81,9 @@ public class SpeakerListAdapter extends BaseAdapter implements View.OnClickListe
                 }
             }
             catch (Exception ignored) {}
+
+            // Id.
+            holder.speakerId = speaker.getId();
 
             // Name.
             holder.speaker.setText(speaker.getFirstName() + " " + speaker.getLastName());
