@@ -27,8 +27,8 @@
 
     <!-- Program -->
     <string name="no_sessions">No sessions found, click here to download</string>
-    <string name="updating">Download program</string>
-    <string name="updating_message">Downloading the program with sessions and speakers.</string>
+    <string name="updating">Updating</string>
+    <string name="updating_message">Downloading the program with sessions and speakers, one moment please.</string>
     <string name="update_offline">You are not connected to the internet.</string>
     <string name="updating_done">The program has been updated.</string>
     <string name="service_offline">The program service is not available, please try again later.</string>
@@ -41,7 +41,7 @@
 
     <!-- Location -->
     <string name="location_map_link">Interactive map</string>
-    <string name="location_info">Katholieke Hogeschool Leuven\nDepartment "Gezondheidszorg en Technology"\nHerestraat 49\n3000 Leuven\n</string>
+    <string name="location_info">Katholieke Hogeschool Leuven\nDepartment "Gezondheidszorg en Technology"\nHerestraat 49\n3000 Leuven</string>
     <string name="location_geo_lat">50.880943</string>
     <string name="location_geo_long">4.674464</string>
 

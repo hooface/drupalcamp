@@ -10,7 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -78,23 +78,16 @@ public class SessionList extends BaseActivity {
             // Hide empty no sessions message.
             noSessions.setVisibility(TextView.GONE);
 
-            // Define layout params.
-            int dp = (int) getResources().getDimension(R.dimen.global_padding);
-            int dp_small = (int) getResources().getDimension(R.dimen.global_small_padding);
-            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            layoutParams.setMargins(dp, dp, dp, dp_small);
-
             // For instance, put this in array integer list. That will require us to create dynamic
             // flippers, listeners on the fly, but that will be good in the end.
             int day1_integer = Integer.parseInt(getString(R.string.day_1_integer));
             int day2_integer = Integer.parseInt(getString(R.string.day_2_integer));
 
-            LinearLayout day1_layout = (LinearLayout) findViewById(R.id.day_flip_1);
-            getSessionsPerDay(day1_layout, layoutParams, db, day1_integer);
+            ListView day1_list = (ListView) findViewById(R.id.session_list_day_1);
+            getSessionsPerDay(day1_list, db, day1_integer);
 
-            LinearLayout day2_layout = (LinearLayout) findViewById(R.id.day_flip_2);
-            getSessionsPerDay(day2_layout, layoutParams, db, day2_integer);
+            ListView day2_list = (ListView) findViewById(R.id.session_list_day_2);
+            getSessionsPerDay(day2_list, db, day2_integer);
 
             // Set listeners on day bars and arrows.
             RelativeLayout day1_bar = (RelativeLayout) findViewById(R.id.day_1_bar);
@@ -111,6 +104,9 @@ public class SessionList extends BaseActivity {
             switcher.setVisibility(ViewFlipper.GONE);
             // Set listener on text view button to refresh the program.
             noSessions.setOnClickListener(refreshProgram);
+            // Set empty view.
+            ListView day1_list = (ListView) findViewById(R.id.session_list_day_1);
+            day1_list.setEmptyView(findViewById(R.id.no_sessions));
         }
     }
 
@@ -161,16 +157,10 @@ public class SessionList extends BaseActivity {
     /**
      * Get sessions per day.
      */
-    public void getSessionsPerDay(LinearLayout layout, LinearLayout.LayoutParams layoutParams, DatabaseHandler db, Integer day) {
+    public void getSessionsPerDay(ListView layout, DatabaseHandler db, Integer day) {
         sessions = db.getSessions(day);
-
         SessionListAdapter adapter = new SessionListAdapter(this, sessions);
-
-        for (int i = 0; i < adapter.getCount(); i++) {
-            View item = adapter.getView(i, null, null);
-            item.setLayoutParams(layoutParams);
-            layout.addView(item);
-        }
+        layout.setAdapter(adapter);
     }
 
     /**

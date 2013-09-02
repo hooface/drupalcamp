@@ -75,7 +75,6 @@ public class SessionListAdapter extends BaseAdapter implements OnClickListener {
 
         if (convertView == null) {
             holder = new ViewHolder();
-            holder.sessionId = session.getId();
 
             switch (type) {
                 case NORMAL:
@@ -99,6 +98,9 @@ public class SessionListAdapter extends BaseAdapter implements OnClickListener {
         }
 
         if (session != null) {
+
+            // Id.
+            holder.sessionId = session.getId();
 
             // Title.
             holder.title.setText(session.getTitle());

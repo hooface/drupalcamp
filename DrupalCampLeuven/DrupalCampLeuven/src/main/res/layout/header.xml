@@ -41,16 +41,4 @@
 
     </RelativeLayout>
 
-    <ImageView
-            android:contentDescription="@string/header_logo"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/grey"
-            android:src="@drawable/logo_text"
-            android:layout_gravity="center_horizontal"
-            android:paddingTop="@dimen/logo_padding"
-            android:layout_marginTop="@dimen/header_separator"
-            android:paddingBottom="@dimen/logo_padding"
-            android:scaleType="fitCenter"/>
-
 </LinearLayout>

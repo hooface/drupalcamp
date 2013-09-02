@@ -7,20 +7,13 @@
         tools:context=".ProgramList"
         android:orientation="vertical">
 
-    <ScrollView
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:layout_marginBottom="@dimen/menu_height"
-            android:background="@color/grey"
-            android:id="@+id/scrollview">
-
         <LinearLayout
                 xmlns:android="http://schemas.android.com/apk/res/android"
                 android:orientation="vertical"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content">
 
-            <include layout="@layout/header_small" />
+            <include layout="@layout/header" />
 
             <include layout="@layout/separator" />
 
@@ -33,8 +26,9 @@
                         android:orientation="vertical"
                         android:id="@+id/day_flip_1"
                         xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:background="@color/grey"
                         android:layout_width="fill_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="fill_parent">
 
                     <RelativeLayout
                             android:id="@+id/day_1_bar"
@@ -66,12 +60,25 @@
 
                     <include layout="@layout/separator" />
 
+                    <ListView
+                            android:id="@+id/session_list_day_1"
+                            android:paddingTop="@dimen/global_small_padding"
+                            android:paddingLeft="@dimen/global_left_padding"
+                            android:paddingRight="@dimen/global_right_padding"
+                            xmlns:android="http://schemas.android.com/apk/res/android"
+                            android:dividerHeight="@dimen/divider_height"
+                            android:fadingEdge="none"
+                            android:divider="@color/grey"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent" />
+
                 </LinearLayout>
 
                 <LinearLayout
                         android:orientation="vertical"
                         android:id="@+id/day_flip_2"
                         xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:background="@color/grey"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content">
 
@@ -104,6 +111,18 @@
 
                     <include layout="@layout/separator" />
 
+                    <ListView
+                            android:id="@+id/session_list_day_2"
+                            android:paddingTop="@dimen/global_small_padding"
+                            android:paddingLeft="@dimen/global_left_padding"
+                            android:paddingRight="@dimen/global_right_padding"
+                            xmlns:android="http://schemas.android.com/apk/res/android"
+                            android:dividerHeight="@dimen/divider_height"
+                            android:fadingEdge="none"
+                            android:divider="@color/grey"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent" />
+
                 </LinearLayout>
 
             </ViewFlipper>
@@ -120,8 +139,6 @@
                     android:layout_height="wrap_content" />
 
         </LinearLayout>
-
-    </ScrollView>
 
     <include layout="@layout/menu"
             android:layout_width="fill_parent"

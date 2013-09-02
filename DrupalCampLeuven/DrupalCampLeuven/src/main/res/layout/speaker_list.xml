@@ -19,7 +19,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content">
 
-            <include layout="@layout/header_small" />
+            <include layout="@layout/header" />
 
             <include layout="@layout/separator" />
 

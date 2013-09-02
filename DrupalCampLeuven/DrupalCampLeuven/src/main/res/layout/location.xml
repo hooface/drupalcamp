@@ -32,7 +32,8 @@
                     android:textSize="@dimen/global_text_size"
                     android:text="@string/location_info"
                     android:paddingLeft="@dimen/global_left_padding"
-                    android:paddingTop="@dimen/location_padding_top"
+                    android:paddingTop="@dimen/global_top_padding"
+                    android:paddingBottom="@dimen/global_top_padding"
                     android:paddingRight="@dimen/global_right_padding">
             </TextView>
 
