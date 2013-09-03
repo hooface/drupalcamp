@@ -37,7 +37,8 @@
                 android:background="@null"
                 android:layout_alignParentRight="true"
                 android:contentDescription="@string/header_go_to_favorites"
-                android:src="@drawable/header_favorites_button_states" />
+                android:src="@drawable/header_favorites_button_states"
+                />
 
     </RelativeLayout>
 
