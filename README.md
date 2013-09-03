@@ -31,6 +31,7 @@ JSON format
     "from": "1379145600",
     "to": "1379149200",
     "level": "3",
+    "room": "Amplexor room",
     "track": [
       "Code \u0026 Development",
       "Sitebuilding"
