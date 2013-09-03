@@ -26,13 +26,13 @@
     <string name="day_2_text">SEPTEMBER 15th 2013</string>
 
     <!-- Program -->
-    <string name="no_sessions">No sessions found, click here to download</string>
-    <string name="updating">Updating</string>
+    <string name="no_sessions">No sessions found, click here to download.\n\nYou can always update the program by clicking on the icon in the left upper corner.</string>
+    <string name="updating">Program</string>
     <string name="updating_message">Downloading the program with sessions and speakers, one moment please.</string>
     <string name="update_offline">You are not connected to the internet.</string>
-    <string name="updating_done">The program has been updated.</string>
-    <string name="service_offline">The program service is not available, please try again later.</string>
-    <string name="parsing_failed">Something went wrong saving the program, please try again later.</string>
+    <string name="updating_done">The program has been updated</string>
+    <string name="service_offline">The program service is not available, please try again later</string>
+    <string name="parsing_failed">Something went wrong saving the program, please try again later</string>
     <string name="favorite_add">Add to favorites</string>
     <string name="favorite_remove">Remove from favorites</string>
 

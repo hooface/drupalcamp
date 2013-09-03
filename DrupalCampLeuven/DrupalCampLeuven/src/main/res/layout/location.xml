@@ -44,7 +44,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/global_text_size"
                     android:text="@string/location_map_link"
-                    android:background="@color/location_red"
+                    android:background="@color/location"
                     android:paddingLeft="@dimen/global_left_padding"
                     android:paddingBottom="@dimen/global_small_padding"
                     android:paddingRight="@dimen/global_right_padding"

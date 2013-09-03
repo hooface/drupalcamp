@@ -5,12 +5,12 @@
     <color name="text_dark">#4b4745</color>
     <color name="dark_grey">#959595</color>
     <color name="separator">#dcdcdc</color>
-    <color name="session_blue">#3992c1</color>
-    <color name="session_blue_hover">#297ba7</color>
-    <color name="speakers_green">#00878a</color>
-    <color name="speakers_green_hover">#016f71</color>
-    <color name="location_red">#b93938</color>
-    <color name="location_red_hover">#972e2e</color>
-    <color name="info_yellow">#ffc600</color>
-    <color name="info_yellow_hover">#ffa800</color>
+    <color name="session">#3992c1</color>
+    <color name="session_hover">#297ba7</color>
+    <color name="speakers">#00878a</color>
+    <color name="speakers_hover">#016f71</color>
+    <color name="location">#b93938</color>
+    <color name="location_hover">#972e2e</color>
+    <color name="info">#ffc600</color>
+    <color name="info_hover">#ffa800</color>
 </resources>

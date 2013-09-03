@@ -35,6 +35,8 @@
                             android:id="@+id/day_1_bar"
                             android:background="@color/grey"
                             android:layout_width="fill_parent"
+                            android:layout_marginTop="@dimen/global_small_padding"
+                            android:layout_marginBottom="@dimen/global_small_padding"
                             android:layout_height="@dimen/day_height">
 
                         <TextView
@@ -88,6 +90,8 @@
                             android:id="@+id/day_2_bar"
                             android:background="@color/grey"
                             android:layout_width="fill_parent"
+                            android:layout_marginTop="@dimen/global_small_padding"
+                            android:layout_marginBottom="@dimen/global_small_padding"
                             android:layout_height="@dimen/day_height">
 
                         <ImageButton

@@ -40,6 +40,7 @@ public class Favorites extends BaseActivity {
         // Set header title.
         setTextViewString(R.id.header_title, R.string.menu_favorites);
 
-        // Set fonts.
+        // Set fonts and colors.
         setFontToOpenSansLight(R.id.header_title);
+        setHeaderBackgroundColor(getResources().getColor(R.color.session));
     }}

@@ -163,7 +163,7 @@ public class SessionListAdapter extends BaseAdapter implements OnClickListener {
                     holder.title.setTextColor(context.getResources().getColor(R.color.white));
                     holder.speaker.setTextColor(context.getResources().getColor(R.color.white));
                     holder.time.setTextColor(context.getResources().getColor(R.color.white));
-                    holder.session_item.setBackgroundColor(context.getResources().getColor(R.color.session_blue));
+                    holder.session_item.setBackgroundColor(context.getResources().getColor(R.color.session));
                     break;
                 case MotionEvent.ACTION_CANCEL:
                 case MotionEvent.ACTION_UP:

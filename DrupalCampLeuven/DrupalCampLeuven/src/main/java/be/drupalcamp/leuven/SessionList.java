@@ -48,19 +48,17 @@ public class SessionList extends BaseActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
-        // Do not hide refresh button.
-        hideRefreshButton = false;
-
         setContentView(R.layout.session_list);
         super.onCreate(savedInstanceState);
 
         // Set header title.
         setTextViewString(R.id.header_title, R.string.menu_program);
 
-        // Set fonts.
+        // Set fonts and colors.
         setFontToOpenSansLight(R.id.header_title);
         setFontToOpenSansLight(R.id.day_1_text);
         setFontToOpenSansLight(R.id.day_2_text);
+        setHeaderBackgroundColor(getResources().getColor(R.color.session));
 
         // Get flipper, refresh and no events.
         ImageButton refresh = (ImageButton) findViewById(R.id.refresh);

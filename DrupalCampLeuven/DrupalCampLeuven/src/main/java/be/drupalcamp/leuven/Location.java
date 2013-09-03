@@ -18,8 +18,9 @@ public class Location extends BaseActivity {
         // Set header title.
         setTextViewString(R.id.header_title, R.string.menu_location);
 
-        // Set fonts.
+        // Set fonts and colors.
         setFontToOpenSansLight(R.id.header_title);
+        setHeaderBackgroundColor(getResources().getColor(R.color.location));
 
         // Add listener on map link.
         TextView mapLink = (TextView) findViewById(R.id.location_map_link);

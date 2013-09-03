@@ -84,9 +84,10 @@ public class SpeakerDetail extends BaseActivity {
             session_list.addView(item);
         }
 
-        // Set fonts.
+        // Set fonts and colors.
         setFontToOpenSansLight(R.id.header_title);
         setFontToOpenSansLight(R.id.speaker_name);
+        setHeaderBackgroundColor(getResources().getColor(R.color.speakers));
     }
 
 }

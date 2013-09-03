@@ -8,11 +8,12 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class BaseActivity extends Activity {
 
-    public boolean hideRefreshButton = true;
+    public boolean clickRefreshButton = false;
     public boolean showFavoritesButton = true;
 
     @Override
@@ -33,12 +34,6 @@ public class BaseActivity extends Activity {
         go_to_information.setId(4);
         go_to_information.setOnTouchListener(menuBar);
 
-        // Remove refresh button, unless the variable is overridden.
-        if (hideRefreshButton) {
-            ImageButton refresh = (ImageButton) findViewById(R.id.refresh);
-            refresh.setVisibility(ImageButton.GONE);
-        }
-
         // Favorites listener or hider.
         ImageButton go_to_favorites = (ImageButton) findViewById(R.id.header_go_to_favorites);
         if (showFavoritesButton) {
@@ -58,19 +53,19 @@ public class BaseActivity extends Activity {
             switch (v.getId()) {
                 case 1:
                     Intent program = new Intent(getBaseContext(), SessionList.class);
-                    setBackGroundColor(v, motionEvent, getResources().getColor(R.color.session_blue_hover), getResources().getColor(R.color.session_blue), program);
+                    setBackGroundColor(v, motionEvent, getResources().getColor(R.color.session_hover), getResources().getColor(R.color.session), program);
                     break;
                 case 2:
                     Intent speakers = new Intent(getBaseContext(), SpeakerList.class);
-                    setBackGroundColor(v, motionEvent, getResources().getColor(R.color.speakers_green_hover), getResources().getColor(R.color.speakers_green), speakers);
+                    setBackGroundColor(v, motionEvent, getResources().getColor(R.color.speakers_hover), getResources().getColor(R.color.speakers), speakers);
                     break;
                 case 3:
                     Intent location = new Intent(getBaseContext(), Location.class);
-                    setBackGroundColor(v, motionEvent, getResources().getColor(R.color.location_red_hover), getResources().getColor(R.color.location_red), location);
+                    setBackGroundColor(v, motionEvent, getResources().getColor(R.color.location_hover), getResources().getColor(R.color.location), location);
                     break;
                 case 4:
                     Intent information = new Intent(getBaseContext(), Information.class);
-                    setBackGroundColor(v, motionEvent, getResources().getColor(R.color.info_yellow_hover), getResources().getColor(R.color.info_yellow), information);
+                    setBackGroundColor(v, motionEvent, getResources().getColor(R.color.info_hover), getResources().getColor(R.color.info), information);
                     break;
                 case 5:
                     if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
@@ -123,5 +118,16 @@ public class BaseActivity extends Activity {
         TextView tv = (TextView) findViewById(textViewId);
         Typeface tf = Typeface.createFromAsset(getAssets(), "OpenSans-Light.ttf");
         tv.setTypeface(tf);
+    }
+
+    /**
+     * Set header background color.
+     *
+     * @param colorResource
+     *   The color id.
+     */
+    public void setHeaderBackgroundColor(Integer colorResource) {
+        RelativeLayout header = (RelativeLayout) findViewById(R.id.header_background);
+        header.setBackgroundColor(colorResource);
     }
 }

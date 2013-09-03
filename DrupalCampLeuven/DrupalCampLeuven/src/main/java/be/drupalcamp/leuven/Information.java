@@ -22,7 +22,8 @@ public class Information extends BaseActivity {
         t.setMovementMethod(LinkMovementMethod.getInstance());
         t.setText(Html.fromHtml(text));
 
-        // Set fonts.
+        // Set fonts and colors.
         setFontToOpenSansLight(R.id.header_title);
+        setHeaderBackgroundColor(getResources().getColor(R.color.info));
     }
 }

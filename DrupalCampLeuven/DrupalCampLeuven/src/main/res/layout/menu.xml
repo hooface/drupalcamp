@@ -7,7 +7,7 @@
 
     <ImageView
             android:id="@+id/menu_program"
-            android:background="@color/session_blue"
+            android:background="@color/session"
             android:contentDescription="@string/menu_program"
             android:layout_weight="0.25"
             android:layout_width="0dp"
@@ -19,7 +19,7 @@
 
     <ImageView
             android:id="@+id/menu_speakers"
-            android:background="@color/speakers_green"
+            android:background="@color/speakers"
             android:contentDescription="@string/menu_speakers"
             android:layout_weight="0.25"
             android:layout_width="0dp"
@@ -29,7 +29,7 @@
 
     <ImageView
             android:id="@+id/menu_location"
-            android:background="@color/location_red"
+            android:background="@color/location"
             android:contentDescription="@string/menu_location"
             android:layout_weight="0.25"
             android:layout_width="0dp"
@@ -39,7 +39,7 @@
 
     <ImageView
             android:id="@+id/menu_information"
-            android:background="@color/info_yellow"
+            android:background="@color/info"
             android:contentDescription="@string/menu_info"
             android:layout_weight="0.25"
             android:layout_width="0dp"
