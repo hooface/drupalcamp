@@ -13,6 +13,7 @@ public class Session {
     int level = 0;
     int day = 0;
     int favorite = 0;
+    String room = "";
     List<Speaker> speakerList;
 
     // Empty constructor.
@@ -21,7 +22,7 @@ public class Session {
     }
 
     // Full constructor, without speaker list.
-    public Session(int id, String title, String description, int special, int startDate, int endDate, int level, int day, int favorite) {
+    public Session(int id, String title, String description, int special, int startDate, int endDate, int level, int day, String room, int favorite) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -31,10 +32,11 @@ public class Session {
         this.level = level;
         this.day = day;
         this.favorite = favorite;
+        this.room = room;
     }
 
     // Full constructor, including speaker list.
-    public Session(int id, String title, String description, int special, int startDate, int endDate, int level, int day, int favorite, List<Speaker> speakerList) {
+    public Session(int id, String title, String description, int special, int startDate, int endDate, int level, int day, String room, int favorite, List<Speaker> speakerList) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -43,6 +45,7 @@ public class Session {
         this.endDate = endDate;
         this.level = level;
         this.day = day;
+        this.room = room;
         this.favorite = favorite;
         this.speakerList = speakerList;
     }
@@ -117,6 +120,14 @@ public class Session {
 
     public void setFavorite(int favorite) {
         this.favorite = favorite;
+    }
+
+    public String getRoom() {
+        return this.room;
+    }
+
+    public void setRoom(String room) {
+        this.room = room;
     }
 
     public List<Speaker> getSpeakers() {

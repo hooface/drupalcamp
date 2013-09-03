@@ -29,6 +29,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public static final String SESSIONS_KEY_END_DATE = "end_date";
     public static final String SESSIONS_KEY_LEVEL = "level";
     public static final String SESSIONS_KEY_DAY = "day";
+    public static final String SESSIONS_KEY_ROOM = "room";
 
     // Speaker table name.
     public static final String TABLE_SPEAKERS = "speakers";
@@ -71,7 +72,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 "" + SESSIONS_KEY_START_DATE + " INTEGER," +
                 "" + SESSIONS_KEY_END_DATE + " INTEGER," +
                 "" + SESSIONS_KEY_LEVEL + " INTEGER," +
-                "" + SESSIONS_KEY_DAY + " INTEGER" +
+                "" + SESSIONS_KEY_DAY + " INTEGER," +
+                "" + SESSIONS_KEY_ROOM + " TEXT" +
                 ")";
         db.execSQL(CREATE_SESSIONS_TABLE);
 
@@ -187,7 +189,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                     sessionCursor.getInt(5),
                     sessionCursor.getInt(6),
                     sessionCursor.getInt(7),
-                    sessionCursor.getInt(8),
+                    sessionCursor.getString(8),
+                    sessionCursor.getInt(9),
                     speakerList
                 );
 
@@ -276,6 +279,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                         sessionCursor.getInt(7),
                         sessionCursor.getInt(8),
                         sessionCursor.getInt(9),
+                        sessionCursor.getString(10),
                         0
                 );
 
@@ -352,7 +356,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                         sessionCursor.getInt(5),
                         sessionCursor.getInt(6),
                         sessionCursor.getInt(7),
-                        sessionCursor.getInt(8)
+                        sessionCursor.getString(8),
+                        sessionCursor.getInt(9)
                 );
 
                 sessionList.add(session);
@@ -382,6 +387,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(SESSIONS_KEY_END_DATE, session.getEndDate());
         values.put(SESSIONS_KEY_LEVEL, session.getLevel());
         values.put(SESSIONS_KEY_DAY, session.getDay());
+        values.put(SESSIONS_KEY_ROOM, session.getRoom());
 
         db.insert(TABLE_SESSIONS, null, values);
         db.close();
@@ -466,7 +472,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 cursor.getInt(5),
                 cursor.getInt(6),
                 cursor.getInt(7),
-                cursor.getInt(8),
+                cursor.getString(8),
+                cursor.getInt(9),
                 speakerList
         );
     }

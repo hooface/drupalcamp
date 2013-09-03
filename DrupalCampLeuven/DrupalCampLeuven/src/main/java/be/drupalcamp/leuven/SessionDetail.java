@@ -50,6 +50,15 @@ public class SessionDetail extends BaseActivity {
         }
         stime.setText(Date + " | " + sdf.format(startHour) + " - " + sdf.format(endHour));
 
+        // Room.
+        TextView sr = (TextView) findViewById(R.id.session_room);
+        if (session.getRoom().length() > 0) {
+            sr.setText(session.getRoom());
+        }
+        else {
+            sr.setVisibility(TextView.GONE);
+        }
+
         // Description.
         TextView sd = (TextView) findViewById(R.id.session_description);
         sd.setText(session.getDescription());

@@ -81,7 +81,7 @@ public class SessionListAdapter extends BaseAdapter implements OnClickListener {
                     convertView = mInflater.inflate(R.layout.session_normal_item, null);
                     holder.title = (TextView) convertView.findViewById(R.id.session_title);
                     holder.speaker = (TextView) convertView.findViewById(R.id.session_speakers);
-                    holder.time = (TextView) convertView.findViewById(R.id.session_time);
+                    holder.time = (TextView) convertView.findViewById(R.id.session_time_room);
                     holder.favorite = (ImageButton) convertView.findViewById(R.id.session_favorite);
                     holder.session_item = (LinearLayout) convertView.findViewById(R.id.session_item);
                     break;
@@ -119,13 +119,17 @@ public class SessionListAdapter extends BaseAdapter implements OnClickListener {
                 }
                 holder.speaker.setText(speakers);
 
-                // Session time.
+                // Session time and room.
                 int from = session.getStartDate();
                 int to = session.getEndDate();
                 DateFormat sdf = new SimpleDateFormat("kk:mm");
                 Date startHour = new Date((long)from * 1000);
                 Date endHour = new Date((long)to * 1000);
-                holder.time.setText(sdf.format(startHour) + " - " + sdf.format(endHour));
+                String room = "";
+                if (session.getRoom().length() > 0) {
+                    room += " | " + session.getRoom();
+                }
+                holder.time.setText(sdf.format(startHour) + " - " + sdf.format(endHour) + room);
 
                 // Favorite image.
                 if (session.getFavorite() == 0) {

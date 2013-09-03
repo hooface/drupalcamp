@@ -217,6 +217,9 @@ public class SessionList extends BaseActivity {
                                 session.setLevel(jsonSession.getInt("level"));
                             }
                             session.setDay(jsonSession.getInt("day"));
+                            if (!jsonSession.isNull("room")) {
+                                session.setRoom(jsonSession.getString("room"));
+                            }
 
                             // Save session
                             handler.insertSession(session);

@@ -43,7 +43,7 @@
             >
 
         <TextView
-                android:id="@+id/session_time"
+                android:id="@+id/session_time_room"
                 xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
