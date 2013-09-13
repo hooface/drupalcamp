@@ -5,6 +5,8 @@ Android application for information about a Drupalcamp, initially built for Drup
 
 iOS version: https://github.com/TimLeytens/drupalcamp
 
+The successor for this project is at https://github.com/swentel/drupalcon
+
 Features
 --------
 
